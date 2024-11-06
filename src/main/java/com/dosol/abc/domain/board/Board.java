@@ -42,4 +42,6 @@ public class Board extends BaseEntity{
         this.title = title;
         this.content = content;
     }
+
+    영환이 바보임???
 }
