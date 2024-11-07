@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Read Page</h5>
+
+      <!--<form action="/todo/register" method="post">-->
+      <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
+       <!-- <div class="input-group mb-3">
+         <span class="input-group-text">Todo_id</span>
+          <input type="text" name="todoId" class="form-control" th:value="${dto.todoId}" readonly>
+        </div>-->
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Title</span>
+          <input type="text" name="title" class="form-control"th:value="${dto.title}" readonly>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Description</span>
+          <textarea name="description" class="form-control col-sm-5" rows="5" readonly>[[${dto.description}]]</textarea>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">DueDate</span>
+
+          <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}" readonly>
+        </div>
+
+       <div class="input-group mb-3">
+          <span class="input-group-text">Complete</span>
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete?'checked':null}" readonly>
+        </div>
+
+
+
+
+
+
+      <div class="input-group mb-3" th:with="link = ${pageRequestDTO.getLink()}">
+        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+          <button type="button" class="btn btn-primary">Modify</button>
+        </a>
+        <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+          <button type="button" class="btn btn-secondary">List</button>
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</html>

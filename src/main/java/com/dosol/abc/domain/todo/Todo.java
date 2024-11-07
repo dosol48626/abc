@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -35,7 +36,7 @@ public class Todo {
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     public void change(@NotEmpty String title, @NotEmpty String description) {
         this.title = title;
