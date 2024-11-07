@@ -46,7 +46,6 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/register")
     public void register() {
     }
@@ -55,7 +54,7 @@ public class UserController {
     public String registerPost(UserDTO userDTO) {
         Long userId = userService.register(userDTO);
 
-        return "redirect:/board/login";
+        return "redirect:/user/login";
     }
 
 
