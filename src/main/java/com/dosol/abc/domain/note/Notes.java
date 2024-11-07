@@ -2,15 +2,11 @@ package com.dosol.abc.domain.note;
 
 import com.dosol.abc.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Data
 @Builder

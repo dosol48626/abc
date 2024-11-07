@@ -42,4 +42,10 @@ public class BoardController {
         Long bno = boardService.register(boardDTO);
         return "redirect:/board/list";
     }
+
+    @GetMapping("/read")
+    public void readGET(Model model, Long boardId) {
+        BoardDTO boardDTO = boardService.readOne(boardId);
+        model.addAttribute("boardDTO", boardDTO);
+    }
 }

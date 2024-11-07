@@ -26,10 +26,13 @@
         <tr th:each="board : ${boardDTOS}">
             <td th:text="${board.boardId}">1</td>
             <td th:text="${board.username}">user123</td>
-            <td th:text="${board.title}">user123</td>
+<!--            <td th:text="${board.title}">user123</td>-->
+
+            <td>
+                <a th:href="@{/board/read(boardId=${board.boardId})}" th:text="${board.title}">게시글 제목</a>
+            </td>
+
             <td th:text="${board.visitCount}">0</td>
-<!--            <th th:text="${board.regDate}"2023-01-01></th>-->
-<!--            <th th:text="${board.regDate}"2023-01-01></th>-->
             <th th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</th>
             <th th:text="${#temporals.format(board.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</th>
             <td>

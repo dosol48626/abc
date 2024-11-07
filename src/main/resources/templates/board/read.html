@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 상세 보기</title>
+</head>
+<body>
+
+<h1>게시글 상세 정보</h1>
+
+<div>
+  <table>
+    <tr>
+      <th>작성자</th>
+      <td th:text="${boardDTO.username}">작성자 이름</td>
+    </tr>
+    <tr>
+      <th>제목</th>
+      <td th:text="${boardDTO.title}">게시글 제목</td>
+    </tr>
+    <tr>
+      <th>내용</th>
+      <td th:text="${boardDTO.content}">게시글 내용</td>
+    </tr>
+    <tr>
+      <th>조회수</th>
+      <td th:text="${boardDTO.visitCount}">0</td>
+    </tr>
+    <tr>
+      <th>작성 날짜</th>
+      <td th:text="${#temporals.format(boardDTO.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
+    </tr>
+    <tr>
+      <th>수정 날짜</th>
+      <td th:text="${#temporals.format(boardDTO.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <a th:href="@{/board/list}">목록으로 돌아가기</a>
+</div>
+
+</body>
+</html>
