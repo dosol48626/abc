@@ -1,14 +1,12 @@
 package com.dosol.abc.domain.board;
 
-import com.dosol.abc.domain.User;
+import com.dosol.abc.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -42,6 +40,4 @@ public class Board extends BaseEntity{
         this.title = title;
         this.content = content;
     }
-
-    영환이 바보임???
 }

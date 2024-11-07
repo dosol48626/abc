@@ -1,6 +1,6 @@
 package com.dosol.abc.domain.todo;
 
-import com.dosol.abc.domain.User;
+import com.dosol.abc.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

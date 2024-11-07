@@ -1,6 +1,6 @@
 package com.dosol.abc.domain.note;
 
-import com.dosol.abc.domain.User;
+import com.dosol.abc.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

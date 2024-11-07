@@ -1,4 +1,4 @@
-package com.dosol.abc.domain;
+package com.dosol.abc.domain.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
