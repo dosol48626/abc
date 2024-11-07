@@ -1,7 +1,6 @@
-package com.dosol.abc.repository;
+package com.dosol.abc.repository.todo;
 
 import com.dosol.abc.domain.todo.Todo;
-import com.dosol.abc.repository.todo.TodoRepository;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
