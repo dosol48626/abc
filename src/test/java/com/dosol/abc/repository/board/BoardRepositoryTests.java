@@ -17,18 +17,19 @@ public class BoardRepositoryTests {
     @Autowired
     private BoardRepository boardRepository;
 
-    @Test
-    public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
-            Board board = Board.builder()
-                    .title("Title" + i)
-                    .content("Content" + i)
-                    .build();
-
-            Board result = boardRepository.save(board);
-            log.info("bno" + result.getBoardId());
-        });
-    }
+//    @Test
+//    public void testInsert() {
+//        IntStream.rangeClosed(1, 100).forEach(i -> {
+//            Board board = Board.builder()
+//                    .user()
+//                    .title("Title" + i)
+//                    .content("Content" + i)
+//                    .build();
+//
+//            Board result = boardRepository.save(board);
+//            log.info("bno" + result.getBoardId());
+//        });
+//    }
 
     @Test
     public void testFindByBno() {

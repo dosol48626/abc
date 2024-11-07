@@ -1,5 +1,6 @@
 package com.dosol.abc.service.board;
 
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.repository.board.BoardRepository;
 import com.dosol.abc.domain.board.Board;
 import com.dosol.abc.dto.board.BoardDTO;
@@ -59,6 +60,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Long register(BoardDTO boardDTO) {
         Board board = modelMapper.map(boardDTO, Board.class);
+        User user = board.getUser();
         Long bno = boardRepository.save(board).getBoardId();
         return bno;
     }
