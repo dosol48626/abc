@@ -1,6 +1,7 @@
 package com.dosol.abc.repository.note.search;
 
 import com.dosol.abc.domain.note.Notes;
+import com.dosol.abc.domain.note.QNotes;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
