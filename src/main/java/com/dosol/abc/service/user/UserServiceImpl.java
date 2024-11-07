@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Log4j2
@@ -20,5 +22,18 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userDTO.getPassword());
         Long userId = userRepository.save(user).getUserId();
         return userId;
+    }
+
+    public Optional<User> login(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public User findByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public User findUserName(String username) {
+        return userRepository.findByUsername(username);
     }
 }

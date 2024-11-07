@@ -1,8 +1,10 @@
 package com.dosol.abc.controller.board;
 
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.board.BoardDTO;
 import com.dosol.abc.service.board.BoardService;
 import com.dosol.abc.service.user.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -34,7 +36,9 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPOST(BoardDTO boardDTO) {
+    public String registerPOST(BoardDTO boardDTO, HttpSession session) {
+        User user = (User)session.getAttribute("user");
+        boardDTO.setUsername(user.getUsername());
         Long bno = boardService.register(boardDTO);
         return "redirect:/board/list";
     }

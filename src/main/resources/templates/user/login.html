@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+
+<!-- 로그인 실패 시 에러 메시지 표시 -->
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}">Invalid username or password.</p>
+</div>
+
+<!-- 로그인 폼 -->
+<form th:action="@{/user/login}" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+<!-- 회원가입 페이지 링크 -->
+<div>
+    <a th:href="@{/user/register}">Sign up for an account</a>
+</div>
+
+</body>
+</html>

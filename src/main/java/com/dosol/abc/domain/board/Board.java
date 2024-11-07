@@ -22,6 +22,8 @@ public class Board extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    private String username;
+
     @Column(nullable = false, length = 100)
     private String title;
 
