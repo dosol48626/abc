@@ -17,6 +17,7 @@ public class BoardServiceTests {
     public void testRegister() {
 
         BoardDTO boardDTO = BoardDTO.builder()
+                .username("qwer1")
                 .title("Sample Title")
                 .content("Sample Content")
                 .build();
@@ -30,9 +31,9 @@ public class BoardServiceTests {
     public void testModify() {
 
         BoardDTO boardDTO = BoardDTO.builder()
-                .boardId(2L)
-                .title("Updated 2")
-                .content("Updated 2")
+                .boardId(101L)
+                .title("Updated 101")
+                .content("Updated 101")
                 .build();
 
         boardService.modify(boardDTO);
@@ -40,15 +41,30 @@ public class BoardServiceTests {
 
     @Test
     public void testDelete() {
-        Long bno = 2L;
+        Long bno = 101L;
         boardService.remove(bno);
     }
 
     @Test
     public void testFindById(){
-        Long bno = 3L;
+        Long bno = 102L;
         boardService.readOne(bno);
         log.info("bno :" + bno);
+    }
+
+    @Test
+    public void testFindById2() {
+        Long bno = 102L;
+        BoardDTO boardDTO = boardService.readOne(bno);
+
+        if (boardDTO != null) {
+            log.info("Board Details:");
+            log.info("Title: " + boardDTO.getTitle());
+            log.info("Content: " + boardDTO.getContent());
+            log.info("username: " + boardDTO.getUsername());
+        } else {
+            log.info("Board with ID " + bno + " not found.");
+        }
     }
 
 //    @Test

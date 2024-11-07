@@ -1,5 +1,6 @@
 package com.dosol.abc.service.board;
 
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.board.BoardDTO;
 
 import java.util.List;

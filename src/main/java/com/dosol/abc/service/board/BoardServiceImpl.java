@@ -4,6 +4,7 @@ import com.dosol.abc.domain.user.User;
 import com.dosol.abc.repository.board.BoardRepository;
 import com.dosol.abc.domain.board.Board;
 import com.dosol.abc.dto.board.BoardDTO;
+import com.dosol.abc.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final ModelMapper modelMapper;
-
+    private final UserRepository userRepository;
 
 //    @Override
 //    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
@@ -60,7 +61,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Long register(BoardDTO boardDTO) {
         Board board = modelMapper.map(boardDTO, Board.class);
-        User user = board.getUser();
+        User user = userRepository.findByUsername(boardDTO.getUsername());
+        board.setUser(user);
         Long bno = boardRepository.save(board).getBoardId();
         return bno;
     }

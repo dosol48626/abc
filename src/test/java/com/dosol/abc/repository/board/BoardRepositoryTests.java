@@ -1,6 +1,7 @@
 package com.dosol.abc.repository.board;
 
 import com.dosol.abc.domain.board.Board;
+import com.dosol.abc.domain.user.User;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +18,25 @@ public class BoardRepositoryTests {
     @Autowired
     private BoardRepository boardRepository;
 
-//    @Test
-//    public void testInsert() {
-//        IntStream.rangeClosed(1, 100).forEach(i -> {
-//            Board board = Board.builder()
-//                    .user()
-//                    .title("Title" + i)
-//                    .content("Content" + i)
-//                    .build();
-//
-//            Board result = boardRepository.save(board);
-//            log.info("bno" + result.getBoardId());
-//        });
-//    }
+    @Test
+    public void testInsert() {
+        IntStream.rangeClosed(1, 30).forEach(i -> {
+            Board board = Board.builder()
+                    .user(User.builder().userId(1L).build())
+                    .title("Title" + i)
+                    .content("Content" + i)
+                    .build();
+
+            Board result = boardRepository.save(board);
+            log.info("bno" + result.getBoardId());
+        });
+    }
 
     @Test
     public void testFindByBno() {
-        Long bno = 1L;
-        Optional<Board> result = boardRepository.findById(bno);
-        log.info("bno" + bno);
+        Long boardID = 1L;
+        Optional<Board> result = boardRepository.findById(boardID);
+        log.info("bno" + boardID);
     }
 
     @Test
