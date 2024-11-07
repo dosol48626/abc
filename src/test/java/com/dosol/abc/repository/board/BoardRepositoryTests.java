@@ -1,6 +1,5 @@
-package com.dosol.abc.repository;
+package com.dosol.abc.repository.board;
 
-import com.dosol.abc.repository.board.BoardRepository;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
