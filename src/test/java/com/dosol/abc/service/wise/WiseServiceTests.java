@@ -1,5 +1,6 @@
 package com.dosol.abc.service.wise;
 
+import com.dosol.abc.domain.wise.Wise;
 import com.dosol.abc.dto.board.BoardDTO;
 import com.dosol.abc.dto.wise.WiseDTO;
 import com.dosol.abc.service.wise.WiseService;

@@ -1,5 +1,6 @@
 package com.dosol.abc.service.wise;
 
+import com.dosol.abc.domain.wise.Wise;
 import com.dosol.abc.dto.wise.WiseDTO;
 
 import java.util.List;
@@ -10,5 +11,7 @@ public interface WiseService {
     List<WiseDTO> getAllWises();
 
     // Wise ID로 Wise를 조회하여 WiseDTO로 반환
-    WiseDTO getRandomWise();
+    public WiseDTO getRandomWise();
+
+    /*WiseDTO getWiseById(Long id);*/
 }
