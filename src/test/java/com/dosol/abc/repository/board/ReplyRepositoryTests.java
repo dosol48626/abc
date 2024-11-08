@@ -47,4 +47,19 @@ public class ReplyRepositoryTests {
             log.info("Saved Reply@@@@@@@@##########!!!!: " + result);
 //        });
     }
+
+    @Test
+    public void testUpdate() {
+        Long replyId = 1L;
+
+        Reply reply = replyRepository.findById(replyId).orElseThrow(() -> new IllegalArgumentException("Reply not found"));
+        reply.setReplyText("qwer이쁘다");
+        replyRepository.save(reply);
+    }
+
+    @Test
+    public void testDelete() {
+        Long replyId = 1L;
+        replyRepository.deleteById(replyId);
+    }
 }

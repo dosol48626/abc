@@ -24,9 +24,9 @@ public class BoardServiceTests {
                 .content("Sample Content")
                 .build();
 
-        Long bno = boardService.register(boardDTO);
+        Long boardId = boardService.register(boardDTO);
 
-        log.info("bno :" + bno);
+        log.info("boardId :" + boardId);
     }
 
     @Test
@@ -43,21 +43,21 @@ public class BoardServiceTests {
 
     @Test
     public void testDelete() {
-        Long bno = 101L;
-        boardService.remove(bno);
+        Long boardId = 101L;
+        boardService.remove(boardId);
     }
 
     @Test
     public void testFindById(){
-        Long bno = 102L;
-        boardService.readOne(bno);
-        log.info("bno :" + bno);
+        Long boardId = 102L;
+        boardService.readOne(boardId);
+        log.info("boardId :" + boardId);
     }
 
     @Test
     public void testFindById2() {
-        Long bno = 102L;
-        BoardDTO boardDTO = boardService.readOne(bno);
+        Long boardId = 102L;
+        BoardDTO boardDTO = boardService.readOne(boardId);
 
         if (boardDTO != null) {
             log.info("Board Details:");
@@ -65,7 +65,7 @@ public class BoardServiceTests {
             log.info("Content: " + boardDTO.getContent());
             log.info("username: " + boardDTO.getUsername());
         } else {
-            log.info("Board with ID " + bno + " not found.");
+            log.info("Board with ID " + boardId + " not found.");
         }
     }
 

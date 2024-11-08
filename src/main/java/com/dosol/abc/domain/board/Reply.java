@@ -17,10 +17,12 @@ public class Reply extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rno;
+    private Long replyId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
+
+    //private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;

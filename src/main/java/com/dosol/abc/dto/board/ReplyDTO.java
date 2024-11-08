@@ -1,8 +1,5 @@
 package com.dosol.abc.dto.board;
 
-import com.dosol.abc.domain.board.Board;
-
-import com.dosol.abc.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +17,8 @@ public class ReplyDTO {
     //private Board board;
 
     //private User user;
+
+    private Long replyId;
 
     private Long boardId;
 
