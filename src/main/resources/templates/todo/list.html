@@ -111,8 +111,8 @@
                                 <form action="/todo/remove" method="post" style="display:inline;">
                                     <input type="hidden" name="todoId" th:value="${dto.todoId}">
                                     <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-                                    <button type="submit" style="background: none; border: none; padding: 0;">
-                                        <img src="/img/todoimg/bin.png" width="20" height="20" alt="삭제" onclick="return confirmDelete(this)">
+                                    <button type="button" class="deleteIcon" style="background: none; border: none; padding: 0;">
+                                        <img src="/img/todoimg/bin.png" width="20" height="20" alt="삭제">
                                     </button>
                                 </form>
                             </div>
@@ -128,27 +128,29 @@
 
             </div>
 
-
-
         </div>
 
-        <div class="main_pagination">
-            <div class="pagination_box">
-                <ul class="pagination flex-wrap">
-                    <li class="page-item" th:if="${responseDTO.prev}">
-                        <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
-                    </li>
+        <div class="float-end">
+            <ul class="pagination flex-wrap">
 
-                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
-                        <li th:class="${responseDTO.page == i}?'page-item active':'page-item'" >
-                            <a class="page-link"  th:data-num="${i}">[[${i}]]</a>
-                        </li>
-                    </th:block>
-                    <li class="page-item" th:if="${responseDTO.next}">
-                        <a class="page-link"  th:data-num="${responseDTO.end + 1}">Next</a>
+                <!-- Previous Button -->
+                <li class="page-item" th:if="${responseDTO.prev}">
+                    <a class="page-link" th:href="@{/todo/list(page=${responseDTO.start - 1})}">Previous</a>
+                </li>
+
+                <!-- Dynamic Page Numbers -->
+                <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                    <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
+                        <a class="page-link" th:href="@{/todo/list(page=${i})}" th:text="${i}">1</a>
                     </li>
-                </ul>
-            </div>
+                </th:block>
+
+                <!-- Next Button -->
+                <li class="page-item" th:if="${responseDTO.next}">
+                    <a class="page-link" th:href="@{/todo/list(page=${responseDTO.end + 1})}">Next</a>
+                </li>
+
+            </ul>
         </div>
 
 
@@ -166,7 +168,7 @@
         sidebar.classList.toggle('show');
     }
 
-    document.querySelector(".pagination").addEventListener("click", function(e) {
+    document.querySelector(".main_pagination").addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
         const target = e.target;
@@ -177,15 +179,18 @@
         const formObj = document.querySelector("form");
         formObj.innerHTML += `<input type="hidden" name="page" value="${num}">`;
         formObj.submit();
-    });
+    }, false);
 
-    function confirmDelete(form) {
-        if (confirm("해당 일정을 삭제하시겠습니까?")) {
-            form.submit();
-        } else {
-            return false;
-        }
-    }
+
+    document.querySelector(".deleteIcon").addEventListener("click", function (e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        formObj.action = `/todo/remove`
+        formObj.method = 'post'
+        formObj.submit()
+    }, false);
+
 </script>
 
 

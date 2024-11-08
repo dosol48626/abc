@@ -41,6 +41,7 @@ public class TodoController {
 
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
         log.info(responseDTO);
+        log.info(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
 
     }
