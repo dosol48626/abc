@@ -29,8 +29,7 @@ public class WiseController {
 
 
     @GetMapping("/random")
-    public String getRandomWise(Model model) {
+    public void getRandomWise(Model model) {
         model.addAttribute("wise",wiseService.getRandomWise());
-        return "wise/view";
     }
 }
