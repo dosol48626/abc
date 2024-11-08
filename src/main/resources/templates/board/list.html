@@ -7,9 +7,35 @@
 </head>
 <body>
 
-<a th:href="@{/board/register}">글 등록하기</a>
 <div class="container mt-5">
     <h2>Board List</h2>
+
+    <form action="/board/list" method="get" th:action="@{/board/list}" th:object="${pageRequestDTO}">
+        <div class="col">
+            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <select name="type" class="form-select">
+                        <option value="">---</option>
+                        <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                        <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
+                        <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>
+                        <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목 내용</option>
+                        <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목 내용 작성자</option>
+                    </select>
+                </div>
+                <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
+                    <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- 글 등록 링크 -->
+    <a th:href="@{/board/register}" class="btn btn-primary mb-3">글 등록하기</a>
+
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
@@ -19,30 +45,48 @@
             <th>Visit Count</th>
             <th>Registration Date</th>
             <th>Last Modified Date</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="board : ${boardDTOS}">
+        <!-- 페이지의 게시글 리스트 반복 -->
+        <tr th:each="board : ${responseDTO.dtoList}">
             <td th:text="${board.boardId}">1</td>
             <td th:text="${board.username}">user123</td>
-<!--            <td th:text="${board.title}">user123</td>-->
-
             <td>
                 <a th:href="@{/board/read(boardId=${board.boardId})}" th:text="${board.title}">게시글 제목</a>
             </td>
-
             <td th:text="${board.visitCount}">0</td>
-            <th th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</th>
-            <th th:text="${#temporals.format(board.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</th>
-            <td>
-                <a th:href="@{/board/edit/{id}(id=${board.boardId})}" class="btn btn-sm btn-primary">Edit</a>
-                <a th:href="@{/board/delete/{id}(id=${board.boardId})}" class="btn btn-sm btn-danger"
-                   onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-            </td>
+            <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
+            <td th:text="${#temporals.format(board.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
         </tr>
         </tbody>
     </table>
+
+    <!-- 페이지네이션 -->
+    <nav th:if="${responseDTO.total > 1}">
+        <ul class="pagination justify-content-center">
+
+            <!-- Previous Button -->
+            <li class="page-item" th:classappend="${responseDTO.page == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/board/list(page=${responseDTO.page - 1})}">Previous</a>
+            </li>
+
+            <!-- Dynamic Page Numbers (1~5) -->
+            <li class="page-item"
+                th:each="pageNum : ${#numbers.sequence(responseDTO.page / 5 * 5, responseDTO.page / 5 * 5 + 4)}"
+                th:classappend="${pageNum == responseDTO.page} ? 'active'">
+                <a class="page-link" th:href="@{/board/list(page=${pageNum})}"
+                   th:text="${pageNum + 1}">1</a>
+            </li>
+
+            <!-- Next Button -->
+            <li class="page-item"
+                th:classappend="${responseDTO.page + 1 >= responseDTO.total} ? 'disabled'">
+                <a class="page-link" th:href="@{/board/list(page=${responseDTO.page + 1})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
+
 </body>
 </html>

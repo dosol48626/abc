@@ -2,6 +2,8 @@ package com.dosol.abc.controller.board;
 
 import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.board.BoardDTO;
+import com.dosol.abc.dto.board.PageRequestDTO;
+import com.dosol.abc.dto.board.PageResponseDTO;
 import com.dosol.abc.service.board.BoardService;
 import com.dosol.abc.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -25,10 +27,18 @@ public class BoardController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
+//    @GetMapping("/list")
+//    public void list(Model model) {
+//        List<BoardDTO> boardDTOS = boardService.readAll();
+//        model.addAttribute("boardDTOS", boardDTOS);
+//    }
+
     @GetMapping("/list")
-    public void list(Model model) {
-        List<BoardDTO> boardDTOS = boardService.readAll();
-        model.addAttribute("boardDTOS", boardDTOS);
+    public void list(PageRequestDTO pageRequestDTO, Model model) {
+        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        log.info(responseDTO);
+
+        model.addAttribute("responseDTO", responseDTO);
     }
 
     @GetMapping("/register")
