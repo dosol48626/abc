@@ -1,10 +1,12 @@
 package com.dosol.abc.controller;
 
 import com.dosol.abc.domain.todo.Todo;
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.todo.PageRequestDTO;
 import com.dosol.abc.dto.todo.PageResponseDTO;
 import com.dosol.abc.dto.todo.TodoDTO;
 import com.dosol.abc.service.todo.TodoService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,17 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
+    public void list(PageRequestDTO pageRequestDTO, Model model, HttpSession session) {
         log.info("controller list");
         //model.addAttribute("todoList", todoService.getList());
 //        log.info("pageType=" + pageRequestDTO.getPageType());
+
+        User user = (User) session.getAttribute("user");
+
+        if (user != null) {
+
+            model.addAttribute("user", user);
+        }
 
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
         log.info(responseDTO);
