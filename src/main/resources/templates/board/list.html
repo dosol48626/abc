@@ -61,31 +61,29 @@
         </tr>
         </tbody>
     </table>
-
-    <!-- 페이지네이션 -->
-    <nav th:if="${responseDTO.total > 1}">
-        <ul class="pagination justify-content-center">
+<!--    페이징 처리 하는 부분임-->
+    <div class="float-end">
+        <ul class="pagination flex-wrap">
 
             <!-- Previous Button -->
-            <li class="page-item" th:classappend="${responseDTO.page == 0} ? 'disabled'">
-                <a class="page-link" th:href="@{/board/list(page=${responseDTO.page - 1})}">Previous</a>
+            <li class="page-item" th:if="${responseDTO.prev}">
+                <a class="page-link" th:href="@{/board/list(page=${responseDTO.start - 1})}">Previous</a>
             </li>
 
-            <!-- Dynamic Page Numbers (1~5) -->
-            <li class="page-item"
-                th:each="pageNum : ${#numbers.sequence(responseDTO.page / 5 * 5, responseDTO.page / 5 * 5 + 4)}"
-                th:classappend="${pageNum == responseDTO.page} ? 'active'">
-                <a class="page-link" th:href="@{/board/list(page=${pageNum})}"
-                   th:text="${pageNum + 1}">1</a>
-            </li>
+            <!-- Dynamic Page Numbers -->
+            <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
+                    <a class="page-link" th:href="@{/board/list(page=${i})}" th:text="${i}">1</a>
+                </li>
+            </th:block>
 
             <!-- Next Button -->
-            <li class="page-item"
-                th:classappend="${responseDTO.page + 1 >= responseDTO.total} ? 'disabled'">
-                <a class="page-link" th:href="@{/board/list(page=${responseDTO.page + 1})}">Next</a>
+            <li class="page-item" th:if="${responseDTO.next}">
+                <a class="page-link" th:href="@{/board/list(page=${responseDTO.end + 1})}">Next</a>
             </li>
+
         </ul>
-    </nav>
+    </div>
 </div>
 
 </body>

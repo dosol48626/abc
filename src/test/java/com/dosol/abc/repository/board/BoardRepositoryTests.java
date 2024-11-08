@@ -23,7 +23,7 @@ public class BoardRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 30).forEach(i -> {
+        IntStream.rangeClosed(1, 25).forEach(i -> {
             Board board = Board.builder()
                     .user(User.builder().userId(1L).build())
                     .title("Title" + i)
@@ -71,13 +71,13 @@ public class BoardRepositoryTests {
         Board board1 = new Board();
         board1.setTitle("Spring Boot Guide");
         board1.setContent("This is content about Spring Boot");
-        board1.setUsername("user1");
+
         boardRepository.save(board1);
 
         Board board2 = new Board();
         board2.setTitle("Java Programming");
         board2.setContent("This is content about Java");
-        board2.setUsername("user2");
+        //board2.setUsername("user2");
         boardRepository.save(board2);
 
         // When: 검색 조건을 설정합니다.
@@ -93,7 +93,7 @@ public class BoardRepositoryTests {
             log.info("검색 결과가 존재합니다. 총 {} 개의 항목이 검색되었습니다.", result.getTotalElements());
 
             for (Board board : result.getContent()) {
-                log.info("검색된 게시글 - Title: {}, Username: {}", board.getTitle(), board.getUsername());
+                log.info("검색된 게시글 - Title: {}, Username: {}", board.getTitle(), board.getUser().getUsername());
             }
         } else {
             log.info("검색 결과가 없습니다.");

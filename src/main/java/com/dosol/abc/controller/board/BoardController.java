@@ -53,13 +53,6 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-//    @GetMapping("/read")
-//    public void readGET(Model model, Long boardId,  HttpSession session) {
-//        User user = (User)session.getAttribute("user");
-//
-//        BoardDTO boardDTO = boardService.readOne(boardId);
-//        model.addAttribute("boardDTO", boardDTO);
-//    }
 
     @GetMapping("/read")
     public void readGET(Model model, Long boardId, HttpSession session) {

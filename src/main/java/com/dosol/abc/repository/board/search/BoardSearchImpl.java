@@ -34,7 +34,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                         booleanBuilder.or(board.content.contains(keyword));
                         break;
                     case "w":
-                        booleanBuilder.or(board.username.contains(keyword));
+                        booleanBuilder.or(board.user.username.contains(keyword));
                         break;
 
                 }
