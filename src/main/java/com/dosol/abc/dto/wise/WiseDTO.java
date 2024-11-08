@@ -14,4 +14,6 @@ public class WiseDTO {
     private Long wiseId;
 
     private String content;
+
+    private int randomNumber;  // 랜덤 숫자 추가
 }

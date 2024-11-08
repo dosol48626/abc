@@ -1,4 +1,4 @@
-package com.dosol.abc.controller;
+package com.dosol.abc.controller.todo;
 
 import com.dosol.abc.domain.todo.Todo;
 import com.dosol.abc.dto.todo.PageRequestDTO;

@@ -1,9 +1,8 @@
-package com.dosol.abc.service;
+package com.dosol.abc.service.todo;
 
 import com.dosol.abc.dto.todo.PageRequestDTO;
 import com.dosol.abc.dto.todo.PageResponseDTO;
 import com.dosol.abc.dto.todo.TodoDTO;
-import com.dosol.abc.service.todo.TodoService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
