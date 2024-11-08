@@ -38,14 +38,13 @@ public class UserController {
             // 로그인 성공 시 메인 페이지로 리다이렉트
             User user = userService.findByUserName(username);
             session.setAttribute("user", user);
-            return "redirect:/board/list";
+            return "redirect:/";
         } else {
             // 로그인 실패 시 에러 메시지와 함께 로그인 페이지로 리다이렉트
             redirectAttributes.addFlashAttribute("error", "Invalid username or password.");
             return "redirect:/user/login";
         }
     }
-
 
     @GetMapping("/register")
     public void register() {
@@ -55,7 +54,7 @@ public class UserController {
     public String registerPost(UserDTO userDTO) {
         Long userId = userService.register(userDTO);
 
-        return "redirect:/board/login";
+        return "redirect:/user/login";
     }
 
 

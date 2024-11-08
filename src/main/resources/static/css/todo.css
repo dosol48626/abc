@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Light;';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+/*★ [공통] 상단 logo & Menu  ★ */
+
+.container {
+    margin: auto;
+    font-size: 16px;
+    width: 100%;
+}
+
+.main_top {
+    height: 80px;
+    position: relative;
+}
+
+.head_logo {
+    width: 200px;
+    margin: 10px 0px 0px 30px;
+    float: left;
+}
+
+.top_menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 30px;
+    top: 25px;
+}
+
+.top_menu li {
+    font-size: 14px;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.top_menu li > a {
+    text-decoration: none;
+    color: #6c9694;
+    font-family: Pretendard-regular;
+}
+
+/* 공통 좌측 아이콘 스타일 */
+.icon_sidebar {
+    height: 60px;
+
+    padding: 20px 0px 0px 30px;
+    float: left;
+}
+
+
+
+.container2{
+
+    margin: auto;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+/*★ 투두 메인 ★ */
+
+.todo_main{
+    height: 140px;
+    display: flex;
+    Justify-content:center;
+    padding-top: 40px;
+}
+
+
+.todo_maintext{
+    width: 1000px;
+    height:50px;
+}
+.todo_maintext span{
+    display: block;
+    text-align: center;
+    font-size: 25px;
+    font-family: Pretendard-ExtraBold;
+    color: hwb(183 21% 45%);
+}
+
+.todo_main_btn{
+    width: 1000px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+}
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-family: Pretendard-Regular;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 3px rgba(0, 0, 0, 0.05),
+    4px 4px 10px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btn_register{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+}
+.btn_register:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+
+.todo_main_table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.todo_main_box2 {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+}
+
+.todo-table {
+    width: 100%;
+}
+
+.table_dueDate {
+    font-size: 18px;
+    font-family: Pretendard-Bold;
+    color: #3a9a96;
+    text-align: left;
+    padding: 10px;
+}
+
+
+.table_title {
+    height: 30px;
+    font-family: Pretendard-Bold;
+    font-size: 17px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+ .table_title a {
+     text-decoration: none !important;
+     color: #3a8e97;
+ }
+
+.table_description {
+    height: 60px;
+    font-family: Pretendard-light;
+    color: #8b8b8b;
+    font-size: 16px;
+    text-align: left;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+
+.table_checkbox {
+
+    width: 40px;
+    text-align: center;
+}
+
+.table_checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.table_icon img {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+}
+
+.table_icon img:hover {
+    transform: scale(1.1);
+}
+.tb_icon {
+    width: 27px;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,16 +1,17 @@
 package com.dosol.abc.domain.board;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "board")
+@Table(name = "Reply", indexes = {
+        @Index(name = "idx_reply_board_boardId", columnList = "board_boardId")
+})
 public class Reply {
 
     @Id

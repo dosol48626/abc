@@ -1,6 +1,8 @@
 package com.dosol.abc.service.board;
 
 import com.dosol.abc.domain.user.User;
+import com.dosol.abc.dto.board.PageRequestDTO;
+import com.dosol.abc.dto.board.PageResponseDTO;
 import com.dosol.abc.repository.board.BoardRepository;
 import com.dosol.abc.domain.board.Board;
 import com.dosol.abc.dto.board.BoardDTO;
@@ -26,36 +28,36 @@ public class BoardServiceImpl implements BoardService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-//    @Override
-//    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
-//
-//        String[] types = pageRequestDTO.getTypes();
-//        String keyword = pageRequestDTO.getKeyword();
-//        Pageable pageable = pageRequestDTO.getPageable("bno");
-//        //페이지 번호를 가져 온다??
-//
-//        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
-//
-//        List<BoardDTO> dtoList = result.getContent().stream()
-//                .map(board -> modelMapper.map(board, BoardDTO.class))
-//                .collect(Collectors.toList());
-//
-//        return PageResponseDTO.<BoardDTO>withAll()
-//                .pageRequestDTO(pageRequestDTO)
-//                .dtoList(dtoList)
-//                .total((int)result.getTotalElements())
-//                .build();
-//    }
-
-
     @Override
-    public List<BoardDTO> readAll() {
-        List<Board> boards = boardRepository.findAll();
-        List<BoardDTO> boardDTOs = boards.stream()
+    public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
+
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("boardId");
+        //페이지 번호를 가져 온다??
+
+        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
+
+        List<BoardDTO> dtoList = result.getContent().stream()
                 .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toList());
-        return boardDTOs;
+
+        return PageResponseDTO.<BoardDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
     }
+
+
+//    @Override
+//    public List<BoardDTO> readAll() {
+//        List<Board> boards = boardRepository.findAll();
+//        List<BoardDTO> boardDTOs = boards.stream()
+//                .map(board -> modelMapper.map(board, BoardDTO.class))
+//                .collect(Collectors.toList());
+//        return boardDTOs;
+//    }
 
 
     @Override

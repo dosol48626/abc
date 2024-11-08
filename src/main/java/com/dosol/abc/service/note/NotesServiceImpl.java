@@ -9,9 +9,13 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -50,16 +54,33 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public void deleteNote(Long noteId) {
-
+        notesRepository.deleteById(noteId);
     }
 
     @Override
     public NotesDTO readOne(Long noteId) {
-        return null;
+        Optional<Notes> result = notesRepository.findByIdWithImages(noteId);
+        Notes notes = result.orElseThrow();
+        NotesDTO notesDTO = entityToDTO(notes);
+        //NotesDTO notesDTO = modelMapper.map(result.orElseThrow(), NotesDTO.class);
+        return notesDTO;
     }
 
     @Override
     public PageResponseDTO<NotesDTO> list(PageRequestDTO pageRequestDTO) {
-        return null;
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("noteId");
+        Page<Notes> result = notesRepository.searchAll(types, keyword, pageable);
+
+        List<NotesDTO> dtoList = result.getContent().stream()
+                .map(notes -> modelMapper.map(notes, NotesDTO.class))
+                .collect(Collectors.toList());
+
+        return PageResponseDTO.<NotesDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int) result.getTotalElements())
+                .build();
     }
 }

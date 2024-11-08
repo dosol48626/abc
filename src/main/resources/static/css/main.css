@@ -1,0 +1,243 @@
+
+/*상단 logo & Menu */
+
+.container{
+    margin: auto;
+    font-size: 16px;
+    width: 1360px;
+    
+}
+.main_top{
+    height: 80px;
+}
+
+.head_logo{    
+    width: 200px;    
+    margin: 10px 0px 0px 30px;
+    float: left;
+}
+
+.top_menu{    
+    list-style: none; 
+           
+}
+
+.top_menu li{           
+    font-size : 14px;    
+    margin-top: 15px;    
+    width: 185px;    
+    float: left;         
+}
+
+.top_menu li > a{
+    text-decoration: none;
+    color: black;  
+    margin-left: 850px;
+}
+
+/*상단 좌측 아이콘 */
+
+.icon_sidebar{
+    height: 60px;    
+    padding: 0px 0px 0px 30px;
+}
+
+/*상단 유저 프로필 */
+
+.main_profile{
+    
+    height: 170px;    
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    Justify-content:center; 
+}
+.main_profileimg{
+    
+    width: 600px;
+    height: 170px;      
+}
+   
+.hello_img{
+    float: left;
+    /*padding 같은 사이즈로 맞추면 원형 나옴. 상의 후 수정*/
+    padding: 30px 20px 0px 40px;
+    border-radius: 100%;
+    overflow: hidden;    
+}
+.hello_user{
+    font-size: 25px;
+    text-align: center;
+    float: left;
+    padding: 50px 0px 0px 20px;
+}
+
+/*상단 캘린더 */
+.chalendar{
+    
+    width: 600px;
+    height: 100px;    
+    text-align: center;
+    font-size: 14px;    
+    margin-left:auto;
+    margin-right: auto;
+    padding: 10px 0px 0px 0px;
+}
+.chalendar_img{    
+    margin: 0px 0px 5px 0px;
+    height: 20px;    
+}
+.chalendar p{
+    
+    margin: 2px 0px 0px 0px;
+    color: #9b9b9b;
+   
+}
+
+/*메인 투두 + 메인 그래프*/
+
+.main_center{
+    
+    height: 400px;    
+    display:flex;
+    Justify-content:center;    
+}
+
+.main_box{
+    
+    width: 500px;
+    height: 400px;    
+    float: left;
+    margin: 0px 20px 0px 0px;    
+       
+}
+.main_center_title{
+    width: 150px;
+    height: 30px;    
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0px 0px 0px;
+    float: left;
+    color: hsl(0, 1%, 26%);
+}
+.main_center_title_img{
+    padding:30px 0px 0px 0px;
+}
+
+.main_center_todo{
+    float: left;
+    
+    width: 500px;
+    height: 325px;
+    font-size : 16px;    
+}
+
+.todo_checkbox{
+    margin: 25px 0px 0px 0px;
+    width: 25px;
+    height: 30px;
+    
+    float: left;
+}
+.todo_title{
+    
+    margin: 10px 0px 0px 10px;
+    width: 450px;
+    height: 25px;
+    font-weight: 600;
+    font-size: 18px;
+    float: left;
+    color: #585858;
+}
+.todo_description{
+    
+    margin: 10px 0px 0px 10px;
+    width: 450px;
+    height: 30px;    
+    font-size: 16px;
+    font-weight: 100;
+    float: left;
+    color: #9b9b9b;
+    
+}
+.main_center_box{
+    
+    border-radius: 10px;
+    background-color: white;
+    box-shadow:  1px 2px 7px 1px hsl(0, 0%, 85%);    
+    width: 500px;
+    height: 320px;
+    margin: 20px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;    
+    
+}
+/*하단 게시물 부분*/
+.main_bottom{
+    
+    height: 500px;    
+    margin-top: 50px;
+    display:flex;
+    Justify-content:center;    
+    
+}
+
+.main_bottombox{
+    
+    width: 1020px;
+    height: 500px;    
+    float: left;
+    margin: 0px 20px 0px 0px;         
+}
+.main_bottom_post_title{
+    width: 1020px;
+    height: 30px;    
+    font-size: 18px;
+    font-weight: 600;
+    padding: 20px 0px 20px 0px;
+    float: left;
+    color: hsl(0, 1%, 26%);
+}
+.main_bottom_post{
+    float: left;        
+    padding: 0px 20px 0px 15px;      
+    
+}
+.post_box{
+    
+    border-radius: 10px;
+    background-color: white;
+    box-shadow:  1px 2px 7px 1px hsl(0, 0%, 85%);    
+    width: 220px;
+    height: 320px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;    
+    
+}
+
+
+.main_bottom_img{          
+    border-radius: 10px 10px 0px 0px;
+}
+.main_bottom_title{
+    
+    width: 250px;
+    height: 20px;
+    padding: 5px 0px 0px 10px; 
+    font-weight: 500;
+    font-size: 16px; 
+    float: left;     
+}
+.main_bottom_visitcount_text{
+    
+    width: 80px;
+    height: 20px;
+    padding: 10px 0px 0px 10px; 
+    font-weight: 100;
+    font-size: 14px;     
+    float: left; 
+    color: #9b9b9b;
+}
+
+.main_bottom_visitcount_img{
+    padding: 40px 10px 0px 0px;
+}

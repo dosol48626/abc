@@ -1,4 +1,4 @@
-package com.dosol.abc.domain.wise;
+package com.dosol.abc.domain.notice;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,9 +11,12 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Wise {
+public class Notice extends BaseEntity {
     @Id
-    private Long wiseId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long noticeId;
+
+    private String title;
 
     private String content;
 }

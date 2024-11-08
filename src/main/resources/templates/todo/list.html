@@ -1,129 +1,131 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link th:href="@{/css/todo.css}" rel="stylesheet" />
+</head>
 <body>
-<div layout:fragment="content">
+<div class="container" layout:fragment="content">
+    <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+    <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
 
-    <div class="row mt-3">
-        <form action="/todo/list" method="get">
-            <div class="col">
-                <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
-                <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+    <!--★ [공통] 상단 logo & Menu  ★ -->
 
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <select class="form-select" name="type">
-                            <option value="">---</option>
-                            <option value="t" th:selected="${pageRequestDTO.type =='t'}">제목</option>
-                            <option value="d" th:selected="${pageRequestDTO.type =='d'}">내용</option>
-                            <option value="td" th:selected="${pageRequestDTO.type =='td'}">제목 내용</option>
-                        </select>
-                    </div>
-                    <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
-                        <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+    <div class="main_top">
+        <div class="head_logo">
+            <img  src="/img/todoimg/project_head_Logo.png" alt="로고" width="150" height="30" >
+        </div>
+
+        <div>
+            <ul class="top_menu">
+                <li><a href="#">Notice</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="icon_sidebar">
+        <img src="/img/todoimg/projcect_sidebar_open.png" width="30" height="30">
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            todo list
-        </div>
-        <div class="card-body">
+    <div class="container2">
 
-            <h5>
-        <span th:switch="${pageRequestDTO.pageType}">
-          <span th:case="'list'">username님의 모든 일정입니다.</span>
-          <span th:case="'today'">username님의 오늘 일정입니다.</span>
-          <span th:case="'upcoming'">username님의 다가오는 일정입니다.</span>
-           <span th:case="'past'">username님의 지난 일정입니다.</span>
-           <span th:case="'completed'">username님의 완료된 일정입니다.</span>
-           <span th:case="*">username님의 일정입니다.</span> <!-- 기본값 -->
-        </span>
-            </h5>
-            <div>
-                <a th:href="@{/todo/register(pageType=${pageRequestDTO.pageType})}" class="text-decoration-none">
-                    <button type="button" class="btn btn-outline-secondary">일정 등록</button>
-                </a>
+
+        <!--검색 창 -->
+
+        <!--<div class="row mt-3">
+          <form action="/todo/list" method="get">
+            <div class="col">
+              <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+              <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <select class="form-select" name="type">
+                    <option value="">-&#45;&#45;</option>
+                    <option value="t" th:selected="${pageRequestDTO.type =='t'}">제목</option>
+                    <option value="d" th:selected="${pageRequestDTO.type =='d'}">내용</option>
+                    <option value="td" th:selected="${pageRequestDTO.type =='td'}">제목 내용</option>
+                  </select>
+                </div>
+                <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
+                  <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
+                </div>
+              </div>
             </div>
-            <!--<div>
-              <a th:href="|@{/todo/register}|" class="text-decoration-none">
-                <button type="submit" class="btn btn-outline-secondary">일정 등록</button>
-              </a>
-            </div>-->
+          </form>
+        </div>-->
 
+        <div class="todo_main">
+            <div class="todo_main_box">
+                <div class="todo_maintext">
+          <span th:switch="${pageRequestDTO.pageType}">
+              <span th:case="'list'">username님의 모든 일정입니다.</span>
+              <span th:case="'today'">username님의 오늘 일정입니다.</span>
+              <span th:case="'upcoming'">username님의 다가오는 일정입니다.</span>
+              <span th:case="'past'">username님의 지난 일정입니다.</span>
+              <span th:case="'completed'">username님의 완료된 일정입니다.</span>
+              <span th:case="*">username님의 일정입니다.</span> <!-- 기본값 -->
+          </span>
+                </div>
 
-            <table class="table">
+                <div class="todo_main_btn">
+                    <a th:href="@{/todo/register(pageType=${pageRequestDTO.pageType})}">
+                        <button type="button" class="custom-btn btn_register">일정 추가</button>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-                <thead>
-                <tr>
-                    <!--<th scope="col">Todo_id</th>-->
-                    <th scope="col">DueDate</th>
-                    <th scope="col">Complete</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"></th>
+        <div class="todo_main_table">
+            <div class="todo_main_box2">
+                <table class="todo-table" th:each="dto : ${responseDTO.dtoList}">
+                    <tbody th:with="link=${pageRequestDTO.getLink()}">
+                    <!-- Due Date Row -->
+                    <tr>
+                        <td class="table_dueDate" colspan="4" >[[${#temporals.format(dto.dueDate,'yyyy-MM-dd')}]]</td>
+                    </tr>
 
+                    <!-- Todo Item Rows -->
+                    <tr >
+                        <!-- Checkbox Column -->
+                        <td class="table_checkbox" rowspan="2"  style="width: 10%; height: 40px;" >
+                            <input class="form-check-input" type="checkbox" th:checked="${dto.complete ?: false ? 'checked' : ''}">
+                        </td>
 
+                        <!-- Title Column -->
+                        <td class="table_title" colspan="2" style="width: 80%; ">
+                            <a th:href="|@{/todo/read(todoId=${dto.todoId})}&${link}|">[[${dto.title}]]</a>
+                        </td>
 
+                        <!-- Icons Column -->
+                        <td class="table_icon" rowspan="2"  style="width: 10%; height: 40px;">
+                            <div class="tb_icon">
+                                <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|">
+                                    <img src="/img/todoimg/pencil.png" width="20" height="20">
+                                </a>
+                            </div>
+                            <div class="tb_icon">
+                                <form action="/todo/remove" method="post" style="display:inline;">
+                                    <input type="hidden" name="todoId" th:value="${dto.todoId}">
+                                    <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+                                    <button type="submit" style="background: none; border: none; padding: 0;">
+                                        <img src="/img/todoimg/bin.png" width="20" height="20" alt="삭제" onclick="return confirmDelete(this)">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
 
-                </tr>
-                </thead>
+                    <!-- Description Row -->
+                    <tr>
+                        <td class="table_description" colspan="2" style="width: 80%"  th:text="${dto.description}"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                <tbody th:with="link=${pageRequestDTO.getLink()}">
-                <tr th:each="dto:${responseDTO.dtoList}">
-                    <td>[[${#temporals.format(dto.dueDate,'yyyy-MM-dd')}]]</td>
-                    <td><input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete ?: false ? 'checked' : ''}"></td>
-                    <!--<th scope="row">[[${dto.todoId}]]</th>-->
-                    <!--<td><a th:href="@{/todo/read(todo_id=${dto.todo_id})}">[[${dto.title}]]</a></td>-->
-                    <td><a th:href="|@{/todo/read(todoId=${dto.todoId})}&${link}|">[[${dto.title}]]</a></td>
-                    <td>[[${dto.description}]]</td>
-
-                    <td>
-                        <div class="input-group mb-3">
-                            <!-- 수정 버튼 -->
-                            <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
-                                <button type="button" class="btn btn-outline-success btn-sm ">수정</button>
-                            </a>
-
-                            <!-- 삭제 버튼 -->
-                            <form action="/todo/remove" method="post" style="display:inline;">
-                                <input type="hidden" name="todoId" th:value="${dto.todoId}">
-                                <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-                                <button type="button" class="btn btn-outline-danger btn-sm " onclick="confirmDelete(this.form)">삭제</button>
-                            </form>
-                        </div>
-                    </td>
-
-                    <!--<td>
-                      <div class="input-group mb-3" th:with="link = ${pageRequestDTO.getLink()}">
-                        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
-                          <button type="button" class="btn btn-outline-success btn-sm">수정</button>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      <form action="/todo/remove" method="post" style="display:inline;">
-                        <input type="hidden" name="todoId" th:value="${dto.todoId}">
-                        <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-                        <button type="button" class="btn btn-outline-danger btn-sm " onclick="confirmDelete(this.form)">삭제</button>
-                      </form>
-
-                    </td>
-          -->
-
-
-
-                </tr>
-            </table>
-
+            </div>
             <div class="float-end">
                 <ul class="pagination flex-wrap">
                     <li class="page-item" th:if="${responseDTO.prev}">
@@ -142,34 +144,3 @@
             </div>
 
         </div>
-
-    </div>
-
-</div>
-</body>
-
-
-<script layout:fragment="script" th:inline="javascript">
-    document.querySelector(".pagination").addEventListener("click", function (e){
-        e.preventDefault()
-        e.stopPropagation()
-        const target=e.target
-        if(target.tagName !=='A'){
-            return;
-        }
-        const num=target.getAttribute('data-num');
-        const formObj=document.querySelector("form");
-        formObj.innerHTML += `<input type=h'hidden' name='page' value='${num}'>`
-        formObj.submit()
-    })
-
-    function confirmDelete(form) {
-        if (confirm('정말 삭제하시겠습니까?')) {
-            form.submit();  // 확인을 누르면 폼을 제출합니다.
-        }
-    }
-
-
-
-</script>
-</html>
