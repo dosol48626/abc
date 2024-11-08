@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 public class TodoDTO {
     private Long todoId;
-    private String memberId;
+    private Long userId;
 
     @NotEmpty
     private String title;

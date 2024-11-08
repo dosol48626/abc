@@ -23,7 +23,7 @@ public class Todo {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private String memberId;
+
 
     private String title;
 

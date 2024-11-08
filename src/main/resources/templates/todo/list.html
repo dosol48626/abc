@@ -23,11 +23,12 @@
             </ul>
         </div>
     </div>
-    <div class="icon_sidebar">
-        <img src="/img/todoimg/projcect_sidebar_open.png" width="30" height="30">
-    </div>
+
 
     <div class="container2">
+        <div class="icon_sidebar">
+            <img src="/img/todoimg/projcect_sidebar_open.png" width="30" height="30">
+        </div>
 
 
         <!--검색 창 -->
@@ -126,7 +127,13 @@
                 </table>
 
             </div>
-            <div class="float-end">
+
+
+
+        </div>
+
+        <div class="main_pagination">
+            <div class="pagination_box">
                 <ul class="pagination flex-wrap">
                     <li class="page-item" th:if="${responseDTO.prev}">
                         <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
@@ -142,5 +149,46 @@
                     </li>
                 </ul>
             </div>
-
         </div>
+
+
+    </div>
+
+</div>
+
+</body>
+
+
+<script>
+    // 사이드바 토글 함수
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('show');
+    }
+
+    document.querySelector(".pagination").addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const target = e.target;
+        if (target.tagName !== 'A') {
+            return;
+        }
+        const num = target.getAttribute('data-num');
+        const formObj = document.querySelector("form");
+        formObj.innerHTML += `<input type="hidden" name="page" value="${num}">`;
+        formObj.submit();
+    });
+
+    function confirmDelete(form) {
+        if (confirm("해당 일정을 삭제하시겠습니까?")) {
+            form.submit();
+        } else {
+            return false;
+        }
+    }
+</script>
+
+
+
+</script>
+</html>

@@ -1,6 +1,7 @@
 package com.dosol.abc.repository.todo;
 
 import com.dosol.abc.domain.todo.Todo;
+import com.dosol.abc.domain.user.User;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,20 @@ import java.util.stream.IntStream;
 public class TodoRepositoryTest {
     @Autowired
     private TodoRepository todoRepository;
+
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+
+        User user = User.builder()
+                .userId(1L)
+                .password("12341")
+                .username("qwer1")
+                .build();
+        IntStream.rangeClosed(1, 15).forEach(i -> {
             Todo todo = Todo.builder()
                     .title("Title" + i)
-                    .memberId("sample member")
+                    .user(user)
+
                     .description("Description" + i)
                     .complete(false)
                     .dueDate(LocalDate.now())
