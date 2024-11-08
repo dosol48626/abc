@@ -103,7 +103,7 @@
                         <td class="table_icon" rowspan="2"  style="width: 10%; height: 40px;">
                             <div class="tb_icon">
                                 <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|">
-                                    <img src="../img/pencil.png" width="20" height="20">
+                                    <img src="/img/todoimg/pencil.png" width="20" height="20">
                                 </a>
                             </div>
                             <div class="tb_icon">
@@ -111,7 +111,7 @@
                                     <input type="hidden" name="todoId" th:value="${dto.todoId}">
                                     <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
                                     <button type="submit" style="background: none; border: none; padding: 0;">
-                                        <img src="../img/bin.png" width="20" height="20" alt="삭제" onclick="return confirmDelete(this)">
+                                        <img src="/img/todoimg/bin.png" width="20" height="20" alt="삭제" onclick="return confirmDelete(this)">
                                     </button>
                                 </form>
                             </div>
