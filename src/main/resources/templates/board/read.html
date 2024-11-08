@@ -41,5 +41,10 @@
   <a th:href="@{/board/list}">목록으로 돌아가기</a>
 </div>
 
+<a th:if="${username == boardDTO.username}"
+   th:href="@{/board/modify(boardId=${boardDTO.boardId})}">
+  <button type="button">수정하기</button>
+</a>
+
 </body>
 </html>
