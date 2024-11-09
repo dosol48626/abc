@@ -46,5 +46,79 @@
   <button type="button">수정하기</button>
 </a>
 
+
+<hr>
+
+<!-- 댓글 목록 -->
+<h2>댓글 목록</h2>
+<div id="replyList">
+  <!-- 댓글 목록이 비동기적으로 로드됩니다 -->
+</div>
+
+<!-- 댓글 작성 폼 -->
+<h3>댓글 작성</h3>
+<textarea id="replyText" placeholder="댓글을 작성하세요..."></textarea>
+<button onclick="addReply()">댓글 추가</button>
+
+<script>
+  const boardId = /* 타임리프를 통해 전달된 게시글 ID */ [[${boardDTO.boardId}]];
+  const username = /* 로그인한 사용자 ID */ [[${username}]];
+
+  async function loadReplies(page = 1) {
+    const response = await fetch(`/replies/list/${boardId}?page=${page}`);
+    const data = await response.json();
+
+    const replyListDiv = document.getElementById("replyList");
+    replyListDiv.innerHTML = "";
+
+    if (data.content.length > 0) {
+      data.content.forEach(reply => {
+        const replyDiv = document.createElement("div");
+        replyDiv.innerHTML = `
+                    <p><strong>${reply.user.username}</strong>: ${reply.replyText}</p>
+                    ${username === reply.user.username ? `
+                        <button onclick="editReply(${reply.replyId})">수정</button>
+                        <button onclick="deleteReply(${reply.replyId})">삭제</button>
+                    ` : ''}
+                    <hr>
+                `;
+        replyListDiv.appendChild(replyDiv);
+      });
+    } else {
+      replyListDiv.innerHTML = "<p>댓글이 없습니다.</p>";
+    }
+  }
+
+  async function addReply() {
+    const replyText = document.getElementById("replyText").value;
+    if (!replyText.trim()) {
+      alert("댓글 내용을 입력하세요.");
+      return;
+    }
+
+    const replyDTO = {
+      boardId: boardId,
+      userId: username,
+      replyText: replyText
+    };
+
+    const response = await fetch("/replies/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(replyDTO)
+    });
+
+    if (response.ok) {
+      document.getElementById("replyText").value = "";
+      loadReplies();
+    } else {
+      alert("댓글 등록에 실패했습니다.");
+    }
+  }
+
+  loadReplies();
+</script>
+
+
 </body>
 </html>

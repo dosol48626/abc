@@ -27,10 +27,12 @@ public class NotesImage implements Comparable<NotesImage> {
 
     @Override
     public int compareTo(NotesImage other) {
+
         return ord - other.ord;
     }
 
     public void changeNotes(Notes notes) {
+
         this.notes = notes;
     }
 }

@@ -111,6 +111,5 @@ public class ReplyServiceTests {
         var response = replyService.getListOfBoard(boardId, pageRequestDTO);
         log.info("Replies for board ID " + boardId + ": " + response.getDtoList());
 
-
     }
 }

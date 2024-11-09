@@ -24,7 +24,7 @@ public class ReplyDTO {
 
     private Long userId;
 
-    //private String username;
+    private String username;
 
     //private String username;
 
@@ -35,4 +35,5 @@ public class ReplyDTO {
     private LocalDateTime regDate;
 
     private LocalDateTime modDate;
+
 }
