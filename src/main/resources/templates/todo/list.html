@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <link th:href="@{/css/todo.css}" rel="stylesheet" />
+    <link th:href="@{/css/common.css}" rel="stylesheet"/>
+    <link th:href="@{/css/todo.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container" layout:fragment="content">
@@ -13,7 +14,7 @@
 
     <div class="main_top">
         <div class="head_logo">
-            <img  src="/img/todoimg/project_head_Logo.png" alt="로고" width="150" height="30" >
+            <img src="/img/common/project_head_Logo.png" alt="로고" width="150" height="30" >
         </div>
 
         <div>
@@ -27,7 +28,7 @@
 
     <div class="container2">
         <div class="icon_sidebar">
-            <img src="/img/todoimg/projcect_sidebar_open.png" width="30" height="30">
+            <img src="/img/common/projcect_sidebar_open.png" width="30" height="30">
         </div>
 
 
@@ -104,7 +105,7 @@
                         <td class="table_icon" rowspan="2"  style="width: 10%; height: 40px;">
                             <div class="tb_icon">
                                 <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|">
-                                    <img src="/img/todoimg/pencil.png" width="20" height="20">
+                                    <img src="/img/todo/pencil.png" width="20" height="20">
                                 </a>
                             </div>
                             <div class="tb_icon">
@@ -112,7 +113,7 @@
                                     <input type="hidden" name="todoId" th:value="${dto.todoId}">
                                     <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
                                     <button type="button" class="deleteIcon" style="background: none; border: none; padding: 0;">
-                                        <img src="/img/todoimg/bin.png" width="20" height="20" alt="삭제">
+                                        <img src="/img/todo/bin.png" width="20" height="20" alt="삭제">
                                     </button>
                                 </form>
                             </div>
@@ -130,27 +131,31 @@
 
         </div>
 
+        <!--★ [공통] 페이징 th:href 경로 수정★ -->
+
         <div class="float-end">
-            <ul class="pagination flex-wrap">
+            <div class="pagination_box">
+                <ul class="pagination flex-wrap">
 
-                <!-- Previous Button -->
-                <li class="page-item" th:if="${responseDTO.prev}">
-                    <a class="page-link" th:href="@{/todo/list(page=${responseDTO.start - 1})}">Previous</a>
-                </li>
-
-                <!-- Dynamic Page Numbers -->
-                <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
-                    <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
-                        <a class="page-link" th:href="@{/todo/list(page=${i})}" th:text="${i}">1</a>
+                    <!-- Previous Button -->
+                    <li class="page-item" th:if="${responseDTO.prev}">
+                        <a class="page-link" th:href="@{/todo/list(page=${responseDTO.start - 1})}">Previous</a>
                     </li>
-                </th:block>
 
-                <!-- Next Button -->
-                <li class="page-item" th:if="${responseDTO.next}">
-                    <a class="page-link" th:href="@{/todo/list(page=${responseDTO.end + 1})}">Next</a>
-                </li>
+                    <!-- Dynamic Page Numbers -->
+                    <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                        <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
+                            <a class="page-link" th:href="@{/todo/list(page=${i})}" th:text="${i}">1</a>
+                        </li>
+                    </th:block>
 
-            </ul>
+                    <!-- Next Button -->
+                    <li class="page-item" th:if="${responseDTO.next}">
+                        <a class="page-link" th:href="@{/todo/list(page=${responseDTO.end + 1})}">Next</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
 
 
@@ -162,12 +167,6 @@
 
 
 <script>
-    // 사이드바 토글 함수
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('show');
-    }
-
     document.querySelector(".main_pagination").addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();

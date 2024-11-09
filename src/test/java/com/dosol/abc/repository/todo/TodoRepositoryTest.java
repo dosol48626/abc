@@ -25,14 +25,14 @@ public class TodoRepositoryTest {
                 .password("12341")
                 .username("qwer1")
                 .build();
-        IntStream.rangeClosed(1, 40).forEach(i -> {
+        IntStream.rangeClosed(1, 10).forEach(i -> {
             Todo todo = Todo.builder()
                     .title("Title" + i)
                     .user(user)
                     .description("Description" + i)
                     .complete(false)
 //                    .dueDate(LocalDate.now())
-                    .dueDate(LocalDate.parse("2023-12-31"))
+                    .dueDate(LocalDate.parse("2024-11-09"))
                     .build();
 
             Todo result = todoRepository.save(todo);
