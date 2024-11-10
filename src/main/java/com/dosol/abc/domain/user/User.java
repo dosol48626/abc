@@ -19,4 +19,13 @@ public class User {
 
     private String password;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserImage profileImage;
+
+    // 프로필 이미지 설정 메서드
+    public void setProfileImage(UserImage profileImage) {
+        this.profileImage = profileImage;
+        profileImage.changeUser(this);
+    }
 }
+

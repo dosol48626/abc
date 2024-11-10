@@ -14,7 +14,7 @@
     <div class="container">
         <div class="main_profile">
             <div class="main_profileimg">
-                <img class="hello_img" src="../img/예시_유저.jpg" alt="유저사진" width="120" height="120">
+                <img th:src="@{'/upload/' + ${profileImage.filename}}" alt="유저사진" class="hello_img" width="120" height="120">
                 <p class="hello_user">반갑습니다. <b th:text="${user.username}">USERNAME</b>님</p>
             </div>
         </div>

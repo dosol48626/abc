@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserImage implements Comparable<UserImage>{
+public class UserImage implements Comparable<UserImage> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uuid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     private String filename;
