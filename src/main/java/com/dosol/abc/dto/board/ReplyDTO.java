@@ -14,26 +14,18 @@ import java.time.LocalDateTime;
 @Builder
 public class ReplyDTO {
 
-    //private Board board;
-
-    //private User user;
-
     private Long replyId;
 
-    private Long boardId;
+    private Long boardId;  // Board 엔티티의 ID를 참조
 
-    private Long userId;
+    private Long userId;   // User 엔티티의 ID를 참조
 
-    private String username;
-
-    //private String username;
-
-    //private Long userId;
+    private String username; // 댓글 작성자의 사용자 이름
 
     private String replyText;
 
     private LocalDateTime regDate;
 
     private LocalDateTime modDate;
-
 }
+

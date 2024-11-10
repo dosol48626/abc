@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
-        Long userId = userRepository.save(user).getUserId();
-        return userId;
+        return userRepository.save(user).getUserId();
     }
 
     public Optional<User> login(String username, String password) {
@@ -30,10 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUserName(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public User findUserName(String username) {
         return userRepository.findByUsername(username);
     }
 }

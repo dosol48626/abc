@@ -19,21 +19,18 @@ public class Reply extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long replyId;
 
+    // 수정된 부분: @ManyToOne 설정 검토
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
-    //private Long userId;
-
+    // 수정된 부분: @ManyToOne 설정 검토
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    //private String username;
-
-    //private Long userId;
-
     private String replyText;
 
-    public void changeText(String text){
+    public void changeText(String text) {
         this.replyText = text;
     }
 }
+

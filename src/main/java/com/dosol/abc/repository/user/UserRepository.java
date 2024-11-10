@@ -7,7 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username); //글 쓸때 이름 가져올려고 하는 메서드
 
-    Optional<User> findByUsernameAndPassword(String username, String password); //로그인할때 맞는지 확인할려고 가져오는 메서드
+    User findByUsername(String username);
+    // 이 메서드는 username으로 User 객체를 단일 조회할 때 사용합니다.
+
+    Optional<User> findByUsernameAndPassword(String username, String password);
+    // 로그인 시 username과 password로 User를 찾기 위한 메서드입니다.
 }

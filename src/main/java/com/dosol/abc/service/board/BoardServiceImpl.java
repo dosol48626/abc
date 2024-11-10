@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
-
         String[] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("boardId");
@@ -42,12 +41,8 @@ public class BoardServiceImpl implements BoardService {
         List<BoardDTO> dtoList = result.getContent().stream()
                 .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toList());
-        log.info("아니 왜 user 정보를 다 가지고 오냐고@@@@@@@@"+dtoList);
 
-//        List<BoardDTO> dtoList = result.getContent().stream()
-//                .map(board -> entityToDTO(board)) // entityToDTO 메서드를 사용
-//                .collect(Collectors.toList());
-
+        log.info("Board List DTOs: " + dtoList);
 
         return PageResponseDTO.<BoardDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
@@ -56,80 +51,52 @@ public class BoardServiceImpl implements BoardService {
                 .build();
     }
 
-
-//    @Override
-//    public List<BoardDTO> readAll() {
-//        List<Board> boards = boardRepository.findAll();
-//        List<BoardDTO> boardDTOs = boards.stream()
-//                .map(board -> modelMapper.map(board, BoardDTO.class))
-//                .collect(Collectors.toList());
-//        return boardDTOs;
-//    }
-
-
-//    @Override
-//    public Long register(BoardDTO boardDTO) {
-//        Board board = modelMapper.map(boardDTO, Board.class);
-//        User user = userRepository.findByUsername(boardDTO.getUsername());
-//        board.setUser(user);
-//        Long bno = boardRepository.save(board).getBoardId();
-//        return bno;
-//    }
-
     @Override
     public Long register(BoardDTO boardDTO) {
-        // BoardDTO를 Board 엔티티로 변환
-        //Board board = modelMapper.map(boardDTO, Board.class);
-
         Board board = dtoToEntity(boardDTO);
         User user = userRepository.findByUsername(boardDTO.getUsername());
+        if (user == null) {
+            throw new RuntimeException("유저를 찾을 수 없습니다.");
+        }
         board.setUser(user);
 
-        // fileNames를 Board의 imageSet에 추가
         if (boardDTO.getFileNames() != null) {
             boardDTO.getFileNames().forEach(fileName -> {
-                String[] parts = fileName.split("_", 2); // uuid와 원래 파일명을 분리
+                String[] parts = fileName.split("_", 2);
                 String uuid = parts[0];
                 String originalFileName = parts[1];
                 board.addImage(uuid, originalFileName);
-
             });
         }
-
         return boardRepository.save(board).getBoardId();
     }
 
-
     @Override
-    public BoardDTO readOne(Long bno) {
-        Optional<Board> result = boardRepository.findById(bno);
-        Board board = result.orElseThrow();
+    public BoardDTO readOne(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
+                new RuntimeException("해당 게시글이 존재하지 않습니다."));
         board.updateVisitCount();
-        BoardDTO boardDTO = entityToDTO(board);
-        //BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class); 이제 새로 만든거 쓸거다
-        return boardDTO;
+        return entityToDTO(board);
     }
 
     @Override
     public void modify(BoardDTO boardDTO) {
-        Optional<Board> result = boardRepository.findById(boardDTO.getBoardId());
-        Board board = result.orElseThrow();
-
+        Board board = boardRepository.findById(boardDTO.getBoardId()).orElseThrow(() ->
+                new RuntimeException("수정할 게시글을 찾을 수 없습니다."));
         board.change(boardDTO.getTitle(), boardDTO.getContent());
 
         board.clearImages();
-        if(boardDTO.getFileNames()!=null) {
-            for (String fileName : boardDTO.getFileNames()) {
-                String[] arr=fileName.split("_");
-                board.addImage(arr[0], arr[1]);
-            }
+        if (boardDTO.getFileNames() != null) {
+            boardDTO.getFileNames().forEach(fileName -> {
+                String[] parts = fileName.split("_", 2);
+                board.addImage(parts[0], parts[1]);
+            });
         }
-
         boardRepository.save(board);
     }
 
     @Override
-    public void remove(Long bno) {
-        boardRepository.deleteById(bno);
+    public void remove(Long boardId) {
+        boardRepository.deleteById(boardId);
     }
 }

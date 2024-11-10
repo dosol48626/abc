@@ -16,18 +16,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "imageSet")
-public class Board extends BaseEntity{
+public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
+    // 수정된 부분: CascadeType.PERSIST 추가
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
-
-
-//    private String username;
 
     @Column(nullable = false, length = 100)
     private String title;
@@ -39,26 +36,23 @@ public class Board extends BaseEntity{
     @ColumnDefault("0")
     private int visitcount;
 
-    public void updateVisitCount(){
+    public void updateVisitCount() {
         this.visitcount++;
     }
 
-    public void change(String title, String content){
+    public void change(String title, String content) {
         this.title = title;
         this.content = content;
     }
 
-
-    @OneToMany(mappedBy = "board",
-            fetch=FetchType.LAZY,
-            cascade = {CascadeType.ALL},
-            orphanRemoval = true)
+    // 수정된 부분: CascadeType.ALL 추가
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @BatchSize(size = 20)
-    private Set<BoardImage> imageSet=new HashSet<>();
+    private Set<BoardImage> imageSet = new HashSet<>();
 
-    public void addImage(String uuid, String fileName){
-        BoardImage image=BoardImage.builder()
+    public void addImage(String uuid, String fileName) {
+        BoardImage image = BoardImage.builder()
                 .uuid(uuid)
                 .fileName(fileName)
                 .board(this)
@@ -66,9 +60,9 @@ public class Board extends BaseEntity{
                 .build();
         imageSet.add(image);
     }
-    public void clearImages(){
+
+    public void clearImages() {
         imageSet.forEach(boardImage -> boardImage.changeBoard(null));
         this.imageSet.clear();
     }
-
 }

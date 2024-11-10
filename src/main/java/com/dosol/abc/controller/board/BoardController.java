@@ -59,21 +59,21 @@ public class BoardController {
 
     @PostMapping("/register")
     public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
-
+        // User가 null이 아닐 경우에만 getUsername 호출
         User user = (User) session.getAttribute("user");
+        if (user != null) {
+            boardDTO.setUsername(user.getUsername());
+        } else {
+            throw new RuntimeException("로그인이 필요합니다.");
+        }
 
-        boardDTO.setUsername(user.getUsername());
-
-
-        // 파일 업로드 처리
+        // 파일 업로드와 관련된 파일 이름 설정 처리
         List<String> strFileNames = null;
         if (uploadFileDTO.getFiles() != null && !uploadFileDTO.getFiles().get(0).getOriginalFilename().equals("")) {
             strFileNames = fileUpload(uploadFileDTO);
             log.info("Uploaded Files: " + strFileNames.size());
         }
         boardDTO.setFileNames(strFileNames);
-
-        log.info("Board POST register with files...");
 
         Long boardId = boardService.register(boardDTO);
         return "redirect:/board/list";

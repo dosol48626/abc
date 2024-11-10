@@ -46,7 +46,6 @@
   <button type="button">수정하기</button>
 </a>
 
-
 <hr>
 
 <!-- 댓글 목록 -->
@@ -60,10 +59,15 @@
 <textarea id="replyText" placeholder="댓글을 작성하세요..."></textarea>
 <button onclick="addReply()">댓글 추가</button>
 
-<script>
-  const boardId = /* 타임리프를 통해 전달된 게시글 ID */ [[${boardDTO.boardId}]];
-  const username = /* 로그인한 사용자 ID */ [[${username}]];
+<!-- 댓글 기능을 위한 JavaScript 추가 -->
+<script th:inline="javascript">
+  /* 게시글 ID와 사용자 ID 정보를 JavaScript 변수로 설정 */
+  const boardId = /*[[${boardDTO.boardId}]]*/ 0;
 
+  // 세션 유저가 없는 경우 null로 처리
+  const username = /*[[${session.user != null ? session.user.username : null}]]*/ null;
+
+  /* 댓글 목록 로드 함수 */
   async function loadReplies(page = 1) {
     const response = await fetch(`/replies/list/${boardId}?page=${page}`);
     const data = await response.json();
@@ -71,17 +75,17 @@
     const replyListDiv = document.getElementById("replyList");
     replyListDiv.innerHTML = "";
 
-    if (data.content.length > 0) {
-      data.content.forEach(reply => {
+    if (data.dtoList.length > 0) { // dtoList 확인
+      data.dtoList.forEach(reply => { // dtoList의 내용을 사용
         const replyDiv = document.createElement("div");
         replyDiv.innerHTML = `
-                    <p><strong>${reply.user.username}</strong>: ${reply.replyText}</p>
-                    ${username === reply.user.username ? `
-                        <button onclick="editReply(${reply.replyId})">수정</button>
-                        <button onclick="deleteReply(${reply.replyId})">삭제</button>
-                    ` : ''}
-                    <hr>
-                `;
+          <p><strong>${reply.username}</strong>: ${reply.replyText}</p>
+          ${username === reply.username ? `
+              <button onclick="editReply(${reply.replyId}, '${reply.replyText}')">수정</button>
+              <button onclick="deleteReply(${reply.replyId})">삭제</button>
+          ` : ''}
+          <hr>
+        `;
         replyListDiv.appendChild(replyDiv);
       });
     } else {
@@ -89,6 +93,7 @@
     }
   }
 
+  /* 댓글 추가 함수 */
   async function addReply() {
     const replyText = document.getElementById("replyText").value;
     if (!replyText.trim()) {
@@ -96,9 +101,14 @@
       return;
     }
 
+    if (!username) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
     const replyDTO = {
       boardId: boardId,
-      userId: username,
+      username: username,
       replyText: replyText
     };
 
@@ -116,9 +126,47 @@
     }
   }
 
+  /* 댓글 수정 함수 */
+  async function editReply(replyId, currentText) {
+    const newReplyText = prompt("수정할 댓글을 입력하세요:", currentText);
+    if (newReplyText == null || newReplyText.trim() === "") return;
+
+    const replyDTO = {
+      replyId: replyId,
+      replyText: newReplyText
+    };
+
+    const response = await fetch(`/replies/${replyId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(replyDTO)
+    });
+
+    if (response.ok) {
+      loadReplies();
+    } else {
+      alert("댓글 수정에 실패했습니다.");
+    }
+  }
+
+  /* 댓글 삭제 함수 */
+  async function deleteReply(replyId) {
+    if (!confirm("정말 이 댓글을 삭제하시겠습니까?")) return;
+
+    const response = await fetch(`/replies/${replyId}`, {
+      method: "DELETE"
+    });
+
+    if (response.ok) {
+      loadReplies();
+    } else {
+      alert("댓글 삭제에 실패했습니다.");
+    }
+  }
+
+  /* 댓글 목록 초기 로드 */
   loadReplies();
 </script>
-
 
 </body>
 </html>
