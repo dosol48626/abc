@@ -57,9 +57,30 @@ public class BoardController {
     public void registerGET() {
     }
 
+//    @PostMapping("/register")
+//    public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
+//        // User가 null이 아닐 경우에만 getUsername 호출
+//        User user = (User) session.getAttribute("user");
+//        if (user != null) {
+//            boardDTO.setUsername(user.getUsername());
+//        } else {
+//            throw new RuntimeException("로그인이 필요합니다.");
+//        }
+//
+//        // 파일 업로드와 관련된 파일 이름 설정 처리
+//        List<String> strFileNames = null;
+//        if (uploadFileDTO.getFiles() != null && !uploadFileDTO.getFiles().get(0).getOriginalFilename().equals("")) {
+//            strFileNames = fileUpload(uploadFileDTO);
+//            log.info("Uploaded Files: " + strFileNames.size());
+//        }
+//        boardDTO.setFileNames(strFileNames);
+//
+//        Long boardId = boardService.register(boardDTO);
+//        return "redirect:/board/list";
+//    }
+
     @PostMapping("/register")
     public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
-        // User가 null이 아닐 경우에만 getUsername 호출
         User user = (User) session.getAttribute("user");
         if (user != null) {
             boardDTO.setUsername(user.getUsername());
@@ -67,15 +88,10 @@ public class BoardController {
             throw new RuntimeException("로그인이 필요합니다.");
         }
 
-        // 파일 업로드와 관련된 파일 이름 설정 처리
-        List<String> strFileNames = null;
-        if (uploadFileDTO.getFiles() != null && !uploadFileDTO.getFiles().get(0).getOriginalFilename().equals("")) {
-            strFileNames = fileUpload(uploadFileDTO);
-            log.info("Uploaded Files: " + strFileNames.size());
-        }
-        boardDTO.setFileNames(strFileNames);
+        List<String> strFileNames = fileUpload(uploadFileDTO);
+        boardDTO.setFileNames(strFileNames); // (수정 부분) 파일 이름 목록 설정
 
-        Long boardId = boardService.register(boardDTO);
+        Long boardId = boardService.register(boardDTO); // (수정 부분) Service 레이어에서 DB에 저장
         return "redirect:/board/list";
     }
 
@@ -84,20 +100,19 @@ public class BoardController {
         List<String> list = new ArrayList<>();
         uploadFileDTO.getFiles().forEach(multipartFile -> {
             String originalName = multipartFile.getOriginalFilename();
-            log.info(originalName);
-
             String uuid = UUID.randomUUID().toString();
             Path savePath = Paths.get(uploadPath, uuid + "_" + originalName);
 
             try {
-                multipartFile.transferTo(savePath); // 서버에 파일 저장
+                multipartFile.transferTo(savePath);
+                String contentType = Files.probeContentType(savePath);
 
-                // 이미지 파일인 경우 썸네일 생성
-                if (Files.probeContentType(savePath).startsWith("image")) {
+                // contentType이 null인지 확인 후 처리
+                if (contentType != null && contentType.startsWith("image")) {
                     File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
                     Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
                 }
-                list.add(uuid + "_" + originalName); // 업로드된 파일명 추가
+                list.add(uuid + "_" + originalName); // 파일 이름을 목록에 추가
             } catch (IOException e) {
                 e.printStackTrace();
             }

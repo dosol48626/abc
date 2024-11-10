@@ -52,13 +52,18 @@ public class Board extends BaseEntity {
     private Set<BoardImage> imageSet = new HashSet<>();
 
     public void addImage(String uuid, String fileName) {
-        BoardImage image = BoardImage.builder()
-                .uuid(uuid)
-                .fileName(fileName)
-                .board(this)
-                .ord(imageSet.size())
-                .build();
-        imageSet.add(image);
+        // 중복 방지: uuid가 중복되는 이미지가 있는지 확인
+        boolean isDuplicate = imageSet.stream().anyMatch(image -> image.getUuid().equals(uuid));
+
+        if (!isDuplicate) {  // 중복이 아니면 추가
+            BoardImage image = BoardImage.builder()
+                    .uuid(uuid)
+                    .fileName(fileName)
+                    .board(this)
+                    .ord(imageSet.size())
+                    .build();
+            imageSet.add(image);
+        }
     }
 
     public void clearImages() {

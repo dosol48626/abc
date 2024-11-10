@@ -37,6 +37,17 @@
   </table>
 </div>
 
+
+
+<div th:if="${boardDTO.fileNames != null}">
+  <h3>첨부 이미지</h3>
+  <div th:each="fileName : ${boardDTO.fileNames}">
+    <img th:src="@{'/uploads/' + ${fileName}}" alt="Image" width="200" height="200"/>
+  </div>
+</div>
+
+
+
 <div>
   <a th:href="@{/board/list}">목록으로 돌아가기</a>
 </div>

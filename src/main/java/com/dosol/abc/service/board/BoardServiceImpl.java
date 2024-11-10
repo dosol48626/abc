@@ -16,8 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,15 +62,22 @@ public class BoardServiceImpl implements BoardService {
         }
         board.setUser(user);
 
+        // 파일 정보를 엔티티에 추가
         if (boardDTO.getFileNames() != null) {
+            Set<String> uniqueUuids = new HashSet<>();
             boardDTO.getFileNames().forEach(fileName -> {
-                String[] parts = fileName.split("_", 2);
+                String[] parts = fileName.split("_", 2);  // UUID와 파일 이름 분리
                 String uuid = parts[0];
                 String originalFileName = parts[1];
-                board.addImage(uuid, originalFileName);
+                if (uniqueUuids.add(uuid)) {
+                    board.addImage(uuid, originalFileName); // board에 이미지 정보 추가
+                }
             });
         }
-        return boardRepository.save(board).getBoardId();
+
+        // (수정 부분) 이미지를 포함한 board를 영속화
+        boardRepository.save(board);
+        return board.getBoardId();
     }
 
     @Override

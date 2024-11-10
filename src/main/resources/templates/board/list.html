@@ -68,6 +68,10 @@
                 <td th:text="${board.boardId}">1</td>
                 <td th:text="${board.username}">작성자</td>
                 <td>
+                    <!-- 썸네일 이미지 표시 -->
+                    <div th:if="${board.fileNames != null && !board.fileNames.isEmpty()}">
+                        <img th:src="@{'/uploads/' + ${board.fileNames[0]}}" alt="Thumbnail" width="50" height="50"/>
+                    </div>
                     <a th:href="@{/board/read(boardId=${board.boardId})}" th:text="${board.title}">게시글 제목</a>
                 </td>
                 <td th:text="${board.visitCount}">0</td>
