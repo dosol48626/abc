@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Layout</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 상단 공지 및 메뉴 */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+    .top-bar .logo img {
+      height: 30px;
+    }
+    .top-bar .menu a {
+      margin: 0 10px;
+      color: #555;
+      text-decoration: none;
+    }
+
+    /* 반갑습니다, 유저님 메시지 */
+    .welcome {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      font-size: 18px;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    /* 사이드바 */
+    .sidebar {
+      position: fixed;
+      top: 50px; /* 약 1cm 정도 아래로 이동 */
+      left: -250px;
+      width: 250px;
+      height: calc(100% - 50px); /* 사이드바가 아래로 내려갔을 때 화면에 꽉 차도록 */
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding-top: 20px;
+      transition: all 0.3s;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 1500;
+    }
+    .sidebar.show {
+      left: 0;
+    }
+    .sidebar a {
+      display: block;
+      color: #d1d8e0;
+      padding: 10px 15px; /* 컴팩트한 패딩 */
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .sidebar a:hover {
+      background-color: #34495e;
+    }
+    .sidebar .user-section {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px; /* 컴팩트한 패딩 */
+      margin-bottom: 20px;
+    }
+    .sidebar .user-section a {
+      color: #b0c4de;
+      text-decoration: none;
+      font-size: 12px; /* 글자 크기를 더 작게 조정 */
+    }
+
+    /* 사이드바 내부의 토글 버튼 */
+    .toggle-btn {
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('show');
+    }
+  </script>
+</head>
+<body>
+<!-- 상단 바 -->
+<div class="top-bar">
+
+  <div class="logo">
+    <a href="/"> <!-- 메인 페이지 경로에 맞게 href 설정 -->
+      <img src="../img/chodan.jpg" alt="로고">
+    </a>
+  </div>
+
+
+  <div class="menu">
+    <a href="#">Notice</a>
+    <a href="#">FAQ</a>
+  </div>
+</div>
+
+<!--&lt;!&ndash; 반갑습니다, 유저님 메시지 &ndash;&gt;-->
+<!--<div class="welcome">-->
+<!--  반갑습니다, <b th:text="${user.username}">유저</b>님!-->
+<!--</div>-->
+
+<!-- 사이드바 -->
+<div class="sidebar">
+  <!-- 사이드바 내부의 토글 버튼 -->
+  <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+  <div class="user-section">
+    <a href="#">마이페이지</a>
+    <a href="/user/logout">로그아웃</a>
+  </div>
+  <a href="/board/list">커뮤니티</a>
+  <a href="/todo/list">투두</a>
+  <a href="/notes/list">노트</a>
+</div>
+
+<!-- 메인 콘텐츠 영역 -->
+<div class="content-area" layout:fragment="content">
+  <!-- 이 부분에 각 페이지의 콘텐츠가 들어갑니다 -->
+</div>
+
+<div layout:fragment="scripts"></div>
+
+</body>
+</html>

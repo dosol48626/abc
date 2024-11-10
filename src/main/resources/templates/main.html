@@ -1,204 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project_Main</title>
+    <title>Main Content</title>
     <link href="../css/main.css" type="text/css" rel="stylesheet">
-    <style></style>
 </head>
+
 <body>
-    <!-- 상단 logo & Menu -->
+<div layout:fragment="content">
     <div class="container">
-        <div class="main_top">
-            <div class="head_logo">
-                <img  src="../img/naver.png" alt="로고" width="150" height="30" >
-            </div>
-            
-            <div>
-                <ul class="top_menu">
-                    <li><a href="#">Notice</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>            
-        </div>
-    
-        <div class="icon_sidebar">
-            <img src="../img/angle-double-left.svg" width="20" height="20">
-        </div>
-    
         <div class="main_profile">
             <div class="main_profileimg">
-                <img class="hello_img" src="../img/예시_유저.jpg" alt="유저사진" width="120" height="120" >
+                <img class="hello_img" src="../img/예시_유저.jpg" alt="유저사진" width="120" height="120">
                 <p class="hello_user">반갑습니다. <b th:text="${user.username}">USERNAME</b>님</p>
-            </div>        
+            </div>
         </div>
-    
+
         <div class="chalendar">
             <div class="chalendar_img"><img src="../img/angle-down.svg" width="20" height="20"></div>
             <p>캘린더 확인하기</p>
         </div>
 
-        <div>
-            <p>각 페이지 경로(사이드바 경로)</p>
-            <a th:href="@{/board/list}">게시글 목록 보기</a>
-            <a th:href="@{/각자의 경로 맞춰서 적으세요/list}">노트 목록 보기</a>
-            <a th:href="@{/todo/list}">투두 목록 보기</a>
-            <a th:href="@{/user/logout}">로그아웃</a>
-        </div>
-
-
-
         <div class="main_center">
-    
             <div class="main_box">
                 <div>
                     <p class="main_center_title">오늘의 To-do</p>
-                    <a href="#"><img class= "main_center_title_img" src="../img/pencil.svg" width="20" height="20"> </a> 
+                    <a href="#"><img class="main_center_title_img" src="../img/pencil.svg" width="20" height="20"></a>
                 </div>
-    
                 <div class="main_center_todo">
-                    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                    
+                    <div class="todo_checkbox">
+                        <input type="checkbox" name="todo_check">
+                    </div>
+                    <div class="todo_title">Title</div>
+                    <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
                 </div>
-                    
             </div>
 
             <div class="main_box">
                 <div>
                     <p class="main_center_title">오늘의 학습 그래프</p>
-                    <a href="#"><img class= "main_center_title_img" src="../img/pencil.svg" width="20" height="20"> </a> 
+                    <a href="#"><img class="main_center_title_img" src="../img/pencil.svg" width="20" height="20"></a>
                 </div>
                 <div class="main_center_box"></div>
-                <!--
-                <div class="main_center_todo">
-                    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                        <div class="todo_checkbox">
-                            <input type="checkbox" name="todo_check">
-                        </div>
-                        <div class="todo_title">Title</div>
-                        <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
-    
-                    
-                </div>
-                -->  
-                
-                
             </div>
-    
-           
         </div>
 
         <div class="main_bottom">
             <div class="main_bottombox">
-                <div class="main_bottom_post_title">인기 게시물</div>                
-
-                
+                <div class="main_bottom_post_title">인기 게시물</div>
                 <div class="main_bottom_post">
                     <div class="post_box">
-                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"></br>
-                        <div class="main_bottom_title">
-                            studying
-                        </div>
-                        <div class="main_bottom_visitcount_text">
-                            조회수   1245 
-                        </div>
+                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"><br>
+                        <div class="main_bottom_title">studying</div>
+                        <div class="main_bottom_visitcount_text">조회수 1245</div>
                         <div class="main_bottom_visitcount_img">
                             <img src="../img/visitcount.png" width="20" height="20">
                         </div>
                     </div>
                 </div>
-                <div class="main_bottom_post">
-                    <div class="post_box">
-                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"></br>
-                        <div class="main_bottom_title">
-                            studying
-                        </div>
-                        <div class="main_bottom_visitcount_text">
-                            조회수   1245 
-                        </div>
-                        <div class="main_bottom_visitcount_img">
-                            <img src="../img/visitcount.png" width="20" height="20">
-                        </div>
-                    </div>
-                </div><div class="main_bottom_post">
-                    <div class="post_box">
-                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"></br>
-                        <div class="main_bottom_title">
-                            studying
-                        </div>
-                        <div class="main_bottom_visitcount_text">
-                            조회수   1245 
-                        </div>
-                        <div class="main_bottom_visitcount_img">
-                            <img src="../img/visitcount.png" width="20" height="20">
-                        </div>
-                    </div>
-                </div><div class="main_bottom_post">
-                    <div class="post_box">
-                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"></br>
-                        <div class="main_bottom_title">
-                            studying
-                        </div>
-                        <div class="main_bottom_visitcount_text">
-                            조회수   1245 
-                        </div>
-                        <div class="main_bottom_visitcount_img">
-                            <img src="../img/visitcount.png" width="20" height="20">
-                        </div>
-                    </div>
-                </div>
-                
-                
+                <!-- 추가 게시물 섹션들 -->
             </div>
         </div>
-    
     </div>
-
-       
-        
-    
+</div>
 </body>
 </html>

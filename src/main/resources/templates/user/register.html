@@ -1,17 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원가입 페이지</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        .container {
+            width: 450px;
+            background-color: #fff;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #50b3a2;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 18px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            color: #555;
+            background-color: #f0f0f0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            background-color: #e8f5f5;
+        }
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: #50b3a2;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .register-btn:hover {
+            background-color: #45a393;
+        }
+        .login {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+        .login a {
+            color: #50b3a2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-Register Page Test
-  <div>
-      <form action="/user/register" method="post">
-          UserName : <input type="text" name="username">
-          PassWord : <input type="text" name="password">
-          <input type="submit" value="회원가입">
-      </form>
-  </div>
+<div class="container">
+    <div class="logo">회원가입</div>
+
+    <form action="/user/register" method="post">
+        <input type="text" name="username" class="input-field" placeholder="UserName" required>
+        <input type="password" name="password" class="input-field" placeholder="Password" required>
+        <input type="submit" value="회원가입" class="register-btn">
+    </form>
+
+    <div class="login">
+        이미 계정이 있으신가요? <a href="/user/login">로그인</a>
+    </div>
+</div>
 </body>
 </html>

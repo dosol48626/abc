@@ -2,35 +2,104 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>로그인 페이지</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #555;
+        }
+        .container {
+            width: 400px;
+            padding: 40px 30px;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #50b3a2;
+            margin-bottom: 25px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            background-color: #f0f0f0;
+            color: #555;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            background-color: #e8f5f5;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 25px;
+            background-color: #50b3a2;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .login-btn:hover {
+            background-color: #45a393;
+        }
+        .error-message {
+            color: #d9534f;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .register {
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+        }
+        .register a {
+            color: #50b3a2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>Login</h1>
+<div class="container">
+    <div class="logo">로그인</div>
 
-<!-- 로그인 실패 시 에러 메시지 표시 -->
-<div th:if="${error}" style="color: red;">
-    <p th:text="${error}">Invalid username or password.</p>
+    <!-- 로그인 실패 시 에러 메시지 표시 -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}">Invalid username or password.</p>
+    </div>
+
+    <!-- 로그인 폼 -->
+    <form th:action="@{/user/login}" method="post">
+        <input type="text" id="username" class="input-field" name="username" placeholder="Username" required />
+        <input type="password" id="password" class="input-field" name="password" placeholder="Password" required />
+        <button type="submit" class="login-btn">로그인</button>
+    </form>
+
+    <!-- 회원가입 페이지 링크 -->
+    <div class="register">
+        계정이 없으신가요? <a th:href="@{/user/register}">회원가입</a>
+    </div>
 </div>
-
-<!-- 로그인 폼 -->
-<form th:action="@{/user/login}" method="post">
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
-
-<!-- 회원가입 페이지 링크 -->
-<div>
-    <a th:href="@{/user/register}">Sign up for an account</a>
-</div>
-
 </body>
 </html>
