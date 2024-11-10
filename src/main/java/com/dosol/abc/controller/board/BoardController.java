@@ -57,27 +57,6 @@ public class BoardController {
     public void registerGET() {
     }
 
-//    @PostMapping("/register")
-//    public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
-//        // User가 null이 아닐 경우에만 getUsername 호출
-//        User user = (User) session.getAttribute("user");
-//        if (user != null) {
-//            boardDTO.setUsername(user.getUsername());
-//        } else {
-//            throw new RuntimeException("로그인이 필요합니다.");
-//        }
-//
-//        // 파일 업로드와 관련된 파일 이름 설정 처리
-//        List<String> strFileNames = null;
-//        if (uploadFileDTO.getFiles() != null && !uploadFileDTO.getFiles().get(0).getOriginalFilename().equals("")) {
-//            strFileNames = fileUpload(uploadFileDTO);
-//            log.info("Uploaded Files: " + strFileNames.size());
-//        }
-//        boardDTO.setFileNames(strFileNames);
-//
-//        Long boardId = boardService.register(boardDTO);
-//        return "redirect:/board/list";
-//    }
 
     @PostMapping("/register")
     public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
@@ -110,7 +89,9 @@ public class BoardController {
                 // contentType이 null인지 확인 후 처리
                 if (contentType != null && contentType.startsWith("image")) {
                     File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
-                    Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
+
+                    // 섬네일 크기를 조정합니다
+                    Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 400, 400); // 여기에서 크기를 400x400으로 조정
                 }
                 list.add(uuid + "_" + originalName); // 파일 이름을 목록에 추가
             } catch (IOException e) {
@@ -142,12 +123,6 @@ public class BoardController {
         model.addAttribute("boardDTO", boardDTO);
     }
 
-//    @PostMapping("/modify")
-//    public String modifyPOST(BoardDTO boardDTO) {
-//
-//        boardService.modify(boardDTO);
-//        return "redirect:/board/read?boardId=" + boardDTO.getBoardId();
-//    }
 
     @PostMapping("/modify")
     public String modify(UploadFileDTO uploadFileDTO,
