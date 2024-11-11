@@ -38,8 +38,6 @@ public class TodoRepositoryTest {
             Todo result = todoRepository.save(todo);
             log.info("TodoId" + result.getTodoId());
         });
-
-
     }
 
     @Test
