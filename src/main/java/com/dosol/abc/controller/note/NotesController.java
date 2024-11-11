@@ -1,10 +1,12 @@
 package com.dosol.abc.controller.note;
 
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.note.NotesDTO;
 import com.dosol.abc.dto.note.PageRequestDTO;
 import com.dosol.abc.dto.note.PageResponseDTO;
 import com.dosol.abc.dto.note.UploadFileDTO;
 import com.dosol.abc.service.note.NotesService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -40,10 +42,19 @@ public class NotesController {
     private String uploadPath;
 
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
-        // NotesServiceImpl의 list 메서드를 호출하여 페이징된 데이터를 받아옴
+    public void list(PageRequestDTO pageRequestDTO, Model model, HttpSession session) {
+
+        /* NotesServiceImpl의 list 메서드를 호출하여 페이징된 데이터를 받아옴
         PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO);
-        // 받아온 페이징 데이터를 Model에 추가하여 뷰에 전달
+         받아온 페이징 데이터를 Model에 추가하여 뷰에 전달
+        model.addAttribute("responseDTO", responseDTO);*/
+
+        // 로그인한 사용자 ID 가져오기
+        User user = (User) session.getAttribute("user"); // 세션에서 user를 가져옴 (예시)
+
+        // NotesService의 list 메서드에 user 전달
+        PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO, user);
+
         model.addAttribute("responseDTO", responseDTO);
     }
 

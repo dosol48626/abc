@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+}
+
+.notes-container {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.note-card {
+    width: 200px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+}
+
+.note-card h3 {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.note-card p {
+    color: #777;
+    margin-top: 5px;
+}
+
+.note-card img {
+    width: 100%;
+    max-height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.note-tape {
+    width: 60px;
+    height: 20px;
+    background-color: #e0e0e0;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,6 +17,8 @@ public class NotesDTO {
     private String title;
     private String content;
     private Long user;
+
+    private LocalDateTime regDate;
 
     private List<String> fileNames;
 }
