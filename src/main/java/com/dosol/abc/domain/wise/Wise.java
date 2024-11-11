@@ -13,6 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Wise {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wiseId;
 
     private String content;
