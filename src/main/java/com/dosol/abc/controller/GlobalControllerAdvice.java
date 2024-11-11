@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
 
 @ControllerAdvice
+
 public class GlobalControllerAdvice {
 
     private final UserService userService;
