@@ -53,9 +53,9 @@ public class NotesController {
         User user = (User) session.getAttribute("user"); // 세션에서 user를 가져옴 (예시)
 
         // NotesService의 list 메서드에 user 전달
-//        PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO, user);
-//
-//        model.addAttribute("responseDTO", responseDTO);
+        PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO, user);
+
+        model.addAttribute("responseDTO", responseDTO);
     }
 
     @GetMapping("/register")
