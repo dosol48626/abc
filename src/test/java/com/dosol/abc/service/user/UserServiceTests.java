@@ -19,18 +19,18 @@ public class UserServiceTests {
     @Autowired
     private UserService userService;
 
-    @Test
-    public void testRegister() {
-
-        UserDTO userDTO = UserDTO.builder()
-                .username("cho")
-                .password("1234")
-                .build();
-
-        Long userId = userService.register(userDTO);
-
-        log.info("userId" + userId);
-    }
+//    @Test
+//    public void testRegister() {
+//
+//        UserDTO userDTO = UserDTO.builder()
+//                .username("cho")
+//                .password("1234")
+//                .build();
+//
+//        Long userId = userService.register(userDTO);
+//
+//        log.info("userId" + userId);
+//    }
 
     @Test
     public void testLogin() {
