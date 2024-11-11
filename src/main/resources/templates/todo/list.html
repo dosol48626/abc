@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
 <head>
   <link th:href="@{/css/common.css}" rel="stylesheet"/>
   <link th:href="@{/css/todo.css}" rel="stylesheet"/>
 </head>
+
 <body>
+
 <div class="container" layout:fragment="content">
   <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
   <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
@@ -47,7 +50,7 @@
             </div>
             <div class="userbox">
               <div class="user-setting">
-                <a href="">
+                <a href="/user/mypage">
                   <img class="topmenu-icon" src="/img/common/projcect_sidebar_setting.png" width="30" height="30">
                 </a>
               </div>
@@ -55,7 +58,7 @@
 
             <div class="userbox">
               <div class="user-logout">
-                <a href="">
+                <a href="/user/logout">
                   logout
                 </a>
               </div>
@@ -117,7 +120,7 @@
                 </ul>
               </li>
               <li>
-                <a href="#">
+                <a href="/notes/list">
                   <div class="menu-icon" >
                     <img class="menu-icon" src="/img/common/projcect_sidebar_notes.png" width="40" height="40">
                   </div>
@@ -125,7 +128,7 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="/board/list">
                   <div class="menu-icon" >
                     <img class="menu-icon" src="/img/common/projcect_sidebar_community.png" width="40" height="40">
                   </div>
@@ -369,6 +372,4 @@
 </script>
 
 
-
-</script>
 </html>

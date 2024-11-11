@@ -32,7 +32,7 @@ public class TodoRepositoryTest {
                     .description("Description" + i)
                     .complete(false)
 //                    .dueDate(LocalDate.now())
-                    .dueDate(LocalDate.parse("2024-11-09"))
+                    .dueDate(LocalDate.parse("2024-11-11"))
                     .build();
 
             Todo result = todoRepository.save(todo);
