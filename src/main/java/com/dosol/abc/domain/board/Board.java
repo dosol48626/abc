@@ -44,7 +44,7 @@ public class Board extends BaseEntity {
         this.title = title;
         this.content = content;
     }
-
+//
     // 수정된 부분: CascadeType.ALL 추가
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
