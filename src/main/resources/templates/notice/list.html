@@ -1,32 +1,144 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Notice List</title>
+  <style>
+    /* 기본 스타일 */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* 공지사항 카드 컨테이너 */
+    .notice-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    /* 폴라로이드 카드 스타일 */
+    .polaroid {
+      width: 200px;
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      border: 2px solid #eee;
+      border-radius: 8px;
+      position: relative;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      transform: rotate(calc(var(--rotation) * 1deg));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* 카드 호버 효과 */
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 이미지 스타일 */
+    .polaroid img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    /* 캡션 스타일 */
+    .caption {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #007BFF;
+    }
+
+    /* 새 공지사항 만들기 버튼 스타일 */
+    .new-notice-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(45deg, #007BFF, #00C6FF);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      text-decoration: none;
+      margin-top: 30px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .new-notice-btn:hover {
+      background: linear-gradient(45deg, #0056b3, #0095ff);
+      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+    }
+  </style>
 </head>
 <body>
 <h1>Notice List</h1>
 
-<table border="1">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Content</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- Notice 리스트를 반복하면서 출력 -->
-  <tr th:each="notice : ${notices}">
-    <td th:text="${notice.noticeId}">1</td>
-    <td th:text="${notice.title}">Notice Title</td>
-    <td th:text="${notice.content}">Notice Content</td>
-  </tr>
-  </tbody>
-</table>
+<div class="notice-container" id="notice-container">
+  <!-- 공지사항 카드들이 JavaScript로 동적으로 생성됩니다 -->
+</div>
 
-<br>
+<a href="/notice/create" class="new-notice-btn">Create New Notice</a>
 
-<a href="/notice/create">Create New Notice</a>
+<script>
+  // 공지사항 데이터 (배열로 관리)
+  const notices = [
+    { title: "Notice Title 1", content: "This is the content of notice 1.", imageUrl: "https://via.placeholder.com/150?text=Notice+1" },
+    { title: "Notice Title 2", content: "This is the content of notice 2.", imageUrl: "https://via.placeholder.com/150?text=Notice+2" },
+    { title: "Notice Title 3", content: "This is the content of notice 3.", imageUrl: "https://via.placeholder.com/150?text=Notice+3" },
+    { title: "Notice Title 4", content: "This is the content of notice 4.", imageUrl: "https://via.placeholder.com/150?text=Notice+4" },
+    { title: "Notice Title 5", content: "This is the content of notice 5.", imageUrl: "https://via.placeholder.com/150?text=Notice+5" },
+    { title: "Notice Title 6", content: "This is the content of notice 6.", imageUrl: "https://via.placeholder.com/150?text=Notice+6" },
+    { title: "Notice Title 7", content: "This is the content of notice 7.", imageUrl: "https://via.placeholder.com/150?text=Notice+7" }
+  ];
+
+  // 공지사항 목록을 HTML에 렌더링하는 함수
+  function renderNotices() {
+    const container = document.getElementById("notice-container");
+    container.innerHTML = ""; // 초기화
+
+    notices.forEach((notice, index) => {
+      const rotation = (index % 2 === 0 ? -5 : 5) * (Math.random() * 0.5 + 1); // 랜덤 회전 각도
+
+      // 공지사항 카드 생성
+      const card = document.createElement("div");
+      card.className = "polaroid";
+      card.style.setProperty("--rotation", rotation);
+
+      // 카드 내용 설정
+      card.innerHTML = `
+        <img src="${notice.imageUrl}" alt="Notice Image">
+        <div class="caption">${notice.title}</div>
+        <p>${notice.content}</p>
+      `;
+
+      // 컨테이너에 카드 추가
+      container.appendChild(card);
+    });
+  }
+
+  // 페이지 로드 시 공지사항 렌더링
+  document.addEventListener("DOMContentLoaded", renderNotices);
+</script>
+
 </body>
 </html>
