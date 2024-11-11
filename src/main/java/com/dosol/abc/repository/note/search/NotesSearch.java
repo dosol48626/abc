@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface NotesSearch {
-    Page<Notes> searchAll(String[] types, String keyword, Pageable pageable);
+    Page<Notes> searchAll(String[] types, String keyword, Pageable pageable, Long user);
 }

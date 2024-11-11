@@ -49,11 +49,11 @@ public class NotesController {
          받아온 페이징 데이터를 Model에 추가하여 뷰에 전달
         model.addAttribute("responseDTO", responseDTO);*/
 
-        // 로그인한 사용자 ID 가져오기
+//        로그인한 사용자 ID 가져오기
         User user = (User) session.getAttribute("user"); // 세션에서 user를 가져옴 (예시)
-
+        String userId = String.valueOf(user.getUserId());
         // NotesService의 list 메서드에 user 전달
-        PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO, user);
+        PageResponseDTO<NotesDTO> responseDTO = notesService.list(pageRequestDTO, session);
 
         model.addAttribute("responseDTO", responseDTO);
     }

@@ -15,4 +15,9 @@ public interface NotesRepository extends JpaRepository<Notes, Long>, NotesSearch
     @EntityGraph(attributePaths = {"imageSet"})
     @Query("select n from Notes n where n.user.userId =:userId")
     Page<Notes> findAllByUserIdWithImages(Long userId, Pageable pageable);
+
+    // 하나의 노트를 가져오는 메서드
+    @EntityGraph(attributePaths = {"imageSet"})
+    @Query("select n from Notes n where n.noteId =:noteId")
+    Optional<Notes> findByIdWithImages(Long noteId);
 }

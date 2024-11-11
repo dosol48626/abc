@@ -4,6 +4,8 @@ import com.dosol.abc.domain.note.Notes;
 import com.dosol.abc.dto.note.NotesDTO;
 import com.dosol.abc.dto.note.PageRequestDTO;
 import com.dosol.abc.dto.note.PageResponseDTO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public interface NotesService {
     NotesDTO readOne(Long noteId);
 
     //페이징
-    PageResponseDTO<NotesDTO> list(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<NotesDTO> list(PageRequestDTO pageRequestDTO, HttpSession session);
 
     default Notes dtoToEntity(NotesDTO notesDTO) {
         Notes notes = Notes.builder()
@@ -53,6 +55,4 @@ public interface NotesService {
         notesDTO.setFileNames(fileNames);
         return notesDTO;
     }
-
-    List<NotesDTO> findByUserId(Long userId);
 }

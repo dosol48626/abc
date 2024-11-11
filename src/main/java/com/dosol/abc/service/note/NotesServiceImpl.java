@@ -78,12 +78,13 @@ public class NotesServiceImpl implements NotesService {
 
         Page<Notes> result;
 
-        if (userId != null) {
-            // userId가 있으면 사용자별 필터링된 노트를 가져옴
+        if (user != null) {
+            // user가 있으면 사용자별 필터링된 노트를 가져옴
+            Long userId = user.getUserId();
             result = notesRepository.findAllByUserIdWithImages(userId, pageable);
         } else {
-            // userId가 없으면 모든 노트를 검색
-            result = notesRepository.searchAll(types, keyword, pageable);
+            // user가 없으면 모든 노트를 검색
+            result = notesRepository.searchAll(types, keyword, pageable, user.getUserId());
         }
 
         List<NotesDTO> dtoList = result.getContent().stream()

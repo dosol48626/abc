@@ -18,10 +18,16 @@ public class NotesSearchImpl extends QuerydslRepositorySupport implements NotesS
     }
 
     @Override
-    public Page<Notes> searchAll(String[] types, String keyword, Pageable pageable) {
+    public Page<Notes> searchAll(String[] types, String keyword, Pageable pageable, Long userId) {
         QNotes notes = QNotes.notes;
 
         JPQLQuery<Notes> query = from(notes);
+
+        // userId가 null이 아니면 사용자별로 필터링
+        if (userId != null) {
+            query.where(notes.user.userId.eq(userId));  // 사용자 ID로 필터링
+        }
+
         if((types != null && types.length > 0) && (keyword != null)) {
             BooleanBuilder builder = new BooleanBuilder();
             for(String type : types) {
