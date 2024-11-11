@@ -4,41 +4,72 @@
     <meta charset="UTF-8">
     <title>회원가입 페이지</title>
     <style>
+        @font-face {
+            font-family: 'Pretendard-Light;';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-Bold';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
         body {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            height: 100vh;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f9fc;
-            color: #333;
+            font-family: Pretendard-Regular;
+            background-color: #f8f8f8;
+            color: #555;
         }
         .container {
-            width: 450px;
-            background-color: #fff;
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: absolute;
+
+            width: 500px;
+            padding: 40px 30px;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0px 4px 8px rgb(218, 230, 230);
             text-align: center;
         }
         .logo {
-            font-size: 30px;
-            font-weight: bold;
-            color: #50b3a2;
+            font-size: 25px;
+            font-family: Pretendard-Bold;
+            color:#3a8e97;
             margin-bottom: 30px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
+        }
+        .logo2 {
+            font-size: 15px;
+            font-family: Pretendard-Light;
+            color: #423d3d;
+            margin-bottom: 40px;
         }
         .input-field {
-            width: 100%;
-            padding: 18px;
-            margin: 20px 0;
+            width: 80%;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            margin: 15px 0;
             border: none;
             border-radius: 25px;
-            font-size: 16px;
-            color: #555;
+            font-size: 15px;
             background-color: #f0f0f0;
+            color: #555;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease;
         }
@@ -46,46 +77,169 @@
             outline: none;
             background-color: #e8f5f5;
         }
-        .register-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
+
+        .login-btn {
+            width: 80%;
+            padding: 10px;
+            margin-top: 15px;
+            margin-bottom: 20px;
             border: none;
             border-radius: 25px;
-            background-color: #50b3a2;
+            background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
             font-size: 18px;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                    inset 2px 2px 2px 0px rgba(255,255,255,.5),
+                    7px 7px 20px 3px rgba(0, 0, 0, 0.05);
+
         }
-        .register-btn:hover {
-            background-color: #45a393;
+        .login-btn:hover {
+            background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
         }
+
         .login {
-            margin-top: 30px;
             font-size: 14px;
             color: #777;
+            margin-top: 20px;
         }
-        .login a {
+        .login  a {
             color: #50b3a2;
             text-decoration: none;
             font-weight: bold;
         }
-        .login a:hover {
+        .login  a:hover {
             text-decoration: underline;
+        }
+
+        .login-box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+        .login-box .user-box {
+            width: 80%;
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #bfbfbf;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #dcdcdc;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box label {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #bfbfbf;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #51c2c8;
+            border-bottom: #79dde3;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #51c2c8;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+        .filebox{
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+        .filebox .upload-name {
+            display: inline-block;
+            height: 40px;
+            padding: 0 10px;
+            vertical-align: middle;
+            border: 1px solid #dddddd;
+            border-radius: 15px;
+            width: 300px;
+            color: #bfbfbf;
+        }
+        .filebox label {
+            display: inline-block;
+            color: #fff;
+            padding: 10px;
+            vertical-align: middle;
+            background-color: #cdcdcd;
+            border-radius: 15px;
+            cursor: pointer;
+            height: 20px;
+            margin-left: 10px;
+        }
+        .filebox input[type="file"] {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+        }
+        .filebox input:focus ~ label {
+            border: 1px solid #dddddd;
+
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="logo">회원가입</div>
+    <div class="logo2">환영합니다! 간단한 가입으로 더 많은 서비스를 이용해 보세요.</div>
 
     <form action="/user/register" method="post" enctype="multipart/form-data">
-        <input type="text" name="username" class="input-field" placeholder="UserName" required>
-        <input type="password" name="password" class="input-field" placeholder="Password" required>
-        <input type="file" name="profileImage" class="input-field" accept="image/*" required>
-        <input type="submit" value="회원가입" class="register-btn">
+<!--        <input type="text" name="username" class="input-field" placeholder="UserName" required>-->
+<!--        <input type="password" name="password" class="input-field" placeholder="Password" required>-->
+<!--        <input type="file" name="profileImage" class="input-field" accept="image/*" required>-->
+<!--        <input type="submit" value="회원가입" class="register-btn">-->
+
+        <div class="login-box">
+
+            <form>
+                <div class="user-box">
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+
+            </form>
+
+
+            <div class="filebox">
+                <input class="upload-name" value="프로필 사진을 선택해주세요." >
+                <label for="file">파일 찾기</label>
+                <input type="file"id="file" name="profileImage" class="input-field" accept="image/*" required>
+            </div>
+            <button type="submit" class="login-btn">가입</button>
+        </div>
     </form>
 
     <div class="login">

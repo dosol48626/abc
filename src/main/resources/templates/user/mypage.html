@@ -4,46 +4,86 @@
   <meta charset="UTF-8">
   <title>My Page</title>
   <style>
+    @font-face {
+      font-family: 'Pretendard-Light;';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Pretendard-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Pretendard-Bold';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Pretendard-ExtraBold';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
     body {
       display: flex;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #f7f9fc;
-      color: #333;
+      font-family: Pretendard-Regular;
+      background-color: #f8f8f8;
+      color: #555;
     }
 
     .container {
-      width: 320px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+      width: 500px;
+      padding: 40px 30px;
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0px 4px 8px rgb(218, 230, 230);
       text-align: center;
+
+
     }
 
     .header {
-      font-size: 24px;
-      font-weight: bold;
-      color: #4CAF50;
-      margin-bottom: 10px;
+
+      font-size: 25px;
+      font-family: Pretendard-Bold;
+      color:#3a8e97;
+      margin-bottom: 40px;
     }
 
     .username {
+
+      font-family: Pretendard-Bold;
       font-size: 18px;
       color: #555;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .userprofile {
+
+      font-family: Pretendard-Bold;
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 10px;
+      padding: 20px;
+      text-align: center;
     }
 
     .profile-image {
-      width: 100px;
-      height: 100px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      border: 2px solid #4CAF50;
       margin: 0 auto;
     }
 
@@ -54,7 +94,8 @@
     }
 
     .footer {
-      margin-top: 20px;
+      margin-top: 40px;
+      margin-bottom: 20px;
       font-size: 14px;
       color: #777;
     }
@@ -63,16 +104,16 @@
 <body>
 <div class="container">
   <div class="header">My Page</div>
-  <div class="username">Username: <span th:text="${user.username}">User</span></div>
+  <div class="username">회원님의 아이디 : <span th:text="${user.username}">User</span></div>
 
   <div>
-    <h3>Profile Image</h3>
+    <div class="userprofile">회원님의 프로필 </div>
     <div class="profile-image">
       <img th:src="@{'/upload/' + ${profileImage.filename}}" alt="Profile Image">
     </div>
   </div>
 
-  <div class="footer">Thanks for being with us!</div>
+  <div class="footer">저희와 함께 해주셔서 감사합니다 ❤️</div>
 </div>
 </body>
 </html>

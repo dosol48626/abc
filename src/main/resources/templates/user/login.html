@@ -4,33 +4,60 @@
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
     <style>
+        @font-face {
+            font-family: 'Pretendard-Light;';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-Bold';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
         body {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f7f9fc;
+            font-family: Pretendard-Regular;
+            background-color: #f8f8f8;
             color: #555;
         }
         .container {
-            width: 400px;
+            position: absolute;
+
+            width: 500px;
             padding: 40px 30px;
             background: #fff;
             border-radius: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 4px 8px rgb(218, 230, 230);
             text-align: center;
         }
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #50b3a2;
+            font-size: 25px;
+            font-family: Pretendard-Bold;
+            color:#3a8e97;
             margin-bottom: 25px;
         }
         .input-field {
-            width: 100%;
-            padding: 15px;
+            width: 80%;
+            padding-top: 15px;
+            padding-bottom: 15px;
             margin: 15px 0;
             border: none;
             border-radius: 25px;
@@ -44,24 +71,29 @@
             outline: none;
             background-color: #e8f5f5;
         }
+
         .login-btn {
-            width: 100%;
-            padding: 15px;
+            width: 80%;
+            padding: 10px;
             margin-top: 15px;
+            margin-bottom: 20px;
             border: none;
             border-radius: 25px;
-            background-color: #50b3a2;
+            background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
             font-size: 18px;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow:
+            inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 3px rgba(0, 0, 0, 0.05);
+
         }
         .login-btn:hover {
-            background-color: #45a393;
+            background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
         }
         .error-message {
-            color: #d9534f;
+            color: #f49578;
             font-size: 14px;
             margin-bottom: 20px;
         }
@@ -78,23 +110,99 @@
         .register a:hover {
             text-decoration: underline;
         }
+
+        .login-box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+        .login-box .user-box {
+            width: 80%;
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #bfbfbf;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #dcdcdc;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box label {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #bfbfbf;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #51c2c8;
+            border-bottom: #79dde3;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #51c2c8;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+
+
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="logo">로그인</div>
+    <div class="logo">회원 로그인</div>
 
     <!-- 로그인 실패 시 에러 메시지 표시 -->
     <div th:if="${error}" class="error-message">
-        <p th:text="${error}">Invalid username or password.</p>
+<!--        <p th:text="${error}">Invalid username or password.</p>-->
+        <p th:text="${error}">입력하신 정보가 맞지 않습니다. 다시 확인해주세요.</p>
     </div>
 
     <!-- 로그인 폼 -->
     <form th:action="@{/user/login}" method="post">
-        <input type="text" id="username" class="input-field" name="username" placeholder="Username" required />
-        <input type="password" id="password" class="input-field" name="password" placeholder="Password" required />
-        <button type="submit" class="login-btn">로그인</button>
+<!--        <input type="text" id="username" class="input-field" name="username" placeholder="Username" required />-->
+<!--        <input type="password" id="password" class="input-field" name="password" placeholder="Password" required />-->
+<!--        <button type="submit" class="login-btn">로그인</button>-->
+
+        <div class="login-box">
+
+            <form>
+                <div class="user-box">
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="login-btn">로그인</button>
+            </form>
+        </div>
     </form>
+
+
 
     <!-- 회원가입 페이지 링크 -->
     <div class="register">
