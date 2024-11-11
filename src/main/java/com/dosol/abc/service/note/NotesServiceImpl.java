@@ -77,7 +77,7 @@
 //        User user = (User) session.getAttribute("user");
 //
 //        Page<Notes> result;
-//
+//11
 //        if (userId != null) {
 //            // userId가 있으면 사용자별 필터링된 노트를 가져옴
 //            result = notesRepository.findAllByUserIdWithImages(userId, pageable);
