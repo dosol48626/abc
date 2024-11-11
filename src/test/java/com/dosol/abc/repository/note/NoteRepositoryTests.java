@@ -2,6 +2,7 @@ package com.dosol.abc.repository.note;
 
 import com.dosol.abc.domain.note.Notes;
 import com.dosol.abc.domain.user.User;
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -34,11 +37,11 @@ public class NoteRepositoryTests {
 
     @Test
     public void testInsert2() {
-        IntStream.rangeClosed(1, 25).forEach(i -> {
+        IntStream.rangeClosed(1, 20).forEach(i -> {
             Notes notes = Notes.builder()
-                    .user(User.builder().userId(1L).build())
-                    .title("sample Title" + i)
-                    .content("Content" + i)
+                    .user(User.builder().userId(3L).build())
+                    .title("third Title" + i)
+                    .content("thoo Content" + i)
                     .build();
 
             Notes result = notesRepository.save(notes);
@@ -103,29 +106,30 @@ public class NoteRepositoryTests {
     }
 
     @Test
+    @Transactional
     public void testSearchAll() {
         // 검색 조건 설정
         String[] types = {"t", "c"};  // 예: "t"는 title, "c"는 content
-        String keyword = "15";  // 검색할 키워드
+        String keyword = null;  // 검색할 키워드
 
         // 페이징 및 정렬 설정
         Pageable pageable = PageRequest.of(0, 10, Sort.by("noteId").descending());
 
         // userId를 임의로 설정 (테스트용 userId) 임의 설정
-        Long userId = 1L;
+        Long userId = 3L;
 
         // Notes 엔티티에 대한 검색 수행
         Page<Notes> result = notesRepository.searchAll(types, keyword, pageable, userId);
 
-        // 검색 결과 확인
-        log.info("Total Pages: " + result.getTotalPages());
-        log.info("Page Size: " + result.getSize());
-        log.info("Current Page Number: " + result.getNumber());
-        log.info("Has Previous: " + result.hasPrevious());
-        log.info("Has Next: " + result.hasNext());
+        // 테스트 결과 확인
+        assertThat(result).isNotNull();
+        assertThat(result.getContent()).isNotEmpty();
 
-        // 각 Notes 객체를 로그로 출력
-        result.getContent().forEach(note -> log.info(note.toString()));
+        // 각 노트가 해당 userId를 가지고 있는지 확인
+        result.getContent().forEach(note -> {
+            assertThat(note.getUser().getUserId()).isEqualTo(userId);
+            System.out.println(note.toString());
+        });
     }
 }
 

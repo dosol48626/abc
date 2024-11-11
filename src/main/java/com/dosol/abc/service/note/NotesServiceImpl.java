@@ -75,17 +75,18 @@ public class NotesServiceImpl implements NotesService {
         Pageable pageable = pageRequestDTO.getPageable("noteId");
 
         User user = (User) session.getAttribute("user");
+        Long userId = (user != null) ? user.getUserId() : null;
 
-        Page<Notes> result;
-
-        if (user != null) {
+        /*if (user != null) {
             // user가 있으면 사용자별 필터링된 노트를 가져옴
             Long userId = user.getUserId();
             result = notesRepository.findAllByUserIdWithImages(userId, pageable);
         } else {
             // user가 없으면 모든 노트를 검색
             result = notesRepository.searchAll(types, keyword, pageable, user.getUserId());
-        }
+        }*/
+
+        Page<Notes> result = notesRepository.searchAll(types, keyword, pageable, userId);
 
         List<NotesDTO> dtoList = result.getContent().stream()
                 .map(notes -> modelMapper.map(notes, NotesDTO.class))
