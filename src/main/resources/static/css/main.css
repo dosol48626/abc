@@ -1,46 +1,7 @@
 
 /*상단 logo & Menu */
 
-.main_container{
-    margin: auto;
-    font-size: 16px;
-    width: 1360px;
-    
-}
-.main_top{
-    height: 80px;
-}
 
-.head_logo{    
-    width: 200px;    
-    margin: 10px 0px 0px 30px;
-    float: left;
-}
-
-.top_menu{    
-    list-style: none; 
-           
-}
-
-.top_menu li{           
-    font-size : 14px;    
-    margin-top: 15px;    
-    width: 185px;    
-    float: left;         
-}
-
-.top_menu li > a{
-    text-decoration: none;
-    color: black;  
-    margin-left: 850px;
-}
-
-/*상단 좌측 아이콘 */
-
-.icon_sidebar{
-    height: 60px;    
-    padding: 0px 0px 0px 30px;
-}
 
 /*상단 유저 프로필 */
 
@@ -70,7 +31,11 @@
     text-align: center;
     float: left;
     padding: 50px 0px 0px 20px;
+    font-family: Pretendard-Bold;
+    color: hwb(183 21% 45%);
 }
+
+
 
 /*상단 캘린더 */
 .chalendar{
