@@ -16,12 +16,14 @@
         <div class="main_profile">
             <div class="main_profileimg">
                 <img th:src="@{'/upload/' + ${profileImage.filename}}" alt="유저사진" class="hello_img" width="120" height="120">
-                <p class="hello_user">반갑습니다. <b th:text="${user.username}">USERNAME</b></span>님 😀</p>
+                <p class="hello_user">반갑습니다. <b th:text="${user.username}">USERNAME</b></span>님
+                    <img class="hello_userimg" src = "/img/main/main_smile.png" width="30" height="30">
+                </p>
             </div>
         </div>
 
         <div class="chalendar">
-            <div class="chalendar_img"><img src="../img/angle-down.svg" width="20" height="20"></div>
+            <div class="chalendar_img"><img src="/img/main/angle-down.svg" width="20" height="20"></div>
             <p>캘린더 확인하기</p>
         </div>
 
@@ -29,8 +31,9 @@
             <div class="main_box">
                 <div>
                     <p class="main_center_title">오늘의 To-do</p>
-                    <a href="#"><img class="main_center_title_img" src="../img/pencil.svg" width="20" height="20"></a>
+                    <a href="/todo/list?pageType=today"><img class="main_center_title_img" src="/img/main/main_todo.png" width="20" height="20"></a>
                 </div>
+
                 <div class="main_center_todo">
                     <div class="todo_checkbox">
                         <input type="checkbox" name="todo_check">
@@ -38,33 +41,37 @@
                     <div class="todo_title">Title</div>
                     <div class="todo_description">descriptiondescriptiondescriptiondescriptiondescription</div>
                 </div>
+
+
+
+
             </div>
 
             <div class="main_box">
                 <div>
-                    <p class="main_center_title">오늘의 학습 그래프</p>
-                    <a href="#"><img class="main_center_title_img" src="../img/pencil.svg" width="20" height="20"></a>
+                    <p class="main_center_title2">오늘의 학습 그래프</p>
+                    <a href="#"><img class="main_center_title_img" src="/img/main/pencil.svg" width="20" height="20"></a>
                 </div>
                 <div class="main_center_box"></div>
             </div>
         </div>
 
-        <div class="main_bottom">
-            <div class="main_bottombox">
-                <div class="main_bottom_post_title">인기 게시물</div>
-                <div class="main_bottom_post">
-                    <div class="post_box">
-                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"><br>
-                        <div class="main_bottom_title">studying</div>
-                        <div class="main_bottom_visitcount_text">조회수 1245</div>
-                        <div class="main_bottom_visitcount_img">
-                            <img src="../img/visitcount.png" width="20" height="20">
-                        </div>
-                    </div>
-                </div>
-                <!-- 추가 게시물 섹션들 -->
-            </div>
-        </div>
+<!--        <div class="main_bottom">-->
+<!--            <div class="main_bottombox">-->
+<!--                <div class="main_bottom_post_title">인기 게시물</div>-->
+<!--                <div class="main_bottom_post">-->
+<!--                    <div class="post_box">-->
+<!--                        <img class="main_bottom_img" src="../img/study.jpg" width="220" height="240"><br>-->
+<!--                        <div class="main_bottom_title">studying</div>-->
+<!--                        <div class="main_bottom_visitcount_text">조회수 1245</div>-->
+<!--                        <div class="main_bottom_visitcount_img">-->
+<!--                            <img src="../img/visitcount.png" width="20" height="20">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; 추가 게시물 섹션들 &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </div>
 </body>

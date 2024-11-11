@@ -30,9 +30,17 @@
     font-size: 25px;
     text-align: center;
     float: left;
-    padding: 50px 0px 0px 20px;
+    padding: 40px 0px 0px 20px;
     font-family: Pretendard-Bold;
     color: hwb(183 21% 45%);
+
+}
+.hello_userimg{
+    float: right;
+    width: 30px;
+    padding-left: 10px;
+
+
 }
 
 
@@ -53,7 +61,7 @@
     height: 20px;    
 }
 .chalendar p{
-    
+    font-family: Pretendard-Light;
     margin: 2px 0px 0px 0px;
     color: #9b9b9b;
    
@@ -65,7 +73,8 @@
     
     height: 400px;    
     display:flex;
-    Justify-content:center;    
+    Justify-content:center;
+    margin-top: 70px;
 }
 
 .main_box{
@@ -77,13 +86,22 @@
        
 }
 .main_center_title{
-    width: 150px;
+    width: 130px;
     height: 30px;    
     font-size: 18px;
-    font-weight: 600;
+    font-family: Pretendard-Bold;
     padding: 10px 0px 0px 0px;
     float: left;
-    color: hsl(0, 1%, 26%);
+    color: #4ab1ad;
+}
+.main_center_title2{
+    width: 180px;
+    height: 30px;
+    font-size: 18px;
+    font-family: Pretendard-Bold;
+    padding: 10px -20px 0px 0px;
+    float: left;
+    color: #4ab1ad;
 }
 .main_center_title_img{
     padding:30px 0px 0px 0px;

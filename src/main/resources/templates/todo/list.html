@@ -1,173 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic2.html}">
 <head>
   <link th:href="@{/css/common.css}" rel="stylesheet"/>
   <link th:href="@{/css/todo.css}" rel="stylesheet"/>
 </head>
 <body>
+
 <div class="container" layout:fragment="content">
   <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
   <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
 
-  <!--★ [공통] 상단 logo & Menu  ★ -->
-
-  <div class="main_top">
-    <div class="head_logo">
-      <img src="/img/common/project_head_Logo.png" alt="로고" width="150" height="30" >
-    </div>
-
-    <div>
-      <ul class="top_menu">
-        <li><a href="#">Notice</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-  </div>
-
-
   <div class="container2">
-    <div class="icon_sidebar">
-      <div class="sidebar">
-        <div class="sidebar-btn">
-          <img class="top-menu" src="/img/common/projcect_sidebar_menu.png" width="40" height="40">
-        </div>
 
-        <div class="sidebar-content">
+<!--      &lt;!&ndash; 검색 팝업 &ndash;&gt;-->
+<!--      <div id="searchPopup" class="popup2" style="display: none;">-->
+<!--        <div class="popup-search-content">-->
+<!--          <img src="/img/common/searchface.png" width="90" height="90">-->
+<!--          <p>Todo list 검색하기</p>-->
+<!--          <form action="/todo/list" method="get">-->
+<!--            <div class="input-group">-->
+<!--              <div class="input-group-prepend">-->
+<!--                <select class="form-select" name="type">-->
+<!--                  <option value="">-&#45;&#45;</option>-->
+<!--                  <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>-->
+<!--                  <option value="d" th:selected="${pageRequestDTO.type == 'd'}">내용</option>-->
+<!--                  <option value="td" th:selected="${pageRequestDTO.type == 'td'}">제목 내용</option>-->
+<!--                </select>-->
+<!--              </div>-->
 
-          <div class="user-info">
+<!--              <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요"-->
+<!--                     th:value="${pageRequestDTO.keyword}">-->
 
-            <img  class="user-img" src="/img/common/user_ex.jpg" width="60" height="60">
+<!--              <div class="input-group-append">-->
+<!--                <button class="popup-search-btn" type="submit">검색</button>-->
+<!--                <button class="popup-search-btn" type="button" onclick="clearSearch()">초기화</button>-->
+<!--                <button class="popup-search-btn" onclick="closeSearchPopup()">닫기</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">-->
+<!--            <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">-->
+<!--          </form>-->
 
-            <div class="userbox">
-              <div class="username">
-                username님
-              </div>
-
-            </div>
-            <div class="userbox">
-              <div class="user-setting">
-                <a href="">
-                  <img class="topmenu-icon" src="/img/common/projcect_sidebar_setting.png" width="30" height="30">
-                </a>
-              </div>
-            </div>
-
-            <div class="userbox">
-              <div class="user-logout">
-                <a href="">
-                  logout
-                </a>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="sidemenu">
-            <ul class="menu">
-              <li>
-                <a href="#">
-                  <div class="menu-icon" >
-                    <img class="menu-icon" src="/img/common/projcect_sidebar_home.png" width="40" height="40">
-                  </div>
-                  <div class="menu-text">Home</div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="menu-icon" >
-                    <img class="menu-icon" src="/img/common/projcect_sidebar_timer.png" width="40" height="40">
-                  </div>
-                  <div class="menu-text">Timer</div>
-                </a>
-              </li>
-              <li>
-                <a href="/todo/list?pageType=list">
-                  <div class="menu-icon" >
-                    <img class="menu-icon" src="/img/common/projcect_sidebar_todo.png" width="40" height="40">
-                  </div>
-                  <div class="menu-text">Todo List</div>
-                </a>
-
-                <ul class="submenu">
-
-                  <a href="#" onclick="openSearchPopup()">
-                    <button type="button" class=" btn_search">
-                      <img class="search_btn" src="/img/common/projcect_sidebar_search.png" width="35" height="35" >
-                      <div class="search_btn_text">search</div>
-                    </button>
-                  </a>
-
-                  <li>
-                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
-                    <a href="/todo/list?pageType=today">today</a>
-                  </li>
-                  <li>
-                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
-                    <a href="/todo/list?pageType=upcoming">upcoming</a>
-                  </li>
-                  <li>
-                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
-                    <a href="/todo/list?pageType=past">past</a>
-                  </li>
-                  <li>
-                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
-                    <a href="/todo/list?pageType=completed">completed</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="menu-icon" >
-                    <img class="menu-icon" src="/img/common/projcect_sidebar_notes.png" width="40" height="40">
-                  </div>
-                  <div class="menu-text">Notes</div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="menu-icon" >
-                    <img class="menu-icon" src="/img/common/projcect_sidebar_community.png" width="40" height="40">
-                  </div>
-                  <div class="menu-text">community</div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- 검색 팝업 -->
-      <div id="searchPopup" class="popup2" style="display: none;">
-        <div class="popup-search-content">
-          <img src="/img/common/searchface.png" width="90" height="90">
-          <p>Todo list 검색하기</p>
-          <form action="/todo/list" method="get">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <select class="form-select" name="type">
-                  <option value="">-&#45;&#45;</option>
-                  <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
-                  <option value="d" th:selected="${pageRequestDTO.type == 'd'}">내용</option>
-                  <option value="td" th:selected="${pageRequestDTO.type == 'td'}">제목 내용</option>
-                </select>
-              </div>
-
-              <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요"
-                     th:value="${pageRequestDTO.keyword}">
-
-              <div class="input-group-append">
-                <button class="popup-search-btn" type="submit">검색</button>
-                <button class="popup-search-btn" type="button" onclick="clearSearch()">초기화</button>
-                <button class="popup-search-btn" onclick="closeSearchPopup()">닫기</button>
-              </div>
-            </div>
-            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
-            <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-          </form>
-
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
 
 
 
