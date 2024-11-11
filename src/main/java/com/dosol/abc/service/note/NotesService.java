@@ -53,4 +53,6 @@ public interface NotesService {
         notesDTO.setFileNames(fileNames);
         return notesDTO;
     }
+
+    List<NotesDTO> findByUserId(Long userId);
 }

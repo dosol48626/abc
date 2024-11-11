@@ -1,10 +1,12 @@
 package com.dosol.abc.service.note;
 
 import com.dosol.abc.domain.note.Notes;
+import com.dosol.abc.domain.user.User;
 import com.dosol.abc.dto.note.NotesDTO;
 import com.dosol.abc.dto.note.PageRequestDTO;
 import com.dosol.abc.dto.note.PageResponseDTO;
 import com.dosol.abc.repository.note.NotesRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -67,11 +69,22 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public PageResponseDTO<NotesDTO> list(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<NotesDTO> list(PageRequestDTO pageRequestDTO, HttpSession session) {
         String[] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("noteId");
-        Page<Notes> result = notesRepository.searchAll(types, keyword, pageable);
+
+        User user = (User) session.getAttribute("user");
+
+        Page<Notes> result;
+
+        if (userId != null) {
+            // userId가 있으면 사용자별 필터링된 노트를 가져옴
+            result = notesRepository.findAllByUserIdWithImages(userId, pageable);
+        } else {
+            // userId가 없으면 모든 노트를 검색
+            result = notesRepository.searchAll(types, keyword, pageable);
+        }
 
         List<NotesDTO> dtoList = result.getContent().stream()
                 .map(notes -> modelMapper.map(notes, NotesDTO.class))
