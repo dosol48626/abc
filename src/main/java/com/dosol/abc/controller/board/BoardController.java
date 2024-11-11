@@ -1,6 +1,7 @@
 package com.dosol.abc.controller.board;
 
 import com.dosol.abc.domain.user.User;
+import com.dosol.abc.domain.user.UserImage;
 import com.dosol.abc.dto.board.BoardDTO;
 import com.dosol.abc.dto.board.PageRequestDTO;
 import com.dosol.abc.dto.board.PageResponseDTO;
@@ -46,10 +47,19 @@ public class BoardController {
     private String uploadPath;
 
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
-        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-        log.info(responseDTO);
+    public void list(PageRequestDTO pageRequestDTO, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            UserImage profileImage = userService.getProfileImageByUsername(user.getUsername());
+            if (profileImage == null) {
+                profileImage = new UserImage();
+//                profileImage.setFilename("default.png"); // 기본 이미지 파일명 설정
+            }
+            model.addAttribute("profileImage", profileImage);
+            model.addAttribute("user", user);
+        }
 
+        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
 
