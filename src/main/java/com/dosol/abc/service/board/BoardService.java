@@ -46,7 +46,7 @@ public interface BoardService {
         return board;
     }
 
-
+//
     default BoardDTO entityToDTO(Board board) {
         BoardDTO boardDTO = BoardDTO.builder()
                 .boardId(board.getBoardId())
