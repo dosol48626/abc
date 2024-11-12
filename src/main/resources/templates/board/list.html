@@ -5,89 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Board List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link th:href="@{/css/board.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/common.css}" rel="stylesheet"/>
+    <link th:href="@{/css/board.css}" rel="stylesheet"/>
 </head>
 
-<div layout:fragment="content">
-    <div class="container mt-5">
-        <h2 class="mt-3">게시판 목록</h2>
-
-        <!-- 검색 폼 -->
-        <form action="/board/list" method="get" th:action="@{/board/list}" th:object="${pageRequestDTO}">
-            <div class="col mb-3">
-                <div class="input-group">
-                    <select name="type" class="form-select" th:value="${pageRequestDTO.type}">
-                        <option value="">검색 조건</option>
-                        <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
-                        <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
-                        <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>
-                        <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목 + 내용</option>
-                        <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>
-                    </select>
-                    <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-                    <button class="btn btn-outline-secondary searchBtn" type="submit">검색</button>
-                    <button class="btn btn-outline-secondary clearBtn" type="button">초기화</button>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="container2">
+        <div class="board_main">
+            <div class="board_main_box">
+                <div class="board_maintext">
+                    <p class="maintext1">자유 게시판</p>
+                    <p class="maintext2">의견, 정보, 질문 등을 자유롭게 게시하여 다른 사용자들과 소통해 보세요</p>
+                    <div class="board_main_btn">
+                        <a th:href="@{/board/register}" >
+                            <button type="button" class="custom-btn btn_register">글 등록하기</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </form>
 
-        <!-- 글 등록 버튼 -->
-        <a th:href="@{/board/register}" class="btn btn-primary mb-3">글 등록하기</a>
-
-        <!-- 게시글 목록 테이블 -->
-        <div class="todo_main_table">
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>Board ID</th>
-                    <th>작성자</th>
-                    <th>제목</th>
-                    <th>조회수</th>
-                    <th>등록 날짜</th>
-                    <th>수정 날짜</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- 게시글 목록 반복 -->
-                <tr th:each="board : ${responseDTO.dtoList}">
-                    <td th:text="${board.boardId}">1</td>
-                    <td th:text="${board.username}">작성자</td>
-                    <td>
-                        <!-- 썸네일 이미지 표시 -->
-                        <div th:if="${board.fileNames != null && !board.fileNames.isEmpty()}">
-                            <img th:src="@{'/uploads/' + ${board.fileNames[0]}}" alt="Thumbnail" width="50" height="50"/>
-                        </div>
-                        <a th:href="@{/board/read(boardId=${board.boardId})}" th:text="${board.title}">게시글 제목</a>
-                    </td>
-                    <td th:text="${board.visitCount}">0</td>
-                    <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
-                    <td th:text="${#temporals.format(board.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class=""></div>
         </div>
 
-        <!-- 페이징 처리 -->
-        <div class="float-end">
-            <ul class="pagination flex-wrap">
-                <!-- 이전 페이지 버튼 -->
-                <li class="page-item" th:if="${responseDTO.prev}">
-                    <a class="page-link" th:href="@{/board/list(page=${responseDTO.start - 1})}">이전</a>
-                </li>
-                <!-- 페이지 번호 동적 생성 -->
-                <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
-                    <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
-                        <a class="page-link" th:href="@{/board/list(page=${i})}" th:text="${i}">1</a>
-                    </li>
-                </th:block>
-                <!-- 다음 페이지 버튼 -->
-                <li class="page-item" th:if="${responseDTO.next}">
-                    <a class="page-link" th:href="@{/board/list(page=${responseDTO.end + 1})}">다음</a>
-                </li>
-            </ul>
-        </div>
+
     </div>
 </div>
+</body>
 
 </html>

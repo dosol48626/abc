@@ -1,0 +1,80 @@
+/*body{*/
+/*    */
+/*    margin: 0;*/
+/*    display: flex;*/
+/*    justify-content: center; !* 가로 중앙 정렬 *!*/
+/*    align-items: center;*/
+/*}*/
+
+.board_main {
+    height: 100px;
+    display: flex;
+    Justify-content:center;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    background-color: #a0cdcd;
+}
+.board_main_box {
+    width: 1200px;
+    height: 100px;
+    background-color: #ffffff;
+}
+
+
+.board_paging{
+    max-width: 1000px;
+    height: 80px;
+    background-color: #d9ffc6;
+}
+.pagination_box {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+}
+
+.board_maintext{
+    width: 100%;
+    height: 90px;
+    text-align: left;
+}
+.maintext1{
+    font-size: 25px;
+    font-family: Pretendard-ExtraBold;
+    color: hwb(183 21% 45%);
+}
+.maintext2{
+    font-size: 15px;
+    font-family: Pretendard-Regular;
+    color: #3a9a96;
+}
+.board_main_btn{
+    width: 100%;
+    height:50px;
+    display: flex; /* 버튼을 가운데 정렬 */
+    justify-content: left; /* 가로 가운데 정렬 */
+}
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-family: Pretendard-Regular;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 3px rgba(0, 0, 0, 0.05),
+    4px 4px 10px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btn_register{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+}
+.btn_register:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+
