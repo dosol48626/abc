@@ -27,7 +27,7 @@ public class UserServiceTests {
                 .password("1234")
                 .build();
 
-        Long userId = userService.register(userDTO);
+        Long userId = userService .register(userDTO);
 
         log.info("userId" + userId);
     }
