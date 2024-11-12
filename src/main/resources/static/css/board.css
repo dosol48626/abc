@@ -10,7 +10,7 @@
     height: 100px;
     display: flex;
     Justify-content:center;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 10px;
 
 }
@@ -218,6 +218,171 @@ input::placeholder{
     text-decoration: underline;
     color: #f49578;
 }
+
+
+
+/*-------------------------폼---------------------------*/
+
+.board_main_box4 {
+    width: 1200px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+
+}
+/* register */
+input{
+    font-family: Pretendard-Regular;
+
+    border: 0;
+    outline: none;
+}
+
+input::placeholder{
+    color: #d9d9d9
+
+}
+textarea::placeholder{
+    color: #d9d9d9;
+    font-family: Pretendard-Regular;
+}
+.main-input{
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    font-family: Pretendard-Regular;
+}
+
+.main-textarea{
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    font-family: Pretendard-Bold;
+
+}
+
+
+.main-input label{
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-textarea label{
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-checkbox-txt label{
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-input.ver2 label{
+    top: initial;
+    bottom: -20px;
+}
+.main-textarea.ver2 label{
+    top: initial;
+    bottom: -20px;
+}
+.main-checkbox-txtlabel{
+    top: initial;
+    bottom: -20px;
+}
+.main-input label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-textarea label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-checkbox-txt label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-input input{
+    width: 1200px;
+    border: 1px solid #dddddd !important;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    line-height: 1.45;
+    letter-spacing: -0.04rem;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.txt-textarea{
+    width: 1200px;
+    height: 180px;
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #dddddd !important;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    background-color: #fff;
+    outline: none;
+    font-size: 14px;
+    color: #484848;
+    font-family: Pretendard-Regular;
+}
+.todo_main_btn{
+    width: 1200px;
+    height:50px;
+    display: flex; /* 버튼을 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    padding-top: 20px;
+}
+
+.btn_register2{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.btn_register3{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.btn_register:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+.btn_register2:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+.btn_register3:hover{
+    background: linear-gradient(0deg, #f49578 0%, rgb(241, 174, 161) 100%);
+}
+
 
 
 
