@@ -66,7 +66,7 @@ public class BoardController {
     @GetMapping("/register")
     public void registerGET() {
     }
-//
+////
 
     @PostMapping("/register")
     public String registerPOST(BoardDTO boardDTO, HttpSession session, UploadFileDTO uploadFileDTO) {
