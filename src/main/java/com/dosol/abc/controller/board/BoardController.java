@@ -62,7 +62,7 @@ public class BoardController {
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
-//
+////
     @GetMapping("/register")
     public void registerGET() {
     }
