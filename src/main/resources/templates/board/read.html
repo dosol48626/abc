@@ -1,102 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/basic2.html}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic2.html}">
 <head>
     <meta charset="UTF-8">
-    <title>게시글 상세 보기</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <style>
-        /* 댓글 수정 및 삭제 버튼을 오른쪽 끝에 배치하는 스타일 */
-        .reply-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 5px;
-        }
-    </style>
+    <title>게시글 상세보기</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet"/>
+    <link th:href="@{/css/board.css}" rel="stylesheet" />
 </head>
 
-<div layout:fragment="content">
-    <div class="container mt-5">
-        <h2 class="mb-4">게시글 상세 정보</h2>
+<div class="container" layout:fragment="content">
+    <div class="container4">
+        <div class="board_main">
 
-        <div class="card">
-            <div class="card-body">
-                <table class="table table-borderless">
-                    <tr>
-                        <th>작성자</th>
-                        <td th:text="${boardDTO.username}">작성자 이름</td>
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td th:text="${boardDTO.title}">게시글 제목</td>
-                    </tr>
-                    <tr>
-                        <th>내용</th>
-                        <td th:text="${boardDTO.content}">게시글 내용</td>
-                    </tr>
-                    <tr>
-                        <th>조회수</th>
-                        <td th:text="${boardDTO.visitCount}">0</td>
-                    </tr>
-                    <tr>
-                        <th>작성 날짜</th>
-                        <td th:text="${#temporals.format(boardDTO.regDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
-                    </tr>
-                    <tr>
-                        <th>수정 날짜</th>
-                        <td th:text="${#temporals.format(boardDTO.modDate, 'yyyy-MM-dd HH:mm')}">2023-01-01 10:00</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+            <div class="board_main_box">
 
-        <div th:if="${boardDTO.fileNames != null and !#lists.isEmpty(boardDTO.fileNames)}" class="mt-4">
-            <h5>첨부 이미지</h5>
-            <div class="d-flex flex-wrap">
-                <div th:each="fileName : ${boardDTO.fileNames}" class="me-2 mb-2">
-                    <img th:src="@{'/upload/' + ${fileName}}" alt="Image" class="img-thumbnail" width="200" height="200"/>
+                <div class="board_maintext">
+                    <p class="maintext1">게시물 상세보기</p>
                 </div>
-            </div>
-        </div>
 
-        <div class="mt-4">
-            <a th:href="@{/board/list}" class="btn btn-secondary">목록으로 돌아가기</a>
-            <a th:if="${username == boardDTO.username}" th:href="@{/board/modify(boardId=${boardDTO.boardId})}"
-               class="btn btn-primary ms-2">수정하기</a>
-        </div>
+                <div class="board_main_box4">
+                    <form>
+                        <div class="main-input">
+                            <label><span>* </span>작성자</label>
+                            <input type="text" class="txt-input" name="title" th:value="${boardDTO.username}" readonly>
+                        </div>
 
-        <hr class="my-4">
+                        <div class="main-input">
+                            <label><span>* </span>제목</label>
+                            <input type="text" class="txt-input" name="title" th:value="${boardDTO.title}" required readonly>
+                        </div>
 
-        <h4>댓글 목록</h4>
-        <div id="replyList" class="mb-3">
-            <!-- 댓글 목록이 비동기적으로 로드됩니다 -->
-        </div>
 
-        <div class="mb-4">
-            <h5>댓글 작성</h5>
-            <textarea id="replyText" class="form-control mb-2" rows="3" placeholder="댓글을 작성하세요..."></textarea>
-            <button onclick="addReply()">댓글 추가</button>
 
-            <!-- 댓글 기능을 위한 JavaScript 추가 -->
-            <script th:inline="javascript">
-                /* 게시글 ID와 사용자 ID 정보를 JavaScript 변수로 설정 */
-                const boardId = /*[[${boardDTO.boardId}]]*/ 0;
+                        <div class="main-textarea">
+                            <label><span>* </span>게시글 내용</label>
+                            <div th:if="${boardDTO.fileNames != null and !#lists.isEmpty(boardDTO.fileNames)}" class="mt-4">
+                                <div class="d-flex flex-wrap">
+                                    <div th:each="fileName : ${boardDTO.fileNames}" class="me-2 mb-2">
+                                        <img th:src="@{'/upload/' + ${fileName}}" alt="Image" class="img-thumbnail" width="200" height="200"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea name="content" class="txt-textarea" rows="5" th:text="${boardDTO.content}" required readonly>
+                            </textarea>
+                        </div>
 
-                // 세션 유저가 없는 경우 null로 처리
-                const username = /*[[${session.user != null ? session.user.username : null}]]*/ null;
 
-                /* 댓글 목록 로드 함수 */
-                async function loadReplies(page = 1) {
-                    const response = await fetch(`/replies/list/${boardId}?page=${page}`);
-                    const data = await response.json();
+                        <div class="main-input">
+                            <label><span>* </span>작성 날짜</label>
+                            <input type="text" class="txt-input"  th:value="${#temporals.format(boardDTO.regDate, 'yyyy-MM-dd HH:mm')}" readonly>
+                        </div>
 
-                    const replyListDiv = document.getElementById("replyList");
-                    replyListDiv.innerHTML = "";
+                        <div class="main-input">
+                            <label><span>* </span>수정 날짜</label>
+                            <input type="text" class="txt-input"  th:value="${#temporals.format(boardDTO.modDate, 'yyyy-MM-dd HH:mm')}" readonly>
+                        </div>
 
-                    if (data.dtoList.length > 0) { // dtoList 확인
-                        data.dtoList.forEach(reply => { // dtoList의 내용을 사용
-                            const replyDiv = document.createElement("div");
-                            replyDiv.innerHTML = `
+
+                        <div class="todo_main_btn">
+
+                            <a th:href="@{/board/list}" >
+                                <button type="button" class="custom-btn btn_register2">목록가기</button>
+                            </a>
+                            <a th:if="${username == boardDTO.username}" th:href="@{/board/modify(boardId=${boardDTO.boardId})}" >
+                                <button type="button" class="custom-btn btn_register2">게시글 수정</button>
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="board_main_box4">
+                    <form>
+                        <div class="main-textarea">
+
+                            <label><span>* </span>댓글 작성</label>
+
+                            <textarea id="replyText" class="txt-textarea" rows="3" placeholder="댓글을 작성하세요...">
+                        </textarea>
+                            <div class="button-container">
+                                <button type="button" class="custom-btn btn-reply" onclick="addReply()">댓글 추가</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- 댓글 기능을 위한 JavaScript 추가 -->
+                    <script th:inline="javascript">
+                        /* 게시글 ID와 사용자 ID 정보를 JavaScript 변수로 설정 */
+                        const boardId = /*[[${boardDTO.boardId}]]*/ 0;
+
+                        // 세션 유저가 없는 경우 null로 처리
+                        const username = /*[[${session.user != null ? session.user.username : null}]]*/ null;
+
+                        /* 댓글 목록 로드 함수 */
+                        async function loadReplies(page = 1) {
+                            const response = await fetch(`/replies/list/${boardId}?page=${page}`);
+                            const data = await response.json();
+
+                            const replyListDiv = document.getElementById("replyList");
+                            replyListDiv.innerHTML = "";
+
+                            if (data.dtoList.length > 0) { // dtoList 확인
+                                data.dtoList.forEach(reply => { // dtoList의 내용을 사용
+                                    const replyDiv = document.createElement("div");
+                                    replyDiv.innerHTML = `
           <p><strong>${reply.username}</strong>: ${reply.replyText}</p>
           ${username === reply.username ? `
               <button onclick="editReply(${reply.replyId}, '${reply.replyText}')">수정</button>
@@ -104,87 +112,93 @@
           ` : ''}
           <hr>
         `;
-                            replyListDiv.appendChild(replyDiv);
-                        });
-                    } else {
-                        replyListDiv.innerHTML = "<p>댓글이 없습니다.</p>";
-                    }
-                }
+                                    replyListDiv.appendChild(replyDiv);
+                                });
+                            } else {
+                                replyListDiv.innerHTML = "<p>댓글이 없습니다.</p>";
+                            }
+                        }
 
-                /* 댓글 추가 함수 */
-                async function addReply() {
-                    const replyText = document.getElementById("replyText").value;
-                    if (!replyText.trim()) {
-                        alert("댓글 내용을 입력하세요.");
-                        return;
-                    }
+                        /* 댓글 추가 함수 */
+                        async function addReply() {
+                            const replyText = document.getElementById("replyText").value;
+                            if (!replyText.trim()) {
+                                alert("댓글 내용을 입력하세요.");
+                                return;
+                            }
 
-                    if (!username) {
-                        alert("로그인이 필요합니다.");
-                        return;
-                    }
+                            if (!username) {
+                                alert("로그인이 필요합니다.");
+                                return;
+                            }
 
-                    const replyDTO = {
-                        boardId: boardId,
-                        username: username,
-                        replyText: replyText
-                    };
+                            const replyDTO = {
+                                boardId: boardId,
+                                username: username,
+                                replyText: replyText
+                            };
 
-                    const response = await fetch("/replies/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(replyDTO)
-                    });
+                            const response = await fetch("/replies/", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(replyDTO)
+                            });
 
-                    if (response.ok) {
-                        document.getElementById("replyText").value = "";
+                            if (response.ok) {
+                                document.getElementById("replyText").value = "";
+                                loadReplies();
+                            } else {
+                                alert("댓글 등록에 실패했습니다.");
+                            }
+                        }
+
+                        /* 댓글 수정 함수 */
+                        async function editReply(replyId, currentText) {
+                            const newReplyText = prompt("수정할 댓글을 입력하세요:", currentText);
+                            if (newReplyText == null || newReplyText.trim() === "") return;
+
+                            const replyDTO = {
+                                replyId: replyId,
+                                replyText: newReplyText
+                            };
+
+                            const response = await fetch(`/replies/${replyId}`, {
+                                method: "PUT",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(replyDTO)
+                            });
+
+                            if (response.ok) {
+                                loadReplies();
+                            } else {
+                                alert("댓글 수정에 실패했습니다.");
+                            }
+                        }
+
+                        /* 댓글 삭제 함수 */
+                        async function deleteReply(replyId) {
+                            if (!confirm("정말 이 댓글을 삭제하시겠습니까?")) return;
+
+                            const response = await fetch(`/replies/${replyId}`, {
+                                method: "DELETE"
+                            });
+
+                            if (response.ok) {
+                                loadReplies();
+                            } else {
+                                alert("댓글 삭제에 실패했습니다.");
+                            }
+                        }
+
+                        /* 댓글 목록 초기 로드 */
                         loadReplies();
-                    } else {
-                        alert("댓글 등록에 실패했습니다.");
-                    }
-                }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                /* 댓글 수정 함수 */
-                async function editReply(replyId, currentText) {
-                    const newReplyText = prompt("수정할 댓글을 입력하세요:", currentText);
-                    if (newReplyText == null || newReplyText.trim() === "") return;
 
-                    const replyDTO = {
-                        replyId: replyId,
-                        replyText: newReplyText
-                    };
 
-                    const response = await fetch(`/replies/${replyId}`, {
-                        method: "PUT",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(replyDTO)
-                    });
-
-                    if (response.ok) {
-                        loadReplies();
-                    } else {
-                        alert("댓글 수정에 실패했습니다.");
-                    }
-                }
-
-                /* 댓글 삭제 함수 */
-                async function deleteReply(replyId) {
-                    if (!confirm("정말 이 댓글을 삭제하시겠습니까?")) return;
-
-                    const response = await fetch(`/replies/${replyId}`, {
-                        method: "DELETE"
-                    });
-
-                    if (response.ok) {
-                        loadReplies();
-                    } else {
-                        alert("댓글 삭제에 실패했습니다.");
-                    }
-                }
-
-                /* 댓글 목록 초기 로드 */
-                loadReplies();
-            </script>
-
-            </body>
 </html>

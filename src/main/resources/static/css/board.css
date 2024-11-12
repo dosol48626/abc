@@ -224,10 +224,17 @@ input::placeholder{
 /*-------------------------폼---------------------------*/
 
 .board_main_box4 {
-    width: 1200px;
-    height: 70px;
+    width: 1400px;
+
     display: flex;
     justify-content: center;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    margin-top: 30px;
 
 }
 /* register */
@@ -327,6 +334,9 @@ textarea::placeholder{
     color: #da4841;
     vertical-align: -1px;
 }
+.main-input-date{
+
+}
 .main-input input{
     width: 1200px;
     border: 1px solid #dddddd !important;
@@ -382,7 +392,31 @@ textarea::placeholder{
 .btn_register3:hover{
     background: linear-gradient(0deg, #f49578 0%, rgb(241, 174, 161) 100%);
 }
+.img-thumbnail{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
 
+.button-container {
+    margin-top: 10px; /* 여백 추가 */
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.btn-reply {
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-reply:hover {
+    background: linear-gradient(0deg, #f49578 0%, rgb(241, 174, 161) 100%);
+    transform: scale(1.05); /* 버튼 호버 시 크기 약간 커짐 */
+}
 
 
 

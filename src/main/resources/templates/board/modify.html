@@ -50,9 +50,17 @@
 
             <div class="main-input">
               <label><span>* </span>기존 첨부 파일 </label>
-              <input type="text" class="txt-input"  th:each="fileName : ${boardDTO.fileNames}" >
-              <span th:text="${fileName}" class="me-2">파일 이름</span>
-              <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(this, '[[${fileName}]]')">삭제</button>
+              <input type="text" class="txt-input"  th:value="${boardDTO.fileNames}">
+<!--              <span th:text="${fileName}" class="me-2">파일 이름</span>-->
+<!--              <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(this, '[[${fileName}]]')">삭제</button>-->
+
+<!--              기존 코드-->
+<!--              <ul class="list-unstyled">-->
+<!--                <li th:each="fileName : ${boardDTO.fileNames}" class="d-flex align-items-center mb-2">-->
+<!--                  <span th:text="${fileName}" class="me-2">파일 이름</span>-->
+<!--                  <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(this, '[[${fileName}]]')">삭제</button>-->
+<!--                </li>-->
+<!--              </ul>-->
             </div>
 
             <div class="main-input">
@@ -91,17 +99,38 @@
 </div>
 
 <script>
-  function removeFile(button, fileName) {
-    const form = button.closest("form");
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "deletedFiles";
-    input.value = fileName;
-    form.appendChild(input);
 
-    const li = button.closest("li");
-    li.remove();
-  }
+// 기존 스크립트 코드
+  // function removeFile(button, fileName) {
+  //   const form = button.closest("form");
+  //   const input = document.createElement("input");
+  //   input.type = "hidden";
+  //   input.name = "deletedFiles";
+  //   input.value = fileName;
+  //   form.appendChild(input);
+  //
+  //   const li = button.closest("li");
+  //   li.remove();
+  // }
+
+
+// 수정 스크립트 코드
+  // function removeFile(button, fileName) {
+  //   // 현재 파일 삭제를 위한 히든 필드 추가
+  //   const form = button.closest("form");
+  //
+  //   // 삭제된 파일 정보 저장을 위한 hidden input 추가
+  //   const input = document.createElement("input");
+  //   input.type = "hidden";
+  //   input.name = "deletedFiles";  // 서버로 전송될 파라미터 이름
+  //   input.value = fileName;       // 삭제될 파일의 이름
+  //
+  //   form.appendChild(input);
+  //
+  //   // 파일을 UI에서 삭제 (삭제 버튼 클릭 시 부모의 .main-input을 제거)
+  //   const mainInput = button.closest(".main-input");
+  //   mainInput.remove(); // 이 부분이 UI에서 파일을 삭제하는 부분입니다.
+
 </script>
 
 </html>
