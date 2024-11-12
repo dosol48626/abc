@@ -15,20 +15,23 @@
         <h2 th:text="${username} + '님의 노트'">사용자님의 노트</h2>
 
         <!-- 노트 카드 그리드 -->
-        <div class="row row-cols-2 row-cols-md-4 g-4">
-            <div th:each="note : ${responseDTO.dtoList}" class="col">
-                <div class="card h-100" style="cursor: pointer;" th:onclick="|location.href='/notes/read/${note.noteId}'|">
-                    <div th:if="${note.fileNames != null && !note.fileNames.isEmpty()}" class="card-img-top">
-                        <img th:src="@{/view/{fileName}(fileName=${note.fileNames[0]})}" alt="Note Image" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title" th:text="${note.title}">노트 제목</h5>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div th:each="note : ${responseDTO.dtoList}" class="col">
+                    <div class="card h-100" style="cursor: pointer;" th:onclick="|location.href='/notes/read/${note.noteId}'|">
+                        <div th:if="${note.fileNames != null && !note.fileNames.isEmpty()}" class="card-img-top">
+                            <!-- 썸네일 이미지 사용 (s_ 접두사를 추가) -->
+                            <img th:src="@{/notes/view/{fileName}(fileName=${'s_' + note.fileNames[0]})}" alt="Note Thumbnail"
+                                 class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${note.title}">노트 제목</h5>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 노트 추가 버튼 -->
+
+            <!-- 노트 추가 버튼 -->
         <div class="d-flex justify-content-end mt-3">
             <a th:href="@{/notes/register}" class="btn btn-primary">노트 추가</a>
         </div>

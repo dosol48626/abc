@@ -194,7 +194,7 @@ public class NotesController {
                 String contentType = Files.probeContentType(savePath);
                 if (contentType != null && contentType.startsWith("image")) {
                     File thumbFile = new File(uploadPath, "s_" + uuid + "_" + originalName);
-                    Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 200, 200);
+                    Thumbnailator.createThumbnail(savePath.toFile(), thumbFile, 50, 50);
                     log.info("Thumbnail created for image: " + thumbFile.getPath());
                 }
 

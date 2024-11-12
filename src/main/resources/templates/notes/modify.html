@@ -21,9 +21,9 @@
             </div>
         </div>
 
-        <!-- 노트 작성 폼 -->
+        <!-- 노트 수정 폼 -->
         <div class="todo_main_table">
-            <form th:action="@{/notes/register}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/notes/modify}" method="post" enctype="multipart/form-data">
                 <div class="todo_main_box3">
 
                     <!-- 제목 입력 필드 -->
@@ -38,13 +38,6 @@
                         <textarea id="description" name="content" class="txt-textarea" rows="5" placeholder="노트 내용을 입력하세요" required></textarea>
                     </div>
 
-                    <div class="main-input">
-                        <label><span>* </span>기존 첨부 파일 </label>
-                        <input type="text" class="txt-input"  th:each="fileName : ${boardDTO.fileNames}" >
-                        <span th:text="${fileName}" class="me-2">파일 이름</span>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(this, '[[${fileName}]]')">삭제</button>
-                    </div>
-
                     <!-- 파일 업로드 필드 -->
                     <div class="file-upload">
                         <label for="file"><span>* </span>사진 업로드</label>
@@ -55,6 +48,9 @@
                     <div class="mt-4 button-group">
                         <button type="submit" class="btn btn-primary">노트 등록</button>
                         <a th:href="@{/notes/list}" class="btn btn-secondary">뒤로</a>
+                        <a th:href="@{/notes/remove(notesId=${notesDTO.notesId})}" class="text-decoration-none">
+                            <button type="button" class="custom-btn btn_register3">게시글 삭제</button>
+                        </a>
                     </div>
 
                 </div>
