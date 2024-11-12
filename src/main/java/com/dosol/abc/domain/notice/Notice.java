@@ -12,11 +12,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Notice extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long noticeId;
+    private Long noticeId;  // Notice의 고유 식별자
 
-    private String title;
+    private String title;   // 공지사항 제목
 
-    private String content;
+    private String content; // 공지사항 내용
 }

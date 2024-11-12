@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>공지사항 목록</title>
@@ -18,49 +18,44 @@
     }
 
     body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
       font-family: 'Pretendard-Regular';
       background-color: #f8f8f8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      padding: 20px;
       color: #555;
     }
 
-    h1 {
-      font-size: 28px;
-      font-family: 'Pretendard-Bold';
-      color: #3a8e97;
-      margin-bottom: 20px;
+    .container {
+      width: 600px;
+      padding: 40px 30px;
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0px 4px 8px rgb(218, 230, 230);
       text-align: center;
     }
 
-    .notice-container {
-      width: 100%;
-      max-width: 600px;
-      background-color: #fff;
-      padding: 30px 20px;
-      box-shadow: 0 4px 8px rgba(218, 230, 230, 0.7);
-      border-radius: 25px;
-      margin-bottom: 20px;
+    .header {
+      font-size: 25px;
+      font-family: 'Pretendard-Bold';
+      color: #3a8e97;
+      margin-bottom: 30px;
     }
 
     .notice-item {
-      margin-bottom: 20px;
       padding: 15px;
       border-radius: 15px;
       background: #f0f7f7;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .notice-item:last-child {
-      margin-bottom: 0;
+      margin-bottom: 15px;
+      text-align: left;
     }
 
     .notice-title {
       font-family: 'Pretendard-Bold';
-      font-size: 20px;
+      font-size: 18px;
       color: #3a8e97;
       margin-bottom: 8px;
     }
@@ -69,43 +64,108 @@
       font-size: 16px;
       font-family: 'Pretendard-Regular';
       color: #333;
+      margin-bottom: 10px;
     }
 
-    .new-notice-btn {
+    .notice-actions a, .notice-actions form {
       display: inline-block;
-      padding: 12px 24px;
-      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    .notice-actions a {
+      color: #50b3a2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .notice-actions a:hover {
+      color: #3a8e97;
+      text-decoration: underline;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
       font-family: 'Pretendard-Bold';
       color: #fff;
-      background: linear-gradient(45deg, #3a8e97, #50b3a2);
+      background: #50b3a2;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(58, 142, 151, 0.3);
-      text-decoration: none;
-      margin-top: 20px;
       transition: background 0.3s, box-shadow 0.3s;
-      text-align: center;
+    }
+
+    button:hover {
+      background: #2b939d;
+      box-shadow: 0 6px 12px rgba(43, 147, 157, 0.4);
+    }
+
+    .new-notice-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-family: 'Pretendard-Bold';
+      color: #fff;
+      background: #3a8e97;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .new-notice-btn:hover {
-      background: linear-gradient(45deg, #007a83, #2b939d);
+      background: #007a83;
       box-shadow: 0 6px 12px rgba(43, 147, 157, 0.4);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .pagination li {
+      margin: 0 5px;
+    }
+
+    .pagination a {
+      color: #50b3a2;
+      text-decoration: none;
+    }
+
+    .pagination a:hover {
+      color: #3a8e97;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-<h1>공지사항 목록</h1>
+<div class="container">
+  <div class="header">공지사항 목록</div>
 
-<div class="notice-container" id="notice-container">
-  <!-- Thymeleaf를 사용하여 공지사항 목록을 동적으로 렌더링 -->
-  <div th:each="notice : ${notices}" class="notice-item">
-    <div class="notice-title" th:text="${notice.title}">공지사항 제목</div>
-    <div class="notice-content" th:text="${notice.content}">공지사항 내용</div>
+  <div class="notice-container" id="notice-container">
+    <div th:each="notice : ${notices.content}" class="notice-item">
+      <div class="notice-title" th:text="${notice.title}">공지사항 제목</div>
+      <div class="notice-content" th:text="${notice.content}">공지사항 내용</div>
+      <div class="notice-actions">
+        <a th:href="@{/notice/edit/{noticeId}(noticeId=${notice.noticeId})}">수정</a>
+        <form th:action="@{/notice/delete/{noticeId}(noticeId=${notice.noticeId})}" method="post" style="display:inline;">
+          <button type="submit">삭제</button>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <a href="/notice/create" class="new-notice-btn">새로운 공지사항</a>
+
+  <ul class="pagination">
+    <li th:each="i : ${#numbers.sequence(1, notices.totalPages)}">
+      <a th:href="@{/notice/list(page=${i - 1})}" th:text="${i}"></a>
+    </li>
+  </ul>
 </div>
-
-<a href="/notice/create" class="new-notice-btn">새로운 공지사항</a>
-
 </body>
 </html>
