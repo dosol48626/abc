@@ -1,12 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/basic.html}">
+      layout:decorate="~{layout/basic2.html}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet"/>
+    <link th:href="@{/css/todo.css}" rel="stylesheet"/>
 </head>
+
 <body>
+
+<div class="container" layout:fragment="content">
+    <div class="container2">
+
+        <!-- 제목 -->
+        <div class="todo_main2">
+            <div class="todo_main_box">
+                <div class="todo_maintext">
+                    <h2>어떤 노트를 작성할까요?</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- 노트 수정 폼 -->
+        <div class="todo_main_table">
+            <form th:action="@{/notes/modify}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="noteId" th:value="${dto.noteId}">
+
+                <div class="todo_main_box3">
+
+                    <!-- 제목 입력 필드 -->
+                    <div class="main-input">
+                        <label for="title"><span>* </span>제목</label>
+                        <input type="text" id="title" class="txt-input" name="title" th:value="${dto.title}" required>
+                    </div>
+
+                    <!-- 내용 입력 필드 -->
+                    <div class="main-textarea">
+                        <label for="description"><span>* </span>내용</label>
+                        <textarea id="description" name="description" class="txt-textarea" rows="5" required
+                                  th:text="${dto.description}"></textarea>
+                    </div>
+
+                    <!-- 기존 이미지 파일 표시 -->
+                    <div class="file-upload">
+                        <label>사진 업로드</label>
+                        <div class="uploaded-files">
+                            <ul>
+                                <li th:each="image : ${dto.fileNames}">
+                                    <span th:text="${image}">파일명</span>
+                                    <a th:href="@{/notes/view/{fileName}(fileName=${image})}" target="_blank">보기</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 파일 업로드 필드 -->
+                        <input type="file" id="file" name="files" class="file-input" accept="image/*" multiple>
+                    </div>
+
+                    <!-- 버튼 영역 -->
+                    <div class="mt-4 button-group">
+                        <button type="submit" class="btn btn-primary">수정하기</button>
+                        <a th:href="@{/notes/list}" class="btn btn-secondary">뒤로</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

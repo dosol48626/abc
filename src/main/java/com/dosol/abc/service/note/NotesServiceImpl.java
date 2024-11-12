@@ -29,8 +29,10 @@ public class NotesServiceImpl implements NotesService {
     private final ModelMapper modelMapper;
     @Override
     public Long createNote(NotesDTO notesDTO) {
+        log.info("1================================"+notesDTO.getNoteId());
         Notes notes = dtoToEntity(notesDTO);
         Long noteId = notesRepository.save(notes).getNoteId();
+        log.info("2================================"+notes);
         return noteId;
     }
 

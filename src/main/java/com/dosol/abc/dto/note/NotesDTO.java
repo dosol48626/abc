@@ -1,5 +1,6 @@
 package com.dosol.abc.dto.note;
 
+import com.dosol.abc.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,10 @@ public class NotesDTO {
     private Long noteId;
     private String title;
     private String content;
-    private Long user;
+
+    private Long userId;
+
+    private String username;
 
     private LocalDateTime regDate;
 

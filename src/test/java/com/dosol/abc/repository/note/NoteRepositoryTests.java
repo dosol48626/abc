@@ -39,7 +39,7 @@ public class NoteRepositoryTests {
     public void testInsert2() {
         IntStream.rangeClosed(1, 20).forEach(i -> {
             Notes notes = Notes.builder()
-                    .user(User.builder().userId(3L).build())
+                    .user(User.builder().userId(1L).build())
                     .title("third Title" + i)
                     .content("thoo Content" + i)
                     .build();
