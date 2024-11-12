@@ -14,41 +14,6 @@
 
   <div class="container2">
 
-<!--      &lt;!&ndash; 검색 팝업 &ndash;&gt;-->
-<!--      <div id="searchPopup" class="popup2" style="display: none;">-->
-<!--        <div class="popup-search-content">-->
-<!--          <img src="/img/common/searchface.png" width="90" height="90">-->
-<!--          <p>Todo list 검색하기</p>-->
-<!--          <form action="/todo/list" method="get">-->
-<!--            <div class="input-group">-->
-<!--              <div class="input-group-prepend">-->
-<!--                <select class="form-select" name="type">-->
-<!--                  <option value="">-&#45;&#45;</option>-->
-<!--                  <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>-->
-<!--                  <option value="d" th:selected="${pageRequestDTO.type == 'd'}">내용</option>-->
-<!--                  <option value="td" th:selected="${pageRequestDTO.type == 'td'}">제목 내용</option>-->
-<!--                </select>-->
-<!--              </div>-->
-
-<!--              <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요"-->
-<!--                     th:value="${pageRequestDTO.keyword}">-->
-
-<!--              <div class="input-group-append">-->
-<!--                <button class="popup-search-btn" type="submit">검색</button>-->
-<!--                <button class="popup-search-btn" type="button" onclick="clearSearch()">초기화</button>-->
-<!--                <button class="popup-search-btn" onclick="closeSearchPopup()">닫기</button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">-->
-<!--            <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">-->
-<!--          </form>-->
-
-<!--        </div>-->
-<!--      </div>-->
-
-
-
-
       <!--------------------★★★★★★★★★ 여기서 부터 본인 레이아웃 넣기 ★★★★★★★★★-------------------->
 
 
@@ -70,6 +35,27 @@
           <a th:href="@{/todo/register(pageType=${pageRequestDTO.pageType})}">
             <button type="button" class="custom-btn btn_register">일정 추가</button>
           </a>
+        </div>
+
+        <div class="todo_main_search">
+          <form action="/todo/list" method="get">
+            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+            <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+
+            <div class="search_box">
+              <div class="input-group">
+                <select name="type" class="form-select">
+                  <option value="">검색 </option>
+                  <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                  <option value="d" th:selected="${pageRequestDTO.type == 'd'}">내용</option>
+                  <option value="td" th:selected="${pageRequestDTO.type == 'td'}">제목 내용</option>
+                </select>
+                <input type="text" class="form-control" name="keyword"  placeholder="검색어를 입력하세요">
+                <button class="btn btn-outline-secondary searchBtn" type="submit">검색</button>
+                <button class="btn btn-outline-secondary clearBtn" type="reset">초기화</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

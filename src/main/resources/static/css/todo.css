@@ -6,8 +6,10 @@
     height: 100px;
     display: flex;
     Justify-content:center;
-    padding-top: 80px;
+    padding-top: 50px;
     padding-bottom: 10px;
+
+
 
 }
 .todo_main2{
@@ -41,9 +43,19 @@
 }
 .todo_main_btn{
     width: 800px;
-    height:50px;
+    height:80px;
     display: flex; /* 버튼을 가운데 정렬 */
     justify-content: center; /* 가로 가운데 정렬 */
+}
+.todo_main_search{
+    width: 800px;
+    height:30px;
+
+}
+.todo_main_search form {
+    display: flex;
+    justify-content: space-between; /* 검색창 요소들이 양옆에 정렬 */
+    align-items: center;
 }
 .custom-btn {
     width: 130px;
@@ -92,9 +104,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 120px;
     padding-top: 10px;
     padding-bottom: 5px;
     width: 100%;
+    position: relative;
+
 
 }
 
@@ -327,3 +342,74 @@ textarea::placeholder{
 
 }
 
+/* 검색 */
+
+
+.search_box .input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+.board_main_box2 {
+    width: 1200px;
+    height: 70px;
+
+}
+.search_box{
+    width: 1200px;
+    float: left;
+}
+
+
+.search_box .input-group select {
+    width: 150px;
+    padding: 3px;
+    height: 30px;
+    font-size: 14px;
+    color: #959595;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fbfbfb;
+
+}
+.search_box .input-group input{
+    padding: 3px;
+    width: 400px;
+    height: 30px;
+    border:none;
+    background-color: transparent;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+}
+input::placeholder{
+    color: #b6b5b5;
+    font-size: 14px;
+
+}
+
+/* 버튼 스타일 */
+.search_box .input-group button {
+    margin-bottom: 20px;
+    font-family: Pretendard-Light;
+    color: #ccc;;
+    width: 80px;
+    padding: 3px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search_box .input-group button:hover {
+    background-color: #eaeaea;
+}
+
+/* 버튼들 간의 간격을 유지 */
+.search_box .input-group button {
+    margin-left: 5px;
+}
