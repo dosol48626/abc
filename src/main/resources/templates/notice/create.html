@@ -1,118 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Create New Notice</title>
+  <title>새로운 공지사항</title>
   <style>
-    /* 기본 스타일 */
+    @font-face {
+      font-family: 'Pretendard-Regular';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Pretendard-Bold';
+      src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    /* 폴라로이드 폼 스타일 */
-    .polaroid-form {
-      width: 300px;
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      position: relative;
-      transform: rotate(-2deg);
-      text-align: center;
-    }
-
-    .polaroid-form::before {
-      content: "";
-      width: 30px;
-      height: 30px;
-      background-color: #ffcc00;
-      border-radius: 50%;
-      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      position: absolute;
-      top: -15px;
-      left: -15px;
-      color: #333;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Pretendard-Regular';
+      background-color: #f8f8f8;
+      color: #555;
+    }
+
+    .container {
+      width: 500px;
+      padding: 40px 30px;
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0px 4px 8px rgb(218, 230, 230);
+      text-align: center;
+    }
+
+    .header {
+      font-size: 25px;
+      font-family: 'Pretendard-Bold';
+      color: #3a8e97;
+      margin-bottom: 30px;
     }
 
     label {
       display: block;
-      font-weight: bold;
+      font-family: 'Pretendard-Bold';
+      font-size: 16px;
+      color: #555;
       margin-top: 10px;
-      color: #333;
-      font-size: 14px;
+      margin-bottom: 5px;
+      text-align: left;
     }
 
     input[type="text"], textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
       border: 1px solid #ddd;
       border-radius: 4px;
       font-size: 15px;
       box-sizing: border-box;
+      margin-bottom: 15px;
+      font-family: 'Pretendard-Regular';
     }
 
     textarea {
       resize: vertical;
+      height: 100px;
     }
 
-    /* 제출 버튼 스타일 */
     button {
       width: 100%;
       padding: 12px;
       font-size: 16px;
-      font-weight: bold;
+      font-family: 'Pretendard-Bold';
       color: #fff;
-      background: linear-gradient(45deg, #007BFF, #00C6FF);
+      background: linear-gradient(45deg, #3a8e97, #50b3a2);
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      box-shadow: 0 4px 8px rgba(58, 142, 151, 0.3);
       transition: background 0.3s, box-shadow 0.3s;
     }
 
     button:hover {
-      background: linear-gradient(45deg, #0056b3, #0095ff);
-      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+      background: linear-gradient(45deg, #007a83, #2b939d);
+      box-shadow: 0 6px 12px rgba(43, 147, 157, 0.4);
     }
 
-    /* 뒤로 가기 링크 스타일 */
     .back-link {
-      margin-top: 15px;
+      display: block;
+      margin-top: 20px;
       font-size: 14px;
-      color: #007BFF;
+      color: #50b3a2;
       text-decoration: none;
       transition: color 0.3s;
     }
 
     .back-link:hover {
-      color: #0056b3;
+      color: #3a8e97;
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-<h1>Create New Notice</h1>
+<div class="container">
+  <div class="header">새 공지사항</div>
 
-<div class="polaroid-form">
   <form action="#" th:action="@{/notice/create}" th:object="${notice}" method="post">
     <label for="title">Title</label>
     <input type="text" id="title" th:field="*{title}" placeholder="Enter the title of the notice" required>
@@ -120,11 +115,10 @@
     <label for="content">Content</label>
     <textarea id="content" th:field="*{content}" placeholder="Enter the content of the notice" required></textarea>
 
-    <button type="submit">Create Notice</button>
+    <button type="submit">Click</button>
   </form>
+
+  <a href="/notice/list" class="back-link">돌아가기</a>
 </div>
-
-<a href="/notice/list" class="back-link">Back to Notice List</a>
-
 </body>
 </html>

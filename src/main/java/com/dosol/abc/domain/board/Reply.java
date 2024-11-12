@@ -17,6 +17,7 @@ public class Reply extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="rno")
     private Long replyId;
 
     // 수정된 부분: @ManyToOne 설정 검토
