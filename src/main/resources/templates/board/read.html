@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div th:if="${boardDTO.fileNames != null}" class="mt-4">
+    <div th:if="${boardDTO.fileNames != null and !#lists.isEmpty(boardDTO.fileNames)}" class="mt-4">
       <h5>첨부 이미지</h5>
       <div class="d-flex flex-wrap">
         <div th:each="fileName : ${boardDTO.fileNames}" class="me-2 mb-2">

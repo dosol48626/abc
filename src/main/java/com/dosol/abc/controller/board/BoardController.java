@@ -200,10 +200,6 @@ public class BoardController {
         }
     }
 
-
-
-
-
     @GetMapping("/remove")
     public String removeGET(Long boardId) {
         boardService.remove(boardId);
