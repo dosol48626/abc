@@ -35,23 +35,17 @@ public class WiseServiceImpl implements WiseService {
 
     @Override
     public WiseDTO getRandomWise() {
-        // 모든 Wise 객체를 리스트로 가져옴
-        List<Wise> wises = wiseRepository.findAll();
 
-        // 만약 Wise가 없으면 예외 처리 (빈 리스트 방지)
-        if (wises.isEmpty()) {
-            throw new RuntimeException("No Wise quotes available");
-        }
 
         // 랜덤으로 하나의 Wise 객체 선택
         Random random = new Random();
-        Wise randomWise = wises.get(random.nextInt(wises.size())); // 랜덤 인덱스로 선택
+        Long idrandom=random.nextLong(100);
+        Wise randomWise = wiseRepository.findById(idrandom).orElseThrow();
 
         // WiseDTO로 변환하여 반환
         return WiseDTO.builder()
                 .wiseId(randomWise.getWiseId())
                 .content(randomWise.getContent())
-                .randomNumber(random.nextInt(100) + 1) // 랜덤 숫자 생성 (디스플레이용)
                 .build();
     }
 
