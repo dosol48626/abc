@@ -71,11 +71,11 @@ public class NotesController {
         User user = (User) session.getAttribute("user");
 
         // user 객체가 존재하는 경우에만 username을 설정
-        if (user != null) {
-            notesDTO.setUsername(user.getUsername());
-        } else {
-            throw new RuntimeException("로그인이 필요합니다.");
-        }
+//        if (user != null) {
+//            notesDTO.setUsername(user.getUsername());
+//        } else {
+//            throw new RuntimeException("로그인이 필요합니다.");
+//        }
 
         // 파일 이름 설정 로직
         List<String> strFileNames = new ArrayList<>();
@@ -85,10 +85,9 @@ public class NotesController {
         }
 
         notesDTO.setFileNames(strFileNames); // notesDTO에 파일 이름들 추가
-        log.info(" 4============================================== " + notesDTO);
 
         // 노트 저장 및 생성된 noteId 반환
-        Long noteId = notesService.createNote(notesDTO);
+        Long noteId = notesService.createNote(notesDTO,user);
         notesDTO.setNoteId(noteId); // 생성된 noteId를 DTO에 설정하여 사용
 
         //User 객체를 notes에 추가
@@ -107,13 +106,24 @@ public class NotesController {
         model.addAttribute("dto", notesDTO);
     }*/
 
-    @GetMapping({"/read", "/modify"})
-    public void read(Long noteId, PageRequestDTO pageRequestDTO, Model model) {
-
+    // read 요청을 처리하는 메서드
+    @GetMapping("/read/{noteId}")
+    public String read(@PathVariable("noteId") Long noteId, PageRequestDTO pageRequestDTO, Model model) {
         log.info("Reading Note with ID: " + noteId);
         NotesDTO notesDTO = notesService.readOne(noteId);
         model.addAttribute("dto", notesDTO);
+        return "notes/read";  // read.html을 렌더링
     }
+
+    // modify 요청을 처리하는 메서드
+    @GetMapping("/modify/{noteId}")
+    public String modify(@PathVariable("noteId") Long noteId, PageRequestDTO pageRequestDTO, Model model) {
+        log.info("Modifying Note with ID: " + noteId);
+        NotesDTO notesDTO = notesService.readOne(noteId);
+        model.addAttribute("dto", notesDTO);
+        return "notes/modify";  // modify.html을 렌더링
+    }
+
 
     @PostMapping("/modify")
     public String modify(UploadFileDTO uploadFileDTO,
@@ -121,7 +131,7 @@ public class NotesController {
                          NotesDTO notesDTO,
                          RedirectAttributes redirectAttributes,
                          HttpSession session) {
-        List<String> strFileNames = null;
+        List<String> strFileNames = new ArrayList<>();
 
         User user = (User) session.getAttribute("user");
 

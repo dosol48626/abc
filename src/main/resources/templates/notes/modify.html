@@ -16,49 +16,44 @@
         <div class="todo_main2">
             <div class="todo_main_box">
                 <div class="todo_maintext">
-                    <h2>어떤 노트를 작성할까요?</h2>
+                    <h2>노트를 수정해주세요.</h2>
                 </div>
             </div>
         </div>
 
-        <!-- 노트 수정 폼 -->
+        <!-- 노트 작성 폼 -->
         <div class="todo_main_table">
-            <form th:action="@{/notes/modify}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="noteId" th:value="${dto.noteId}">
-
+            <form th:action="@{/notes/register}" method="post" enctype="multipart/form-data">
                 <div class="todo_main_box3">
 
                     <!-- 제목 입력 필드 -->
                     <div class="main-input">
                         <label for="title"><span>* </span>제목</label>
-                        <input type="text" id="title" class="txt-input" name="title" th:value="${dto.title}" required>
+                        <input type="text" id="title" class="txt-input" name="title" placeholder="노트 제목을 입력하세요" required>
                     </div>
 
                     <!-- 내용 입력 필드 -->
                     <div class="main-textarea">
                         <label for="description"><span>* </span>내용</label>
-                        <textarea id="description" name="description" class="txt-textarea" rows="5" required
-                                  th:text="${dto.description}"></textarea>
+                        <textarea id="description" name="content" class="txt-textarea" rows="5" placeholder="노트 내용을 입력하세요" required></textarea>
                     </div>
 
-                    <!-- 기존 이미지 파일 표시 -->
+                    <div class="main-input">
+                        <label><span>* </span>기존 첨부 파일 </label>
+                        <input type="text" class="txt-input"  th:each="fileName : ${boardDTO.fileNames}" >
+                        <span th:text="${fileName}" class="me-2">파일 이름</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(this, '[[${fileName}]]')">삭제</button>
+                    </div>
+
+                    <!-- 파일 업로드 필드 -->
                     <div class="file-upload">
-                        <label>사진 업로드</label>
-                        <div class="uploaded-files">
-                            <ul>
-                                <li th:each="image : ${dto.fileNames}">
-                                    <span th:text="${image}">파일명</span>
-                                    <a th:href="@{/notes/view/{fileName}(fileName=${image})}" target="_blank">보기</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- 파일 업로드 필드 -->
+                        <label for="file"><span>* </span>사진 업로드</label>
                         <input type="file" id="file" name="files" class="file-input" accept="image/*" multiple>
                     </div>
 
                     <!-- 버튼 영역 -->
                     <div class="mt-4 button-group">
-                        <button type="submit" class="btn btn-primary">수정하기</button>
+                        <button type="submit" class="btn btn-primary">노트 등록</button>
                         <a th:href="@{/notes/list}" class="btn btn-secondary">뒤로</a>
                     </div>
 
@@ -70,3 +65,5 @@
 
 </body>
 </html>
+
+

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public interface NotesService {
 
     //노트생성
-    Long createNote(NotesDTO notesDTO);
+    Long createNote(NotesDTO notesDTO, User user);
 
     //노트수정
     void modifyNote(NotesDTO notesDTO);

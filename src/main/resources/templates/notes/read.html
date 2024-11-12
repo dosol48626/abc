@@ -25,10 +25,13 @@
         <div class="todo_main_table">
             <div class="todo_main_box3">
 
-                <!-- 노트 이미지 표시 -->
-                <div class="note-image">
-                    <img th:src="@{'/upload/' + ${dto.imageUrl}}" alt="노트 이미지" width="200">
+                <!-- read.html의 이미지 출력 부분 수정 -->
+                <div class="image-container">
+                    <img th:if="${dto.fileNames != null && !dto.fileNames.isEmpty()}"
+                         th:src="@{/view/{fileName}(fileName=${dto.fileNames[0]})}"
+                         alt="Note Image" style="width: 100%; height: auto;">
                 </div>
+
 
                 <!-- 제목 필드 -->
                 <div class="main-input">
@@ -39,7 +42,7 @@
                 <!-- 내용 필드 -->
                 <div class="main-textarea">
                     <label><span>* </span>내용</label>
-                    <textarea name="description" class="txt-textarea" rows="3" readonly th:text="${dto.description}"></textarea>
+                    <textarea name="content" class="txt-textarea" rows="3" readonly th:text="${dto.content}"></textarea>
                 </div>
 
                 <!-- 버튼 영역 -->
