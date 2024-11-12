@@ -69,7 +69,6 @@ public class NotesController {
                            RedirectAttributes redirectAttributes,
                            HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<String> strFileNames = new ArrayList<>();
 
         // user 객체가 존재하는 경우에만 username을 설정
         if (user != null) {
@@ -79,17 +78,21 @@ public class NotesController {
         }
 
         // 파일 이름 설정 로직
+        List<String> strFileNames = new ArrayList<>();
         if (uploadFileDTO.getFiles() != null &&
                 !uploadFileDTO.getFiles().get(0).getOriginalFilename().equals("")) {
             strFileNames = fileUpload(uploadFileDTO);
         }
 
         notesDTO.setFileNames(strFileNames); // notesDTO에 파일 이름들 추가
-        log.info("Before Saving to DB, notesDTO: " + notesDTO);
+        log.info(" 4============================================== " + notesDTO);
 
         // 노트 저장 및 생성된 noteId 반환
         Long noteId = notesService.createNote(notesDTO);
         notesDTO.setNoteId(noteId); // 생성된 noteId를 DTO에 설정하여 사용
+
+        //User 객체를 notes에 추가
+        notesDTO.setUserId(user.getUserId());
 
         redirectAttributes.addFlashAttribute("message", "Note registered successfully");
         return "redirect:/notes/list";
