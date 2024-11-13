@@ -19,13 +19,13 @@
     <div class="todo_main_box">
       <div class="todo_maintext">
         <span th:switch="${pageRequestDTO.pageType}">
-          <span>username님 어떤 일을 하셔야 하나요?</span>
+          <span>[[${user.username}]]님 어떤 일을 하셔야 하나요?</span>
         </span>
       </div>
     </div>
   </div>
 
-<div class="todo_main_table">
+<div class="todo_main_table2">
   <div class="todo_main_box3">
 
 

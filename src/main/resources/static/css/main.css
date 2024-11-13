@@ -127,7 +127,7 @@
     float: left;
 }
 .todo_title{
-    
+    font-family: Pretendard-Regular;
     margin: 10px 0px 0px 10px;
     width: 450px;
     height: 25px;
@@ -137,7 +137,7 @@
     color: #585858;
 }
 .todo_description{
-    
+    font-family: Pretendard-Regular;
     margin: 10px 0px 0px 10px;
     width: 450px;
     height: 30px;    
@@ -155,7 +155,17 @@
     width: 500px;
     height: 320px;
     margin-top: 20px;
+
     
+}
+.main_graph{
+
+    width: 500px;
+    height: 300px;
+}
+.main_graph img{
+    margin-top: 60px;
+    margin-left: 15px;
 }
 /*하단 게시물 부분*/
 .main_bottom{
@@ -178,10 +188,11 @@
     width: 1020px;
     height: 30px;    
     font-size: 18px;
-    font-weight: 600;
+    font-family: Pretendard-Bold;
     padding: 20px 0px 20px 0px;
     float: left;
-    color: hsl(0, 1%, 26%);
+    color: #4ab1ad;
+
 }
 .main_bottom_post{
     float: left;        
@@ -205,13 +216,14 @@
     border-radius: 10px 10px 0px 0px;
 }
 .main_bottom_title{
-    
+    font-family: Pretendard-Regular;
     width: 250px;
     height: 20px;
     padding: 5px 0px 0px 10px; 
     font-weight: 500;
     font-size: 16px; 
-    float: left;     
+    float: left;
+    color: #585858;
 }
 .main_bottom_visitcount_text{
     

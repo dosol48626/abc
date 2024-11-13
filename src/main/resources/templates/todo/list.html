@@ -22,12 +22,12 @@
       <div class="todo_main_box">
         <div class="todo_maintext">
           <span th:switch="${pageRequestDTO.pageType}">
-              <span th:case="'list'">username님의 모든 일정입니다.</span>
-              <span th:case="'today'">username님의 오늘 일정입니다.</span>
-              <span th:case="'upcoming'">username님의 다가오는 일정입니다.</span>
-              <span th:case="'past'">username님의 지난 일정입니다.</span>
-              <span th:case="'completed'">username님의 완료된 일정입니다.</span>
-              <span th:case="*">username님의 일정입니다.</span> <!-- 기본값 -->
+              <span th:case="'list'">[[${user.username}]]님의 모든 일정입니다.</span>
+              <span th:case="'today'">[[${user.username}]]님의 오늘 일정입니다.</span>
+              <span th:case="'upcoming'">[[${user.username}]]님의 다가오는 일정입니다.</span>
+              <span th:case="'past'">[[${user.username}"]]님의 지난 일정입니다.</span>
+              <span th:case="'completed'">[[${user.username}]]님의 완료된 일정입니다.</span>
+              <span th:case="*">[[${user.username}]]님의 일정입니다.</span> <!-- 기본값 -->
           </span>
         </div>
 
@@ -57,6 +57,7 @@
             </div>
           </form>
         </div>
+
       </div>
     </div>
 
@@ -204,30 +205,6 @@
 
 
 
-
-
-
-  // ★ 공통 스크립트 ( 검색 팝업 ) ★
-  function closePopup() {
-    document.getElementById("confirmPopup").style.display = "none";
-  }
-
-
-  function openSearchPopup() {
-    document.getElementById("searchPopup").style.display = "flex";
-  }
-
-
-  function closeSearchPopup() {
-    document.getElementById("searchPopup").style.display = "none";
-  }
-
-
-  function clearSearch() {
-
-    document.querySelector('input[name="keyword"]').value = '';
-    document.querySelector('select[name="type"]').value = '';
-  }
 
 </script>
 

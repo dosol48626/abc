@@ -112,6 +112,18 @@
 
 
 }
+.todo_main_table2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width: 100%;
+    position: relative;
+
+
+}
 
 .todo_main_box2 {
     max-width: 800px;

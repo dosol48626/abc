@@ -18,14 +18,14 @@
     <div class="todo_main_box">
       <div class="todo_maintext">
         <span th:switch="${pageRequestDTO.pageType}">
-          <span>username님이 작성하신 일정입니다</span>
+          <span>[[${user.username}]]님이 작성하신 일정입니다</span>
         </span>
       </div>
     </div>
   </div>
 
 
-  <div class="todo_main_table">
+  <div class="todo_main_table2">
     <div class="todo_main_box3">
       <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
 
