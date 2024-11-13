@@ -58,7 +58,8 @@
 
 
           <div class="todo_main_btn" >
-            <button type="button" id="modifyBtn" class="custom-btn btn_register2">일정 수정</button>
+
+            <button type="submit" id="modifyBtn" class="custom-btn btn_register2">일정 수정</button>
 
             <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
               <button type="button" class="custom-btn btn_register2">뒤로</button>
@@ -78,20 +79,17 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
-  const formObj = document.querySelector("form");
-  document.querySelector("#modifyBtn").addEventListener("click", function (e) {
-    e.preventDefault();  // 기본 폼 제출을 막음
-    e.stopPropagation(); // 이벤트 전파를 막음
+  const formObj=document.querySelector("form");
+  document.querySelector("#modifyBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    var pageType = document.querySelector("#pageType").value
+    console.log("pageType="+pageType)
+    formObj.action="/todo/modify?pageType="+pageType
+    formObj.method="post"
+    formObj.submit()
+  }, false)
 
-    var pageType = document.querySelector("#pageType").value;
-    console.log("pageType=" + pageType);
-
-    // 폼의 action 경로를 동적으로 설정
-    formObj.action = "/todo/modify?pageType=" + pageType;
-
-    // 폼을 수동으로 제출
-    formObj.submit();
-  }, false);
 
 
   document.querySelector("#removeBtn").addEventListener("click", function (e) {
