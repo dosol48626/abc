@@ -84,7 +84,7 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-
+//
     private List<String> fileUpload(UploadFileDTO uploadFileDTO) {
         List<String> list = new ArrayList<>();
         uploadFileDTO.getFiles().forEach(multipartFile -> {
