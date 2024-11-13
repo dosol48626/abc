@@ -52,7 +52,7 @@ public class BoardServiceImpl implements BoardService {
                 .total((int)result.getTotalElements())
                 .build();
     }
-
+//
     @Override
     public Long register(BoardDTO boardDTO) {
         Board board = dtoToEntity(boardDTO);
