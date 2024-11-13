@@ -110,7 +110,7 @@ public class BoardController {
         });
         return list;
     }
-
+//
 
 
     @GetMapping("/read")
