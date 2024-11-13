@@ -117,9 +117,13 @@ public class NotesController {
 
     // modify 요청을 처리하는 메서드
     @GetMapping("/modify/{noteId}")
-    public String modify(@PathVariable("noteId") Long noteId, PageRequestDTO pageRequestDTO, Model model) {
+    public String modify(@PathVariable Long noteId, PageRequestDTO pageRequestDTO, Model model) {
         log.info("Modifying Note with ID: " + noteId);
         NotesDTO notesDTO = notesService.readOne(noteId);
+        if (notesDTO == null) {
+            // 노트가 존재하지 않으면 다른 페이지로 리디렉션
+            return "redirect:/notes/list";
+        }
         model.addAttribute("dto", notesDTO);
         return "notes/modify";  // modify.html을 렌더링
     }

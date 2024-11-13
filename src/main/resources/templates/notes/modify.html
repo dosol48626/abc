@@ -11,7 +11,6 @@
 
 <div class="container" layout:fragment="content">
     <div class="container2">
-
         <!-- 제목 -->
         <div class="todo_main2">
             <div class="todo_main_box">
@@ -24,18 +23,21 @@
         <!-- 노트 수정 폼 -->
         <div class="todo_main_table">
             <form th:action="@{/notes/modify}" method="post" enctype="multipart/form-data">
+                <!-- 수정할 노트의 noteId를 숨겨서 전송 -->
+                <input type="hidden" name="noteId" th:value="${dto != null ? dto.noteId : ''}" />
+
                 <div class="todo_main_box3">
 
-                    <!-- 제목 입력 필드 -->
+                    <!-- 제목 입력 필드 (기존 제목 표시) -->
                     <div class="main-input">
                         <label for="title"><span>* </span>제목</label>
-                        <input type="text" id="title" class="txt-input" name="title" placeholder="노트 제목을 입력하세요" required>
+                        <input type="text" id="title" class="txt-input" name="title" th:value="${dto.title}" placeholder="노트 제목을 입력하세요" required>
                     </div>
 
-                    <!-- 내용 입력 필드 -->
+                    <!-- 내용 입력 필드 (기존 내용 표시) -->
                     <div class="main-textarea">
                         <label for="description"><span>* </span>내용</label>
-                        <textarea id="description" name="content" class="txt-textarea" rows="5" placeholder="노트 내용을 입력하세요" required></textarea>
+                        <textarea id="description" name="content" class="txt-textarea" rows="5" th:value="${dto.content}" placeholder="노트 내용을 입력하세요" required></textarea>
                     </div>
 
                     <!-- 파일 업로드 필드 -->
@@ -46,9 +48,9 @@
 
                     <!-- 버튼 영역 -->
                     <div class="mt-4 button-group">
-                        <button type="submit" class="btn btn-primary">노트 등록</button>
+                        <button type="submit" class="btn btn-primary">노트 수정</button>
                         <a th:href="@{/notes/list}" class="btn btn-secondary">뒤로</a>
-                        <a th:href="@{/notes/remove(notesId=${notesDTO.notesId})}" class="text-decoration-none">
+                        <a th:href="@{/notes/remove(noteId=${dto.noteId})}" class="text-decoration-none">
                             <button type="button" class="custom-btn btn_register3">게시글 삭제</button>
                         </a>
                     </div>

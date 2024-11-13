@@ -57,6 +57,9 @@
                     <!-- read.html에서 수정 페이지로 이동하는 링크 -->
                     <a th:href="@{/notes/modify/{noteId}(noteId=${dto.noteId})}">수정하기</a>
 
+                    <a th:href="@{/notes/modify/{noteId}(noteId=${dto.noteId})}" class="btn btn-primary ms-2">
+                        수정하기22 (ID: <span th:text="${dto.noteId}"></span>)
+                    </a>
                 </div>
 
             </div>
