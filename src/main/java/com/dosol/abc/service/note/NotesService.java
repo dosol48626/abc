@@ -34,7 +34,7 @@ public interface NotesService {
         User user = new User();
         if (notesDTO.getUserId() != null) {
 
-            user.setUserId(1L); // userId로 User 객체 생성
+            user.setUserId(notesDTO.getUserId()); // userId로 User 객체 생성
 
         }
 

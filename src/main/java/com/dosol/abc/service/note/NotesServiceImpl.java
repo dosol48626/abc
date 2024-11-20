@@ -90,9 +90,19 @@ public class NotesServiceImpl implements NotesService {
         Page<Notes> result = notesRepository.searchAll(types, keyword, pageable, userId);
 
         List<NotesDTO> dtoList = result.getContent().stream()
-                .map(notes -> modelMapper.map(notes, NotesDTO.class))
+                .map(notes -> {
+                    NotesDTO notesDTO = modelMapper.map(notes, NotesDTO.class);
+
+                    // fileNames가 null이거나 비어 있으면 기본값 설정
+                    if (notesDTO.getFileNames() == null || notesDTO.getFileNames().isEmpty()) {
+                        notesDTO.setFileNames(List.of("default-thumbnail.png")); // 기본 썸네일 설정
+                    }
+
+                    return notesDTO;
+                })
                 .collect(Collectors.toList());
 
+        // 페이지 응답 DTO 반환
         return PageResponseDTO.<NotesDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
