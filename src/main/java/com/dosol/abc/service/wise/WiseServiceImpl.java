@@ -28,6 +28,7 @@ public class WiseServiceImpl implements WiseService {
                 .map(wise -> WiseDTO.builder()
                         .wiseId(wise.getWiseId())
                         .content(wise.getContent())
+                        .writer(wise.getWriter())
                         .randomNumber(random.nextInt(100) + 1)  // 1~100 사이의 랜덤 숫자 생성
                         .build())
                 .collect(Collectors.toList());
@@ -46,6 +47,7 @@ public class WiseServiceImpl implements WiseService {
         return WiseDTO.builder()
                 .wiseId(randomWise.getWiseId())
                 .content(randomWise.getContent())
+                .writer(randomWise.getWriter())
                 .build();
     }
 
