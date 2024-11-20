@@ -11,5 +11,4 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     @Query("select r from Reply r where r.board.boardId = :boardId")
     Page<Reply> listOfBoard(@Param("boardId") Long boardId, Pageable pageable);
-    // 수정 사항: @Param("boardId")를 추가하여 JPQL 변수 이름과 메서드 파라미터 이름을 맞췄습니다.
 }

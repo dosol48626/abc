@@ -35,12 +35,10 @@ public class ReplyController {
             throw new BindException(bindingResult);
         }
 
-        // 세션에서 유저 정보 가져오기 및 검증
         User user = (User) session.getAttribute("user");
         if (user == null) {
             throw new RuntimeException("로그인한 사용자만 댓글을 작성할 수 있습니다.");
         }
-        // ReplyDTO에 세션 유저의 ID 설정
         replyDTO.setUserId(user.getUserId());  // <-- 수정: userId를 세팅
 
         Long replyId = replyService.register(replyDTO);

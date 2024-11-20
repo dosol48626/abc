@@ -14,5 +14,5 @@ public class UserDTO {
     private Long userId;
     private String username;
     private String password;
-    private MultipartFile profileImage; // 프로필 이미지 필드 추가
+    private MultipartFile profileImage;
 }

@@ -16,11 +16,11 @@ public class ReplyDTO {
 
     private Long replyId;
 
-    private Long boardId;  // Board 엔티티의 ID를 참조
+    private Long boardId;
 
-    private Long userId;   // User 엔티티의 ID를 참조
+    private Long userId;
 
-    private String username; // 댓글 작성자의 사용자 이름
+    private String username;
 
     private String replyText;
 

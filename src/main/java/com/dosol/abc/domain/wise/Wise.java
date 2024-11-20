@@ -16,5 +16,6 @@ public class Wise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wiseId;
 
+    private String writer;
     private String content;
 }

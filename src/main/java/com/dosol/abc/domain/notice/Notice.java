@@ -15,9 +15,9 @@ public class Notice extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long noticeId;  // Notice의 고유 식별자
+    private Long noticeId;
 
-    private String title;   // 공지사항 제목
+    private String title;
 
-    private String content; // 공지사항 내용
+    private String content;
 }

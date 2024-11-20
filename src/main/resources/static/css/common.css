@@ -177,7 +177,7 @@
     height: 60px;
     transition: width 0.7s  ease-out;
     position: fixed;
-    top: 20;
+    top: 20px;
     left: 0;
     overflow: hidden;
     

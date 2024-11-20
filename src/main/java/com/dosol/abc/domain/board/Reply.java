@@ -20,11 +20,9 @@ public class Reply extends BaseEntity {
     @Column(name="rno")
     private Long replyId;
 
-    // 수정된 부분: @ManyToOne 설정 검토
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
-    // 수정된 부분: @ManyToOne 설정 검토
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
